@@ -10,10 +10,10 @@ description: >-
 type: Index
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
-  - Satellites
-  - Imagery
   - Earth Observation
   - Geospatial
+  - Imagery
+  - Satellites
 url: >-
   https://raw.githubusercontent.com/api-evangelist/arlula/refs/heads/main/apis.yml
 created: '2025-02-06'
@@ -28,9 +28,9 @@ apis:
     humanURL: https://arlula.com/
     baseURL: https://api.arlula.com
     tags:
-      - Satellites
-      - Imagery
       - Earth Observation
+      - Imagery
+      - Satellites
     properties:
       - type: Documentation
         url: https://arlula.com/documentation/
