@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://arlula.com/json-schema/orders-list-response.json",
+  "title": "OrdersListResponse",
+  "description": "Paginated list of orders.",
+  "type": "object",
+  "properties": {
+    "orders": {
+      "type": "array",
+      "items": {
+        "$ref": "https://arlula.com/json-schema/order-response.json"
+      }
+    }
+  }
+}

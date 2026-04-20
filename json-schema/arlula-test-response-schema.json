@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://arlula.com/json-schema/test-response.json",
+  "title": "TestResponse",
+  "description": "Response from the API connection test endpoint.",
+  "type": "object",
+  "properties": {
+    "success": {
+      "type": "boolean",
+      "description": "Whether the authentication was successful.",
+      "examples": [
+        true
+      ]
+    },
+    "message": {
+      "type": "string",
+      "description": "Status message.",
+      "examples": [
+        "Authentication successful."
+      ]
+    }
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://arlula.com/json-structure/order.json",
+  "name": "Order",
+  "description": "A detailed order with campaigns and datasets.",
+  "type": "object",
+  "members": {
+    "orderId": {
+      "type": "string",
+      "description": "Order identifier."
+    },
+    "status": {
+      "type": "string",
+      "description": "Order status."
+    },
+    "createdAt": {
+      "type": "string",
+      "description": "Order creation timestamp."
+    },
+    "campaigns": {
+      "type": "array",
+      "items": {
+        "type": "Campaign"
+      }
+    }
+  }
+}

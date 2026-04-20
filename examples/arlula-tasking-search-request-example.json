@@ -1,0 +1,18 @@
+{
+  "start": "2026-05-01T00:00:00Z",
+  "end": "2026-05-31T00:00:00Z",
+  "gsd": 0.5,
+  "lat": -33.8523,
+  "long": 151.2108,
+  "cloud": 20,
+  "offNadir": 30.0,
+  "suppliers": [
+    "example-value"
+  ],
+  "platformTypes": [
+    "example-value"
+  ],
+  "sensorTypes": [
+    "example-value"
+  ]
+}

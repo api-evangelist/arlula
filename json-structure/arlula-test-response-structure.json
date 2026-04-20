@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://arlula.com/json-structure/test-response.json",
+  "name": "TestResponse",
+  "description": "Response from the API connection test endpoint.",
+  "type": "object",
+  "members": {
+    "success": {
+      "type": "boolean",
+      "description": "Whether the authentication was successful."
+    },
+    "message": {
+      "type": "string",
+      "description": "Status message."
+    }
+  }
+}

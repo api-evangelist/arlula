@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://arlula.com/json-structure/resource.json",
+  "name": "Resource",
+  "description": "A downloadable resource within a dataset.",
+  "type": "object",
+  "members": {
+    "resourceId": {
+      "type": "string",
+      "description": "Resource identifier."
+    },
+    "type": {
+      "type": "string",
+      "description": "Resource type (GeoTIFF, Preview, Metadata, etc.)."
+    },
+    "filename": {
+      "type": "string",
+      "description": "Original filename."
+    }
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://arlula.com/json-schema/resource.json",
+  "title": "Resource",
+  "description": "A downloadable resource within a dataset.",
+  "type": "object",
+  "properties": {
+    "resourceId": {
+      "type": "string",
+      "description": "Resource identifier.",
+      "examples": [
+        "resource-001"
+      ]
+    },
+    "type": {
+      "type": "string",
+      "description": "Resource type (GeoTIFF, Preview, Metadata, etc.).",
+      "examples": [
+        "GeoTIFF"
+      ]
+    },
+    "filename": {
+      "type": "string",
+      "description": "Original filename.",
+      "examples": [
+        "imagery.tif"
+      ]
+    }
+  }
+}

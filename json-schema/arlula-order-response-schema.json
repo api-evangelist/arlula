@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://arlula.com/json-schema/order-response.json",
+  "title": "OrderResponse",
+  "description": "Response after placing an imagery order.",
+  "type": "object",
+  "properties": {
+    "orderId": {
+      "type": "string",
+      "description": "Unique order identifier.",
+      "examples": [
+        "order-500123"
+      ]
+    },
+    "status": {
+      "type": "string",
+      "description": "Current order status.",
+      "examples": [
+        "processing"
+      ]
+    },
+    "createdAt": {
+      "type": "string",
+      "description": "Time the order was created.",
+      "examples": [
+        "2026-04-19T09:00:00Z"
+      ]
+    }
+  }
+}

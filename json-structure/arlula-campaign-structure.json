@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://arlula.com/json-structure/campaign.json",
+  "name": "Campaign",
+  "description": "A capture campaign within an order.",
+  "type": "object",
+  "members": {
+    "campaignId": {
+      "type": "string",
+      "description": "Campaign identifier."
+    },
+    "orderId": {
+      "type": "string",
+      "description": "Parent order identifier."
+    },
+    "status": {
+      "type": "string",
+      "description": "Campaign status."
+    }
+  }
+}

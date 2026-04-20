@@ -1,0 +1,53 @@
+name: Satellite Imagery Operations
+version: 1.0.0-alpha1
+description: >-
+  Workflow capability for discovering, ordering, and downloading satellite imagery
+  through the Arlula API. Covers archive search, tasking for future captures,
+  and retrieval of completed order datasets.
+naftiko:
+  version: 1.0.0-alpha1
+apis:
+  - name: Arlula API
+    shared: capabilities/shared/arlula-api.yaml
+tools:
+  - name: test-connection
+    description: Test API credentials and verify connectivity to the Arlula platform.
+    operation: test-connection
+  - name: search-archive
+    description: Search the satellite archive for available scenes within an area of interest and date range.
+    operation: search-archive
+  - name: order-archive-scene
+    description: Place an order for an available archive satellite scene.
+    operation: order-archive-scene
+  - name: search-tasking
+    description: Search for future satellite tasking opportunities for a given area of interest.
+    operation: search-tasking
+  - name: order-tasking
+    description: Place a tasking order for future satellite image capture.
+    operation: order-tasking
+  - name: cancel-tasking
+    description: Cancel an existing tasking order before capture occurs.
+    operation: cancel-tasking
+  - name: list-orders
+    description: List all orders for the authenticated account.
+    operation: list-orders
+  - name: get-order
+    description: Retrieve detailed information for a specific order including campaigns and datasets.
+    operation: get-order
+  - name: list-datasets
+    description: List all datasets produced from capture campaigns.
+    operation: list-datasets
+  - name: get-dataset
+    description: Retrieve details for a specific dataset including available downloadable resources.
+    operation: get-dataset
+  - name: download-resource
+    description: Download a specific resource such as a GeoTIFF, preview image, or metadata file.
+    operation: download-resource
+personas:
+  - name: Geospatial Analyst
+    description: Analyst who searches the archive and orders imagery for analysis workflows.
+  - name: Remote Sensing Engineer
+    description: Engineer who manages tasking orders and processes downloaded datasets.
+ports:
+  rest: 8080
+  mcp: 9090

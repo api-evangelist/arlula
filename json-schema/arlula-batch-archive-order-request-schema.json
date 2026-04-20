@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://arlula.com/json-schema/batch-archive-order-request.json",
+  "title": "BatchArchiveOrderRequest",
+  "description": "Request body for placing multiple archive orders simultaneously.",
+  "type": "object",
+  "properties": {
+    "orders": {
+      "type": "array",
+      "items": {
+        "$ref": "https://arlula.com/json-schema/archive-order-request.json"
+      }
+    },
+    "emails": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "webhooks": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

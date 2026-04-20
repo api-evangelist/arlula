@@ -1,0 +1,12 @@
+{
+  "datasetId": "dataset-a1b2c3d4",
+  "campaignId": "campaign-a1b2",
+  "status": "completed",
+  "resources": [
+    {
+      "resourceId": "resource-001",
+      "type": "GeoTIFF",
+      "filename": "imagery.tif"
+    }
+  ]
+}

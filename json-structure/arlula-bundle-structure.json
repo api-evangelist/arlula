@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://arlula.com/json-structure/bundle.json",
+  "name": "Bundle",
+  "description": "An imagery bundle option with specific products and pricing.",
+  "type": "object",
+  "members": {
+    "key": {
+      "type": "string",
+      "description": "Bundle key used when placing orders."
+    },
+    "name": {
+      "type": "string",
+      "description": "Bundle display name."
+    },
+    "price": {
+      "type": "float64",
+      "description": "Bundle price."
+    }
+  }
+}

@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://arlula.com/json-schema/tasking-order-request.json",
+  "title": "TaskingOrderRequest",
+  "description": "Request body for ordering a future satellite capture.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Ordering ID of the tasking opportunity.",
+      "examples": [
+        "opp-a1b2c3d4"
+      ]
+    },
+    "bundleKey": {
+      "type": "string",
+      "description": "Bundle key for this order.",
+      "examples": [
+        "bundle-standard"
+      ]
+    },
+    "eula": {
+      "type": "string",
+      "description": "EULA identifier.",
+      "examples": [
+        "EULA-001"
+      ]
+    },
+    "cloud": {
+      "type": "integer",
+      "description": "Maximum acceptable cloud cover percentage.",
+      "examples": [
+        20
+      ]
+    },
+    "priorityKey": {
+      "type": "string",
+      "description": "Priority level for the capture.",
+      "examples": [
+        "standard"
+      ]
+    },
+    "emails": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "webhooks": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "coupon": {
+      "type": "string",
+      "description": "Optional coupon code."
+    }
+  }
+}

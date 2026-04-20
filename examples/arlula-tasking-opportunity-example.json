@@ -1,0 +1,8 @@
+{
+  "id": "opp-a1b2c3d4",
+  "supplier": "supplier-001",
+  "captureStart": "2026-05-10T10:00:00Z",
+  "captureEnd": "2026-05-10T10:05:00Z",
+  "gsd": 0.5,
+  "price": 500.0
+}

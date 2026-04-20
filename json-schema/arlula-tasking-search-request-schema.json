@@ -1,0 +1,76 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://arlula.com/json-schema/tasking-search-request.json",
+  "title": "TaskingSearchRequest",
+  "description": "Request body for searching future satellite capture opportunities.",
+  "type": "object",
+  "properties": {
+    "start": {
+      "type": "string",
+      "description": "Start of the search window.",
+      "examples": [
+        "2026-05-01T00:00:00Z"
+      ]
+    },
+    "end": {
+      "type": "string",
+      "description": "End of the search window.",
+      "examples": [
+        "2026-05-31T00:00:00Z"
+      ]
+    },
+    "gsd": {
+      "type": "number",
+      "description": "Maximum ground sample distance in meters.",
+      "examples": [
+        0.5
+      ]
+    },
+    "lat": {
+      "type": "number",
+      "description": "Latitude of the area of interest.",
+      "examples": [
+        -33.8523
+      ]
+    },
+    "long": {
+      "type": "number",
+      "description": "Longitude of the area of interest.",
+      "examples": [
+        151.2108
+      ]
+    },
+    "cloud": {
+      "type": "integer",
+      "description": "Maximum acceptable cloud cover percentage.",
+      "examples": [
+        20
+      ]
+    },
+    "offNadir": {
+      "type": "number",
+      "description": "Maximum off-nadir angle in degrees.",
+      "examples": [
+        30.0
+      ]
+    },
+    "suppliers": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "platformTypes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "sensorTypes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

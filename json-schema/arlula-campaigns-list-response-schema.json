@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://arlula.com/json-schema/campaigns-list-response.json",
+  "title": "CampaignsListResponse",
+  "description": "Paginated list of campaigns.",
+  "type": "object",
+  "properties": {
+    "campaigns": {
+      "type": "array",
+      "items": {
+        "$ref": "https://arlula.com/json-schema/campaign.json"
+      }
+    }
+  }
+}

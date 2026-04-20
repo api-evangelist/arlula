@@ -1,0 +1,14 @@
+{
+  "id": "opp-a1b2c3d4",
+  "bundleKey": "bundle-standard",
+  "eula": "EULA-001",
+  "cloud": 20,
+  "priorityKey": "standard",
+  "emails": [
+    "example-value"
+  ],
+  "webhooks": [
+    "example-value"
+  ],
+  "coupon": "example-coupon"
+}

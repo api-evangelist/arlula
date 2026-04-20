@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://arlula.com/json-schema/batch-tasking-order-request.json",
+  "title": "BatchTaskingOrderRequest",
+  "description": "Request body for placing multiple tasking orders simultaneously.",
+  "type": "object",
+  "properties": {
+    "orders": {
+      "type": "array",
+      "items": {
+        "$ref": "https://arlula.com/json-schema/tasking-order-request.json"
+      }
+    },
+    "emails": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

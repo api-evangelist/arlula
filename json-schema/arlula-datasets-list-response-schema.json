@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://arlula.com/json-schema/datasets-list-response.json",
+  "title": "DatasetsListResponse",
+  "description": "Paginated list of datasets.",
+  "type": "object",
+  "properties": {
+    "datasets": {
+      "type": "array",
+      "items": {
+        "$ref": "https://arlula.com/json-schema/dataset.json"
+      }
+    }
+  }
+}

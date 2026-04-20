@@ -1,0 +1,16 @@
+{
+  "id": "scene-a1b2c3d4",
+  "supplier": "supplier-001",
+  "captureDate": "2025-02-15",
+  "gsd": 1.5,
+  "cloudCover": 12,
+  "offNadir": 15.2,
+  "price": 150.0,
+  "bundles": [
+    {
+      "key": "bundle-basic",
+      "name": "Basic Bundle",
+      "price": 150.0
+    }
+  ]
+}

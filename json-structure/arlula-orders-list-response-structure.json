@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://arlula.com/json-structure/orders-list-response.json",
+  "name": "OrdersListResponse",
+  "description": "Paginated list of orders.",
+  "type": "object",
+  "members": {
+    "orders": {
+      "type": "array",
+      "items": {
+        "type": "OrderResponse"
+      }
+    }
+  }
+}

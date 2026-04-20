@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://arlula.com/json-structure/tasking-opportunity.json",
+  "name": "TaskingOpportunity",
+  "description": "A future satellite capture opportunity.",
+  "type": "object",
+  "members": {
+    "id": {
+      "type": "string",
+      "description": "Ordering ID for this tasking opportunity."
+    },
+    "supplier": {
+      "type": "string",
+      "description": "Supplier identifier."
+    },
+    "captureStart": {
+      "type": "string",
+      "description": "Earliest start time for the capture window."
+    },
+    "captureEnd": {
+      "type": "string",
+      "description": "Latest end time for the capture window."
+    },
+    "gsd": {
+      "type": "float64",
+      "description": "Expected ground sample distance in meters."
+    },
+    "price": {
+      "type": "float64",
+      "description": "Price for this tasking opportunity."
+    }
+  }
+}

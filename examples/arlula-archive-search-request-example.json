@@ -1,0 +1,12 @@
+{
+  "start": "2025-01-01",
+  "end": "2025-03-31",
+  "gsd": 1.5,
+  "lat": -33.8523,
+  "long": 151.2108,
+  "cloud": 20,
+  "offNadir": 30.0,
+  "suppliers": [
+    "example-value"
+  ]
+}

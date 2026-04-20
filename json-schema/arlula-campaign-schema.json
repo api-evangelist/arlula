@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://arlula.com/json-schema/campaign.json",
+  "title": "Campaign",
+  "description": "A capture campaign within an order.",
+  "type": "object",
+  "properties": {
+    "campaignId": {
+      "type": "string",
+      "description": "Campaign identifier.",
+      "examples": [
+        "campaign-001"
+      ]
+    },
+    "orderId": {
+      "type": "string",
+      "description": "Parent order identifier.",
+      "examples": [
+        "order-a1b2c3d4"
+      ]
+    },
+    "status": {
+      "type": "string",
+      "description": "Campaign status.",
+      "examples": [
+        "completed"
+      ]
+    }
+  }
+}

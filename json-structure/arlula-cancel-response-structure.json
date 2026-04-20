@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://arlula.com/json-structure/cancel-response.json",
+  "name": "CancelResponse",
+  "description": "Response after cancelling a tasking campaign.",
+  "type": "object",
+  "members": {
+    "success": {
+      "type": "boolean",
+      "description": "Whether the cancellation was successful."
+    },
+    "campaignId": {
+      "type": "string",
+      "description": "ID of the cancelled campaign."
+    }
+  }
+}

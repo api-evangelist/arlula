@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://arlula.com/json-schema/order.json",
+  "title": "Order",
+  "description": "A detailed order with campaigns and datasets.",
+  "type": "object",
+  "properties": {
+    "orderId": {
+      "type": "string",
+      "description": "Order identifier.",
+      "examples": [
+        "order-a1b2c3d4"
+      ]
+    },
+    "status": {
+      "type": "string",
+      "description": "Order status.",
+      "examples": [
+        "completed"
+      ]
+    },
+    "createdAt": {
+      "type": "string",
+      "description": "Order creation timestamp.",
+      "examples": [
+        "2026-04-15T09:00:00Z"
+      ]
+    },
+    "campaigns": {
+      "type": "array",
+      "items": {
+        "$ref": "https://arlula.com/json-schema/campaign.json"
+      }
+    }
+  }
+}

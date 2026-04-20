@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://arlula.com/json-schema/dataset.json",
+  "title": "Dataset",
+  "description": "A dataset produced from a campaign containing downloadable resources.",
+  "type": "object",
+  "properties": {
+    "datasetId": {
+      "type": "string",
+      "description": "Dataset identifier.",
+      "examples": [
+        "dataset-a1b2c3d4"
+      ]
+    },
+    "campaignId": {
+      "type": "string",
+      "description": "Parent campaign identifier.",
+      "examples": [
+        "campaign-a1b2"
+      ]
+    },
+    "status": {
+      "type": "string",
+      "description": "Dataset status.",
+      "examples": [
+        "completed"
+      ]
+    },
+    "resources": {
+      "type": "array",
+      "items": {
+        "$ref": "https://arlula.com/json-schema/resource.json"
+      }
+    }
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://arlula.com/json-structure/archive-search-request.json",
+  "name": "ArchiveSearchRequest",
+  "description": "Request body for searching the archive imagery catalog.",
+  "type": "object",
+  "members": {
+    "start": {
+      "type": "string",
+      "description": "Start date for imagery search (YYYY-MM-DD)."
+    },
+    "end": {
+      "type": "string",
+      "description": "End date for imagery search (YYYY-MM-DD)."
+    },
+    "gsd": {
+      "type": "float64",
+      "description": "Maximum ground sample distance in meters."
+    },
+    "lat": {
+      "type": "float64",
+      "description": "Latitude of the point of interest."
+    },
+    "long": {
+      "type": "float64",
+      "description": "Longitude of the point of interest."
+    },
+    "cloud": {
+      "type": "int32",
+      "description": "Maximum cloud cover percentage (0-100)."
+    },
+    "offNadir": {
+      "type": "float64",
+      "description": "Maximum off-nadir angle in degrees."
+    },
+    "suppliers": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

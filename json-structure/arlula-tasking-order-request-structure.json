@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://arlula.com/json-structure/tasking-order-request.json",
+  "name": "TaskingOrderRequest",
+  "description": "Request body for ordering a future satellite capture.",
+  "type": "object",
+  "members": {
+    "id": {
+      "type": "string",
+      "description": "Ordering ID of the tasking opportunity."
+    },
+    "bundleKey": {
+      "type": "string",
+      "description": "Bundle key for this order."
+    },
+    "eula": {
+      "type": "string",
+      "description": "EULA identifier."
+    },
+    "cloud": {
+      "type": "int32",
+      "description": "Maximum acceptable cloud cover percentage."
+    },
+    "priorityKey": {
+      "type": "string",
+      "description": "Priority level for the capture."
+    },
+    "emails": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "webhooks": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "coupon": {
+      "type": "string",
+      "description": "Optional coupon code."
+    }
+  }
+}

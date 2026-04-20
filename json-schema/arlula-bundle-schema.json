@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://arlula.com/json-schema/bundle.json",
+  "title": "Bundle",
+  "description": "An imagery bundle option with specific products and pricing.",
+  "type": "object",
+  "properties": {
+    "key": {
+      "type": "string",
+      "description": "Bundle key used when placing orders.",
+      "examples": [
+        "bundle-basic"
+      ]
+    },
+    "name": {
+      "type": "string",
+      "description": "Bundle display name.",
+      "examples": [
+        "Basic Bundle"
+      ]
+    },
+    "price": {
+      "type": "number",
+      "description": "Bundle price.",
+      "examples": [
+        150.0
+      ]
+    }
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://arlula.com/json-structure/archive-scene.json",
+  "name": "ArchiveScene",
+  "description": "A satellite imagery scene available in the archive.",
+  "type": "object",
+  "members": {
+    "id": {
+      "type": "string",
+      "description": "Unique ordering ID for the scene."
+    },
+    "supplier": {
+      "type": "string",
+      "description": "Supplier identifier."
+    },
+    "captureDate": {
+      "type": "string",
+      "description": "Date the imagery was captured."
+    },
+    "gsd": {
+      "type": "float64",
+      "description": "Ground sample distance in meters."
+    },
+    "cloudCover": {
+      "type": "int32",
+      "description": "Cloud cover percentage at time of capture."
+    },
+    "offNadir": {
+      "type": "float64",
+      "description": "Off-nadir angle at time of capture."
+    },
+    "price": {
+      "type": "float64",
+      "description": "Price for ordering this scene."
+    },
+    "bundles": {
+      "type": "array",
+      "items": {
+        "type": "Bundle"
+      }
+    }
+  }
+}

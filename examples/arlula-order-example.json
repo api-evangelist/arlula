@@ -1,0 +1,12 @@
+{
+  "orderId": "order-a1b2c3d4",
+  "status": "completed",
+  "createdAt": "2026-04-15T09:00:00Z",
+  "campaigns": [
+    {
+      "campaignId": "campaign-001",
+      "orderId": "order-a1b2c3d4",
+      "status": "completed"
+    }
+  ]
+}

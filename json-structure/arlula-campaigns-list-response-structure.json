@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://arlula.com/json-structure/campaigns-list-response.json",
+  "name": "CampaignsListResponse",
+  "description": "Paginated list of campaigns.",
+  "type": "object",
+  "members": {
+    "campaigns": {
+      "type": "array",
+      "items": {
+        "type": "Campaign"
+      }
+    }
+  }
+}

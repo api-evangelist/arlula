@@ -1,0 +1,55 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://arlula.com/json-structure/tasking-search-request.json",
+  "name": "TaskingSearchRequest",
+  "description": "Request body for searching future satellite capture opportunities.",
+  "type": "object",
+  "members": {
+    "start": {
+      "type": "string",
+      "description": "Start of the search window."
+    },
+    "end": {
+      "type": "string",
+      "description": "End of the search window."
+    },
+    "gsd": {
+      "type": "float64",
+      "description": "Maximum ground sample distance in meters."
+    },
+    "lat": {
+      "type": "float64",
+      "description": "Latitude of the area of interest."
+    },
+    "long": {
+      "type": "float64",
+      "description": "Longitude of the area of interest."
+    },
+    "cloud": {
+      "type": "int32",
+      "description": "Maximum acceptable cloud cover percentage."
+    },
+    "offNadir": {
+      "type": "float64",
+      "description": "Maximum off-nadir angle in degrees."
+    },
+    "suppliers": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "platformTypes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "sensorTypes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

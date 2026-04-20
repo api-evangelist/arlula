@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://arlula.com/json-schema/archive-scene.json",
+  "title": "ArchiveScene",
+  "description": "A satellite imagery scene available in the archive.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Unique ordering ID for the scene.",
+      "examples": [
+        "scene-a1b2c3d4"
+      ]
+    },
+    "supplier": {
+      "type": "string",
+      "description": "Supplier identifier.",
+      "examples": [
+        "supplier-001"
+      ]
+    },
+    "captureDate": {
+      "type": "string",
+      "description": "Date the imagery was captured.",
+      "examples": [
+        "2025-02-15"
+      ]
+    },
+    "gsd": {
+      "type": "number",
+      "description": "Ground sample distance in meters.",
+      "examples": [
+        1.5
+      ]
+    },
+    "cloudCover": {
+      "type": "integer",
+      "description": "Cloud cover percentage at time of capture.",
+      "examples": [
+        12
+      ]
+    },
+    "offNadir": {
+      "type": "number",
+      "description": "Off-nadir angle at time of capture.",
+      "examples": [
+        15.2
+      ]
+    },
+    "price": {
+      "type": "number",
+      "description": "Price for ordering this scene.",
+      "examples": [
+        150.0
+      ]
+    },
+    "bundles": {
+      "type": "array",
+      "items": {
+        "$ref": "https://arlula.com/json-schema/bundle.json"
+      }
+    }
+  }
+}

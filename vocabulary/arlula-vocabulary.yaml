@@ -1,0 +1,134 @@
+name: Arlula Vocabulary
+version: 1.0.0
+description: >-
+  Unified taxonomy mapping resources, actions, workflows, and personas across
+  operational (OpenAPI) and capability (Naftiko) dimensions for the Arlula satellite imagery API.
+resources:
+  - name: ArchiveScene
+    description: A satellite image scene available in the Arlula archive for immediate ordering.
+    openapi:
+      schema: ArchiveScene
+      paths:
+        - /api/archive/search
+        - /api/archive/scene
+    capability:
+      operations:
+        - search-archive
+        - get-archive-scene
+  - name: TaskingOpportunity
+    description: A future satellite pass opportunity available for tasking order.
+    openapi:
+      schema: TaskingOpportunity
+      paths:
+        - /api/tasking/search
+        - /api/tasking/get
+    capability:
+      operations:
+        - search-tasking
+        - get-tasking-opportunity
+  - name: Order
+    description: An order for satellite imagery, either archive or tasking.
+    openapi:
+      schema: Order
+      paths:
+        - /api/orders
+        - /api/order/{order}
+    capability:
+      operations:
+        - list-orders
+        - get-order
+  - name: Campaign
+    description: A capture campaign within an order, tracking the status of image collection.
+    openapi:
+      schema: Campaign
+      paths:
+        - /api/campaigns
+    capability:
+      operations:
+        - list-campaigns
+  - name: Dataset
+    description: A dataset of delivered imagery resources produced from a campaign.
+    openapi:
+      schema: Dataset
+      paths:
+        - /api/datasets
+        - /api/dataset/{dataset}
+    capability:
+      operations:
+        - list-datasets
+        - get-dataset
+  - name: Resource
+    description: A downloadable file within a dataset such as a GeoTIFF, preview, or metadata file.
+    openapi:
+      schema: Resource
+      paths:
+        - /api/resource/{resource}/data
+    capability:
+      operations:
+        - download-resource
+actions:
+  - name: Search
+    description: Search for archive scenes or tasking opportunities matching criteria.
+    openapi:
+      methods: [POST]
+      paths:
+        - /api/archive/search
+        - /api/tasking/search
+    capability:
+      operations:
+        - search-archive
+        - search-tasking
+  - name: Order
+    description: Place an order for archive imagery or future satellite tasking.
+    openapi:
+      methods: [POST]
+      paths:
+        - /api/archive/order
+        - /api/archive/order/batch
+        - /api/tasking/order
+        - /api/tasking/order/batch
+    capability:
+      operations:
+        - order-archive-scene
+        - batch-order-archive
+        - order-tasking
+        - batch-order-tasking
+  - name: Cancel
+    description: Cancel an active tasking order before capture.
+    openapi:
+      methods: [DELETE]
+      paths:
+        - /api/tasking/cancel
+    capability:
+      operations:
+        - cancel-tasking
+  - name: Download
+    description: Download imagery and associated resources from a dataset.
+    openapi:
+      methods: [GET]
+      paths:
+        - /api/resource/{resource}/data
+    capability:
+      operations:
+        - download-resource
+workflows:
+  - name: Satellite Imagery Operations
+    description: >-
+      End-to-end workflow for discovering, ordering, and downloading satellite imagery.
+    capability: capabilities/satellite-imagery-operations.yaml
+    steps:
+      - Search archive or tasking opportunities
+      - Place imagery order
+      - Monitor order status
+      - Download delivered datasets
+personas:
+  - name: Geospatial Analyst
+    description: Analyst who searches the archive and orders imagery for analysis workflows.
+    capability: capabilities/satellite-imagery-operations.yaml
+  - name: Remote Sensing Engineer
+    description: Engineer who manages tasking orders and processes downloaded datasets.
+    capability: capabilities/satellite-imagery-operations.yaml
+crossReference:
+  openapi: openapi/arlula-openapi.yaml
+  capability: capabilities/satellite-imagery-operations.yaml
+  sharedCapability: capabilities/shared/arlula-api.yaml

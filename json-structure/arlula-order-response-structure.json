@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://arlula.com/json-structure/order-response.json",
+  "name": "OrderResponse",
+  "description": "Response after placing an imagery order.",
+  "type": "object",
+  "members": {
+    "orderId": {
+      "type": "string",
+      "description": "Unique order identifier."
+    },
+    "status": {
+      "type": "string",
+      "description": "Current order status."
+    },
+    "createdAt": {
+      "type": "string",
+      "description": "Time the order was created."
+    }
+  }
+}

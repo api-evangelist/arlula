@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://arlula.com/json-schema/archive-order-request.json",
+  "title": "ArchiveOrderRequest",
+  "description": "Request body for ordering archive imagery.",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Ordering ID of the archive scene to purchase.",
+      "examples": [
+        "a1b2c3d4-e5f6-7890-abcd-ef1234567890"
+      ]
+    },
+    "bundleKey": {
+      "type": "string",
+      "description": "Bundle key selected from search results.",
+      "examples": [
+        "bundle-basic"
+      ]
+    },
+    "eula": {
+      "type": "string",
+      "description": "EULA identifier accepted for this order.",
+      "examples": [
+        "EULA-001"
+      ]
+    },
+    "emails": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "webhooks": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "coupon": {
+      "type": "string",
+      "description": "Optional coupon code for discounts.",
+      "examples": [
+        "COUPON-001"
+      ]
+    }
+  }
+}

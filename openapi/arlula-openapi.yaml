@@ -1,0 +1,1389 @@
+openapi: 3.0.3
+info:
+  title: Arlula API
+  description: >-
+    The Arlula API provides programmatic access to satellite imagery ordering,
+    archive search, tasking, and earth observation data services. The API covers
+    four main areas: Archive (historical imagery search and ordering), Tasking
+    (future satellite capture scheduling), Orders Management (order tracking and
+    resource downloads), and connection testing.
+  version: 2025-10
+  contact:
+    name: Arlula Support
+    url: https://arlula.com/
+  x-generated-from: documentation
+  x-last-validated: '2026-04-19'
+servers:
+  - url: https://api.arlula.com
+    description: Production API
+security:
+  - BasicAuth: []
+tags:
+  - name: Archive
+    description: Search and order historical satellite imagery
+  - name: Tasking
+    description: Schedule future satellite captures
+  - name: Orders
+    description: Manage orders, campaigns, datasets, and resources
+  - name: Connection
+    description: API connection testing
+paths:
+  /api/test:
+    get:
+      operationId: testConnection
+      summary: Arlula Test API Connection
+      description: >-
+        Validates API authentication credentials without executing any
+        operational requests. Use this to confirm credentials are correctly
+        configured.
+      tags:
+        - Connection
+      responses:
+        '200':
+          description: Authentication successful.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TestResponse'
+              examples:
+                testConnection200Example:
+                  summary: Default testConnection 200 response
+                  x-microcks-default: true
+                  value:
+                    success: true
+                    message: Authentication successful.
+        '401':
+          description: Unauthorized - invalid credentials.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/archive/search:
+    post:
+      operationId: searchArchive
+      summary: Arlula Search Archive Imagery
+      description: >-
+        Search the Arlula satellite imagery archive and its suppliers for
+        historical imagery matching specified date, location, and quality
+        criteria. Returns available scenes with pricing, bands, and bundle
+        options.
+      tags:
+        - Archive
+      requestBody:
+        required: true
+        description: Archive imagery search parameters.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ArchiveSearchRequest'
+            examples:
+              searchArchiveRequestExample:
+                summary: Default searchArchive request
+                x-microcks-default: true
+                value:
+                  start: '2025-01-01'
+                  end: '2025-03-31'
+                  gsd: 1.5
+                  lat: -33.8523
+                  long: 151.2108
+                  cloud: 20
+      responses:
+        '200':
+          description: Successfully retrieved archive search results.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ArchiveScene'
+              examples:
+                searchArchive200Example:
+                  summary: Default searchArchive 200 response
+                  x-microcks-default: true
+                  value:
+                    - id: scene-a1b2c3d4
+                      supplier: supplier-001
+                      captureDate: '2025-02-15'
+                      gsd: 1.5
+                      cloudCover: 12
+                      offNadir: 15.2
+                      price: 150.00
+                      bundles:
+                        - key: bundle-basic
+                          name: Basic Bundle
+                          price: 150.00
+        '400':
+          description: Malformed request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/archive/scene:
+    get:
+      operationId: getArchiveScene
+      summary: Arlula Get Archive Scene Details
+      description: >-
+        Retrieve details for a previously returned archive search result by its
+        ordering ID.
+      tags:
+        - Archive
+      parameters:
+        - name: id
+          in: query
+          required: true
+          description: The ordering ID of the archive scene to retrieve.
+          schema:
+            type: string
+            format: uuid
+          example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+      responses:
+        '200':
+          description: Successfully retrieved scene details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArchiveScene'
+              examples:
+                getArchiveScene200Example:
+                  summary: Default getArchiveScene 200 response
+                  x-microcks-default: true
+                  value:
+                    id: scene-a1b2c3d4
+                    supplier: supplier-001
+                    captureDate: '2025-02-15'
+                    gsd: 1.5
+                    cloudCover: 12
+                    offNadir: 15.2
+                    price: 150.00
+        '400':
+          description: Malformed request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/archive/order:
+    post:
+      operationId: orderArchiveImagery
+      summary: Arlula Order Archive Imagery
+      description: >-
+        Place a single order for archived satellite imagery. The order includes
+        a bundle selection, EULA acceptance, and payment information. Returns
+        order status as accepted (200) or pending approval (202).
+      tags:
+        - Archive
+      requestBody:
+        required: true
+        description: Archive imagery order parameters.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ArchiveOrderRequest'
+            examples:
+              orderArchiveImageryRequestExample:
+                summary: Default orderArchiveImagery request
+                x-microcks-default: true
+                value:
+                  id: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+                  bundleKey: bundle-basic
+                  eula: EULA-001
+                  emails:
+                    - analyst@example.com
+      responses:
+        '200':
+          description: Order accepted and processing.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderResponse'
+              examples:
+                orderArchiveImagery200Example:
+                  summary: Default orderArchiveImagery 200 response
+                  x-microcks-default: true
+                  value:
+                    orderId: order-500123
+                    status: processing
+                    createdAt: '2026-04-19T09:00:00Z'
+        '202':
+          description: Order pending supplier approval.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderResponse'
+        '400':
+          description: Malformed request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '402':
+          description: Payment required.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Account not activated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/archive/order/batch:
+    post:
+      operationId: batchOrderArchiveImagery
+      summary: Arlula Batch Order Archive Imagery
+      description: >-
+        Place multiple archive imagery orders simultaneously in a single API
+        call. Shares common settings (emails, webhooks, payment) across all
+        orders.
+      tags:
+        - Archive
+      requestBody:
+        required: true
+        description: Batch archive imagery order parameters.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BatchArchiveOrderRequest'
+            examples:
+              batchOrderArchiveImageryRequestExample:
+                summary: Default batchOrderArchiveImagery request
+                x-microcks-default: true
+                value:
+                  orders:
+                    - id: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+                      bundleKey: bundle-basic
+                      eula: EULA-001
+                  emails:
+                    - analyst@example.com
+      responses:
+        '200':
+          description: All orders accepted.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/OrderResponse'
+              examples:
+                batchOrderArchiveImagery200Example:
+                  summary: Default batchOrderArchiveImagery 200 response
+                  x-microcks-default: true
+                  value:
+                    - orderId: order-500123
+                      status: processing
+        '400':
+          description: Malformed request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/tasking/search:
+    post:
+      operationId: searchTasking
+      summary: Arlula Search Tasking Opportunities
+      description: >-
+        Search for future satellite capture opportunities from Arlula suppliers.
+        Specify temporal window, location, resolution, and sensor parameters to
+        find available capture slots.
+      tags:
+        - Tasking
+      requestBody:
+        required: true
+        description: Tasking search parameters.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TaskingSearchRequest'
+            examples:
+              searchTaskingRequestExample:
+                summary: Default searchTasking request
+                x-microcks-default: true
+                value:
+                  start: '2026-05-01'
+                  end: '2026-05-31'
+                  gsd: 0.5
+                  lat: -33.8523
+                  long: 151.2108
+                  cloud: 20
+      responses:
+        '200':
+          description: Successfully retrieved tasking opportunities.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TaskingOpportunity'
+              examples:
+                searchTasking200Example:
+                  summary: Default searchTasking 200 response
+                  x-microcks-default: true
+                  value:
+                    - id: opp-a1b2c3d4
+                      supplier: supplier-001
+                      captureStart: '2026-05-10T10:00:00Z'
+                      captureEnd: '2026-05-10T10:05:00Z'
+                      gsd: 0.5
+                      price: 500.00
+        '400':
+          description: Malformed request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/tasking/get:
+    post:
+      operationId: getTaskingOpportunity
+      summary: Arlula Get Tasking Opportunity Details
+      description: >-
+        Retrieve details for a previously returned tasking search result from
+        a supplier by its ordering ID.
+      tags:
+        - Tasking
+      requestBody:
+        required: true
+        description: Tasking opportunity retrieval parameters.
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                id:
+                  type: string
+                  description: The ordering ID of the tasking opportunity.
+                  example: opp-a1b2c3d4
+            examples:
+              getTaskingOpportunityRequestExample:
+                summary: Default getTaskingOpportunity request
+                x-microcks-default: true
+                value:
+                  id: opp-a1b2c3d4
+      responses:
+        '200':
+          description: Successfully retrieved tasking opportunity.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TaskingOpportunity'
+              examples:
+                getTaskingOpportunity200Example:
+                  summary: Default getTaskingOpportunity 200 response
+                  x-microcks-default: true
+                  value:
+                    id: opp-a1b2c3d4
+                    supplier: supplier-001
+                    captureStart: '2026-05-10T10:00:00Z'
+                    captureEnd: '2026-05-10T10:05:00Z'
+                    gsd: 0.5
+                    price: 500.00
+        '400':
+          description: Malformed request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/tasking/order:
+    post:
+      operationId: orderTaskingCapture
+      summary: Arlula Order Tasking Satellite Capture
+      description: >-
+        Order a future satellite capture from Arlula suppliers. Billed
+        immediately upon placement. Non-cancellable once ordered (unlike archive
+        orders which may be pending approval).
+      tags:
+        - Tasking
+      requestBody:
+        required: true
+        description: Tasking order parameters.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TaskingOrderRequest'
+            examples:
+              orderTaskingCaptureRequestExample:
+                summary: Default orderTaskingCapture request
+                x-microcks-default: true
+                value:
+                  id: opp-a1b2c3d4
+                  bundleKey: bundle-standard
+                  eula: EULA-001
+                  cloud: 20
+                  emails:
+                    - analyst@example.com
+      responses:
+        '200':
+          description: Tasking order accepted and scheduled.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderResponse'
+              examples:
+                orderTaskingCapture200Example:
+                  summary: Default orderTaskingCapture 200 response
+                  x-microcks-default: true
+                  value:
+                    orderId: order-500124
+                    status: scheduled
+                    createdAt: '2026-04-19T09:00:00Z'
+        '400':
+          description: Malformed request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '402':
+          description: Payment required.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/tasking/order/batch:
+    post:
+      operationId: batchOrderTaskingCaptures
+      summary: Arlula Batch Order Tasking Captures
+      description: >-
+        Place multiple tasking capture orders simultaneously. All orders are
+        billed immediately and are non-cancellable once submitted.
+      tags:
+        - Tasking
+      requestBody:
+        required: true
+        description: Batch tasking order parameters.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BatchTaskingOrderRequest'
+            examples:
+              batchOrderTaskingCapturesRequestExample:
+                summary: Default batchOrderTaskingCaptures request
+                x-microcks-default: true
+                value:
+                  orders:
+                    - id: opp-a1b2c3d4
+                      bundleKey: bundle-standard
+                      eula: EULA-001
+                  emails:
+                    - analyst@example.com
+      responses:
+        '200':
+          description: All tasking orders accepted.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/OrderResponse'
+              examples:
+                batchOrderTaskingCaptures200Example:
+                  summary: Default batchOrderTaskingCaptures 200 response
+                  x-microcks-default: true
+                  value:
+                    - orderId: order-500124
+                      status: scheduled
+        '400':
+          description: Malformed request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/tasking/cancel:
+    delete:
+      operationId: cancelTaskingCampaign
+      summary: Arlula Cancel Tasking Campaign
+      description: >-
+        Cancel a pending tasking campaign that is in the pending-approval state.
+        Only campaigns that have not yet been approved can be cancelled.
+      tags:
+        - Tasking
+      parameters:
+        - name: id
+          in: query
+          required: true
+          description: The UUID of the tasking campaign to cancel.
+          schema:
+            type: string
+            format: uuid
+          example: campaign-a1b2c3d4-e5f6-7890
+      responses:
+        '200':
+          description: Campaign successfully cancelled.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CancelResponse'
+              examples:
+                cancelTaskingCampaign200Example:
+                  summary: Default cancelTaskingCampaign 200 response
+                  x-microcks-default: true
+                  value:
+                    success: true
+                    campaignId: campaign-a1b2c3d4-e5f6-7890
+        '400':
+          description: Malformed request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '405':
+          description: Method not allowed - campaign not in cancellable state.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/orders:
+    get:
+      operationId: listOrders
+      summary: Arlula List Orders
+      description: >-
+        List all pending and completed orders on the account. Supports
+        pagination via page and size parameters.
+      tags:
+        - Orders
+      parameters:
+        - name: page
+          in: query
+          required: false
+          description: Page index (0-indexed) for pagination.
+          schema:
+            type: integer
+          example: 0
+        - name: size
+          in: query
+          required: false
+          description: Number of results per page.
+          schema:
+            type: integer
+          example: 25
+      responses:
+        '200':
+          description: Successfully retrieved list of orders.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrdersListResponse'
+              examples:
+                listOrders200Example:
+                  summary: Default listOrders 200 response
+                  x-microcks-default: true
+                  value:
+                    orders:
+                      - orderId: order-500123
+                        status: completed
+                        createdAt: '2026-04-15T09:00:00Z'
+        '400':
+          description: Malformed request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/order/{order}:
+    get:
+      operationId: getOrder
+      summary: Arlula Get Order Details
+      description: >-
+        Retrieve detailed information about a specific order including its
+        campaigns and datasets.
+      tags:
+        - Orders
+      parameters:
+        - name: order
+          in: path
+          required: true
+          description: UUID of the order to retrieve.
+          schema:
+            type: string
+            format: uuid
+          example: order-a1b2c3d4-e5f6-7890
+      responses:
+        '200':
+          description: Successfully retrieved order details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Order'
+              examples:
+                getOrder200Example:
+                  summary: Default getOrder 200 response
+                  x-microcks-default: true
+                  value:
+                    orderId: order-a1b2c3d4-e5f6-7890
+                    status: completed
+                    createdAt: '2026-04-15T09:00:00Z'
+                    campaigns:
+                      - campaignId: campaign-001
+                        status: completed
+        '400':
+          description: Malformed request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/campaigns:
+    get:
+      operationId: listCampaigns
+      summary: Arlula List Campaigns
+      description: >-
+        List all pending and completed campaigns across all orders. Supports
+        pagination.
+      tags:
+        - Orders
+      parameters:
+        - name: page
+          in: query
+          required: false
+          description: Page index (0-indexed).
+          schema:
+            type: integer
+          example: 0
+        - name: size
+          in: query
+          required: false
+          description: Results per page.
+          schema:
+            type: integer
+          example: 25
+      responses:
+        '200':
+          description: Successfully retrieved campaigns.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CampaignsListResponse'
+              examples:
+                listCampaigns200Example:
+                  summary: Default listCampaigns 200 response
+                  x-microcks-default: true
+                  value:
+                    campaigns:
+                      - campaignId: campaign-a1b2
+                        orderId: order-a1b2c3d4
+                        status: completed
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/datasets:
+    get:
+      operationId: listDatasets
+      summary: Arlula List Datasets
+      description: >-
+        List all pending and completed datasets across all orders. Supports
+        pagination.
+      tags:
+        - Orders
+      parameters:
+        - name: page
+          in: query
+          required: false
+          description: Page index (0-indexed).
+          schema:
+            type: integer
+          example: 0
+        - name: size
+          in: query
+          required: false
+          description: Results per page.
+          schema:
+            type: integer
+          example: 25
+      responses:
+        '200':
+          description: Successfully retrieved datasets.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DatasetsListResponse'
+              examples:
+                listDatasets200Example:
+                  summary: Default listDatasets 200 response
+                  x-microcks-default: true
+                  value:
+                    datasets:
+                      - datasetId: dataset-a1b2
+                        campaignId: campaign-a1b2
+                        status: completed
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/dataset/{dataset}:
+    get:
+      operationId: getDataset
+      summary: Arlula Get Dataset Details
+      description: >-
+        Retrieve a detailed dataset object with its available resources for
+        download.
+      tags:
+        - Orders
+      parameters:
+        - name: dataset
+          in: path
+          required: true
+          description: UUID of the dataset to retrieve.
+          schema:
+            type: string
+            format: uuid
+          example: dataset-a1b2c3d4
+      responses:
+        '200':
+          description: Successfully retrieved dataset.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Dataset'
+              examples:
+                getDataset200Example:
+                  summary: Default getDataset 200 response
+                  x-microcks-default: true
+                  value:
+                    datasetId: dataset-a1b2c3d4
+                    campaignId: campaign-a1b2
+                    status: completed
+                    resources:
+                      - resourceId: resource-001
+                        type: GeoTIFF
+                        filename: imagery.tif
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/resource/{resource}/data:
+    get:
+      operationId: downloadResource
+      summary: Arlula Download Resource Data
+      description: >-
+        Download the binary content of a specific resource (imagery file,
+        metadata, thumbnail, etc.). Returns the file content as a binary
+        stream.
+      tags:
+        - Orders
+      parameters:
+        - name: resource
+          in: path
+          required: true
+          description: UUID of the resource to download.
+          schema:
+            type: string
+            format: uuid
+          example: resource-a1b2c3d4
+      responses:
+        '200':
+          description: Resource file content.
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '410':
+          description: Resource expired and no longer available.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+      description: >-
+        HTTP Basic Authentication using API Key as username and API Secret as
+        password. Credentials are obtained from the Arlula dashboard at
+        https://dashboard.arlula.com/apis.
+  schemas:
+    TestResponse:
+      title: TestResponse
+      description: Response from the API connection test endpoint.
+      type: object
+      properties:
+        success:
+          type: boolean
+          description: Whether the authentication was successful.
+          example: true
+        message:
+          type: string
+          description: Status message.
+          example: Authentication successful.
+    ArchiveSearchRequest:
+      title: ArchiveSearchRequest
+      description: Request body for searching the archive imagery catalog.
+      type: object
+      required:
+        - start
+        - gsd
+      properties:
+        start:
+          type: string
+          format: date
+          description: Start date for imagery search (YYYY-MM-DD).
+          example: '2025-01-01'
+        end:
+          type: string
+          format: date
+          description: End date for imagery search (YYYY-MM-DD).
+          example: '2025-03-31'
+        gsd:
+          type: number
+          description: Maximum ground sample distance in meters.
+          example: 1.5
+        lat:
+          type: number
+          description: Latitude of the point of interest.
+          example: -33.8523
+        long:
+          type: number
+          description: Longitude of the point of interest.
+          example: 151.2108
+        cloud:
+          type: integer
+          description: Maximum cloud cover percentage (0-100).
+          example: 20
+        offNadir:
+          type: number
+          description: Maximum off-nadir angle in degrees.
+          example: 30.0
+        suppliers:
+          type: array
+          description: Filter results to specific supplier keys.
+          items:
+            type: string
+    ArchiveScene:
+      title: ArchiveScene
+      description: A satellite imagery scene available in the archive.
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique ordering ID for the scene.
+          example: scene-a1b2c3d4
+        supplier:
+          type: string
+          description: Supplier identifier.
+          example: supplier-001
+        captureDate:
+          type: string
+          format: date
+          description: Date the imagery was captured.
+          example: '2025-02-15'
+        gsd:
+          type: number
+          description: Ground sample distance in meters.
+          example: 1.5
+        cloudCover:
+          type: integer
+          description: Cloud cover percentage at time of capture.
+          example: 12
+        offNadir:
+          type: number
+          description: Off-nadir angle at time of capture.
+          example: 15.2
+        price:
+          type: number
+          description: Price for ordering this scene.
+          example: 150.00
+        bundles:
+          type: array
+          description: Available bundle options for ordering.
+          items:
+            $ref: '#/components/schemas/Bundle'
+    Bundle:
+      title: Bundle
+      description: An imagery bundle option with specific products and pricing.
+      type: object
+      properties:
+        key:
+          type: string
+          description: Bundle key used when placing orders.
+          example: bundle-basic
+        name:
+          type: string
+          description: Bundle display name.
+          example: Basic Bundle
+        price:
+          type: number
+          description: Bundle price.
+          example: 150.00
+    ArchiveOrderRequest:
+      title: ArchiveOrderRequest
+      description: Request body for ordering archive imagery.
+      type: object
+      required:
+        - id
+        - bundleKey
+        - eula
+      properties:
+        id:
+          type: string
+          description: Ordering ID of the archive scene to purchase.
+          example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+        bundleKey:
+          type: string
+          description: Bundle key selected from search results.
+          example: bundle-basic
+        eula:
+          type: string
+          description: EULA identifier accepted for this order.
+          example: EULA-001
+        emails:
+          type: array
+          description: Email addresses to notify when order is ready.
+          items:
+            type: string
+        webhooks:
+          type: array
+          description: Webhook URLs to notify when order status changes.
+          items:
+            type: string
+        coupon:
+          type: string
+          description: Optional coupon code for discounts.
+          example: COUPON-001
+    BatchArchiveOrderRequest:
+      title: BatchArchiveOrderRequest
+      description: Request body for placing multiple archive orders simultaneously.
+      type: object
+      required:
+        - orders
+      properties:
+        orders:
+          type: array
+          description: List of archive orders to place.
+          items:
+            $ref: '#/components/schemas/ArchiveOrderRequest'
+        emails:
+          type: array
+          description: Email addresses for all orders in the batch.
+          items:
+            type: string
+        webhooks:
+          type: array
+          description: Webhook URLs for all orders in the batch.
+          items:
+            type: string
+    TaskingSearchRequest:
+      title: TaskingSearchRequest
+      description: Request body for searching future satellite capture opportunities.
+      type: object
+      required:
+        - start
+        - end
+      properties:
+        start:
+          type: string
+          format: date-time
+          description: Start of the search window.
+          example: '2026-05-01T00:00:00Z'
+        end:
+          type: string
+          format: date-time
+          description: End of the search window.
+          example: '2026-05-31T00:00:00Z'
+        gsd:
+          type: number
+          description: Maximum ground sample distance in meters.
+          example: 0.5
+        lat:
+          type: number
+          description: Latitude of the area of interest.
+          example: -33.8523
+        long:
+          type: number
+          description: Longitude of the area of interest.
+          example: 151.2108
+        cloud:
+          type: integer
+          description: Maximum acceptable cloud cover percentage.
+          example: 20
+        offNadir:
+          type: number
+          description: Maximum off-nadir angle in degrees.
+          example: 30.0
+        suppliers:
+          type: array
+          description: Filter to specific suppliers.
+          items:
+            type: string
+        platformTypes:
+          type: array
+          description: Filter by platform type (optical, radar, etc.).
+          items:
+            type: string
+        sensorTypes:
+          type: array
+          description: Filter by sensor type.
+          items:
+            type: string
+    TaskingOpportunity:
+      title: TaskingOpportunity
+      description: A future satellite capture opportunity.
+      type: object
+      properties:
+        id:
+          type: string
+          description: Ordering ID for this tasking opportunity.
+          example: opp-a1b2c3d4
+        supplier:
+          type: string
+          description: Supplier identifier.
+          example: supplier-001
+        captureStart:
+          type: string
+          format: date-time
+          description: Earliest start time for the capture window.
+          example: '2026-05-10T10:00:00Z'
+        captureEnd:
+          type: string
+          format: date-time
+          description: Latest end time for the capture window.
+          example: '2026-05-10T10:05:00Z'
+        gsd:
+          type: number
+          description: Expected ground sample distance in meters.
+          example: 0.5
+        price:
+          type: number
+          description: Price for this tasking opportunity.
+          example: 500.00
+    TaskingOrderRequest:
+      title: TaskingOrderRequest
+      description: Request body for ordering a future satellite capture.
+      type: object
+      required:
+        - id
+        - bundleKey
+        - eula
+      properties:
+        id:
+          type: string
+          description: Ordering ID of the tasking opportunity.
+          example: opp-a1b2c3d4
+        bundleKey:
+          type: string
+          description: Bundle key for this order.
+          example: bundle-standard
+        eula:
+          type: string
+          description: EULA identifier.
+          example: EULA-001
+        cloud:
+          type: integer
+          description: Maximum acceptable cloud cover percentage.
+          example: 20
+        priorityKey:
+          type: string
+          description: Priority level for the capture.
+          example: standard
+        emails:
+          type: array
+          description: Email notifications for order completion.
+          items:
+            type: string
+        webhooks:
+          type: array
+          description: Webhook URLs for status notifications.
+          items:
+            type: string
+        coupon:
+          type: string
+          description: Optional coupon code.
+    BatchTaskingOrderRequest:
+      title: BatchTaskingOrderRequest
+      description: Request body for placing multiple tasking orders simultaneously.
+      type: object
+      required:
+        - orders
+      properties:
+        orders:
+          type: array
+          description: List of tasking orders to place.
+          items:
+            $ref: '#/components/schemas/TaskingOrderRequest'
+        emails:
+          type: array
+          description: Email addresses for all orders in the batch.
+          items:
+            type: string
+    OrderResponse:
+      title: OrderResponse
+      description: Response after placing an imagery order.
+      type: object
+      properties:
+        orderId:
+          type: string
+          description: Unique order identifier.
+          example: order-500123
+        status:
+          type: string
+          description: Current order status.
+          enum:
+            - processing
+            - pending-approval
+            - scheduled
+            - completed
+            - failed
+          example: processing
+        createdAt:
+          type: string
+          format: date-time
+          description: Time the order was created.
+          example: '2026-04-19T09:00:00Z'
+    CancelResponse:
+      title: CancelResponse
+      description: Response after cancelling a tasking campaign.
+      type: object
+      properties:
+        success:
+          type: boolean
+          description: Whether the cancellation was successful.
+          example: true
+        campaignId:
+          type: string
+          description: ID of the cancelled campaign.
+          example: campaign-a1b2c3d4
+    OrdersListResponse:
+      title: OrdersListResponse
+      description: Paginated list of orders.
+      type: object
+      properties:
+        orders:
+          type: array
+          description: List of orders.
+          items:
+            $ref: '#/components/schemas/OrderResponse'
+    Order:
+      title: Order
+      description: A detailed order with campaigns and datasets.
+      type: object
+      properties:
+        orderId:
+          type: string
+          description: Order identifier.
+          example: order-a1b2c3d4
+        status:
+          type: string
+          description: Order status.
+          example: completed
+        createdAt:
+          type: string
+          format: date-time
+          description: Order creation timestamp.
+          example: '2026-04-15T09:00:00Z'
+        campaigns:
+          type: array
+          description: Campaigns within this order.
+          items:
+            $ref: '#/components/schemas/Campaign'
+    Campaign:
+      title: Campaign
+      description: A capture campaign within an order.
+      type: object
+      properties:
+        campaignId:
+          type: string
+          description: Campaign identifier.
+          example: campaign-001
+        orderId:
+          type: string
+          description: Parent order identifier.
+          example: order-a1b2c3d4
+        status:
+          type: string
+          description: Campaign status.
+          example: completed
+    CampaignsListResponse:
+      title: CampaignsListResponse
+      description: Paginated list of campaigns.
+      type: object
+      properties:
+        campaigns:
+          type: array
+          description: List of campaigns.
+          items:
+            $ref: '#/components/schemas/Campaign'
+    Dataset:
+      title: Dataset
+      description: A dataset produced from a campaign containing downloadable resources.
+      type: object
+      properties:
+        datasetId:
+          type: string
+          description: Dataset identifier.
+          example: dataset-a1b2c3d4
+        campaignId:
+          type: string
+          description: Parent campaign identifier.
+          example: campaign-a1b2
+        status:
+          type: string
+          description: Dataset status.
+          example: completed
+        resources:
+          type: array
+          description: Downloadable resources in this dataset.
+          items:
+            $ref: '#/components/schemas/Resource'
+    DatasetsListResponse:
+      title: DatasetsListResponse
+      description: Paginated list of datasets.
+      type: object
+      properties:
+        datasets:
+          type: array
+          description: List of datasets.
+          items:
+            $ref: '#/components/schemas/Dataset'
+    Resource:
+      title: Resource
+      description: A downloadable resource within a dataset.
+      type: object
+      properties:
+        resourceId:
+          type: string
+          description: Resource identifier.
+          example: resource-001
+        type:
+          type: string
+          description: Resource type (GeoTIFF, Preview, Metadata, etc.).
+          example: GeoTIFF
+        filename:
+          type: string
+          description: Original filename.
+          example: imagery.tif
+    ErrorResponse:
+      title: ErrorResponse
+      description: Error response from the API.
+      type: object
+      properties:
+        code:
+          type: integer
+          description: HTTP status code.
+          example: 400
+        message:
+          type: string
+          description: Error message.
+          example: Bad Request - invalid parameters

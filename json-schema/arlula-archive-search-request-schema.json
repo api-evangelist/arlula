@@ -1,0 +1,64 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://arlula.com/json-schema/archive-search-request.json",
+  "title": "ArchiveSearchRequest",
+  "description": "Request body for searching the archive imagery catalog.",
+  "type": "object",
+  "properties": {
+    "start": {
+      "type": "string",
+      "description": "Start date for imagery search (YYYY-MM-DD).",
+      "examples": [
+        "2025-01-01"
+      ]
+    },
+    "end": {
+      "type": "string",
+      "description": "End date for imagery search (YYYY-MM-DD).",
+      "examples": [
+        "2025-03-31"
+      ]
+    },
+    "gsd": {
+      "type": "number",
+      "description": "Maximum ground sample distance in meters.",
+      "examples": [
+        1.5
+      ]
+    },
+    "lat": {
+      "type": "number",
+      "description": "Latitude of the point of interest.",
+      "examples": [
+        -33.8523
+      ]
+    },
+    "long": {
+      "type": "number",
+      "description": "Longitude of the point of interest.",
+      "examples": [
+        151.2108
+      ]
+    },
+    "cloud": {
+      "type": "integer",
+      "description": "Maximum cloud cover percentage (0-100).",
+      "examples": [
+        20
+      ]
+    },
+    "offNadir": {
+      "type": "number",
+      "description": "Maximum off-nadir angle in degrees.",
+      "examples": [
+        30.0
+      ]
+    },
+    "suppliers": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}
