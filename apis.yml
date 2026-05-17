@@ -55,7 +55,7 @@ apis:
         url: json-structure/arlula-tasking-opportunity-structure.json
       - type: JSONStructure
         url: json-structure/arlula-order-structure.json
-      - type: JSON-LD
+      - type: JSONLD
         url: json-ld/arlula-api-context.jsonld
 common:
   - type: Website
