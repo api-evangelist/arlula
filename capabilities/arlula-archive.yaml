@@ -1,0 +1,207 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Arlula API — Archive
+  description: 'Arlula API — Archive. 4 operations. Lead operation: Arlula Order Archive Imagery. Self-contained Naftiko capability
+    covering one Arlula business surface.'
+  tags:
+  - Arlula
+  - Archive
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ARLULA_API_KEY: ARLULA_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: arlula-archive
+    baseUri: https://api.arlula.com
+    description: Arlula API — Archive business capability. Self-contained, no shared references.
+    resources:
+    - name: api-archive-order
+      path: /api/archive/order
+      operations:
+      - name: orderarchiveimagery
+        method: POST
+        description: Arlula Order Archive Imagery
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-archive-order-batch
+      path: /api/archive/order/batch
+      operations:
+      - name: batchorderarchiveimagery
+        method: POST
+        description: Arlula Batch Order Archive Imagery
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: api-archive-scene
+      path: /api/archive/scene
+      operations:
+      - name: getarchivescene
+        method: GET
+        description: Arlula Get Archive Scene Details
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: id
+          in: query
+          type: string
+          description: The ordering ID of the archive scene to retrieve.
+          required: true
+    - name: api-archive-search
+      path: /api/archive/search
+      operations:
+      - name: searcharchive
+        method: POST
+        description: Arlula Search Archive Imagery
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    authentication:
+      type: basic
+      username: '{{env.ARLULA_USER}}'
+      password: '{{env.ARLULA_PASS}}'
+  exposes:
+  - type: rest
+    namespace: arlula-archive-rest
+    port: 8080
+    description: REST adapter for Arlula API — Archive. One Spectral-compliant resource per consumed operation, prefixed with
+      /v1.
+    resources:
+    - path: /v1/api/archive/order
+      name: api-archive-order
+      description: REST surface for api-archive-order.
+      operations:
+      - method: POST
+        name: orderarchiveimagery
+        description: Arlula Order Archive Imagery
+        call: arlula-archive.orderarchiveimagery
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/archive/order/batch
+      name: api-archive-order-batch
+      description: REST surface for api-archive-order-batch.
+      operations:
+      - method: POST
+        name: batchorderarchiveimagery
+        description: Arlula Batch Order Archive Imagery
+        call: arlula-archive.batchorderarchiveimagery
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/archive/scene
+      name: api-archive-scene
+      description: REST surface for api-archive-scene.
+      operations:
+      - method: GET
+        name: getarchivescene
+        description: Arlula Get Archive Scene Details
+        call: arlula-archive.getarchivescene
+        with:
+          id: rest.id
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/archive/search
+      name: api-archive-search
+      description: REST surface for api-archive-search.
+      operations:
+      - method: POST
+        name: searcharchive
+        description: Arlula Search Archive Imagery
+        call: arlula-archive.searcharchive
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: arlula-archive-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Arlula API — Archive. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: arlula-order-archive-imagery
+      description: Arlula Order Archive Imagery
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: arlula-archive.orderarchiveimagery
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: arlula-batch-order-archive-imagery
+      description: Arlula Batch Order Archive Imagery
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: arlula-archive.batchorderarchiveimagery
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: arlula-get-archive-scene-details
+      description: Arlula Get Archive Scene Details
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: arlula-archive.getarchivescene
+      with:
+        id: tools.id
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: arlula-search-archive-imagery
+      description: Arlula Search Archive Imagery
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: false
+      call: arlula-archive.searcharchive
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

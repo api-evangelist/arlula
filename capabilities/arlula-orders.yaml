@@ -1,0 +1,306 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Arlula API — Orders
+  description: 'Arlula API — Orders. 6 operations. Lead operation: Arlula List Campaigns. Self-contained Naftiko capability
+    covering one Arlula business surface.'
+  tags:
+  - Arlula
+  - Orders
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ARLULA_API_KEY: ARLULA_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: arlula-orders
+    baseUri: https://api.arlula.com
+    description: Arlula API — Orders business capability. Self-contained, no shared references.
+    resources:
+    - name: api-campaigns
+      path: /api/campaigns
+      operations:
+      - name: listcampaigns
+        method: GET
+        description: Arlula List Campaigns
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: page
+          in: query
+          type: integer
+          description: Page index (0-indexed).
+        - name: size
+          in: query
+          type: integer
+          description: Results per page.
+    - name: api-dataset-dataset
+      path: /api/dataset/{dataset}
+      operations:
+      - name: getdataset
+        method: GET
+        description: Arlula Get Dataset Details
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: dataset
+          in: path
+          type: string
+          description: UUID of the dataset to retrieve.
+          required: true
+    - name: api-datasets
+      path: /api/datasets
+      operations:
+      - name: listdatasets
+        method: GET
+        description: Arlula List Datasets
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: page
+          in: query
+          type: integer
+          description: Page index (0-indexed).
+        - name: size
+          in: query
+          type: integer
+          description: Results per page.
+    - name: api-order-order
+      path: /api/order/{order}
+      operations:
+      - name: getorder
+        method: GET
+        description: Arlula Get Order Details
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: order
+          in: path
+          type: string
+          description: UUID of the order to retrieve.
+          required: true
+    - name: api-orders
+      path: /api/orders
+      operations:
+      - name: listorders
+        method: GET
+        description: Arlula List Orders
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: page
+          in: query
+          type: integer
+          description: Page index (0-indexed) for pagination.
+        - name: size
+          in: query
+          type: integer
+          description: Number of results per page.
+    - name: api-resource-resource-data
+      path: /api/resource/{resource}/data
+      operations:
+      - name: downloadresource
+        method: GET
+        description: Arlula Download Resource Data
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: resource
+          in: path
+          type: string
+          description: UUID of the resource to download.
+          required: true
+    authentication:
+      type: basic
+      username: '{{env.ARLULA_USER}}'
+      password: '{{env.ARLULA_PASS}}'
+  exposes:
+  - type: rest
+    namespace: arlula-orders-rest
+    port: 8080
+    description: REST adapter for Arlula API — Orders. One Spectral-compliant resource per consumed operation, prefixed with
+      /v1.
+    resources:
+    - path: /v1/api/campaigns
+      name: api-campaigns
+      description: REST surface for api-campaigns.
+      operations:
+      - method: GET
+        name: listcampaigns
+        description: Arlula List Campaigns
+        call: arlula-orders.listcampaigns
+        with:
+          page: rest.page
+          size: rest.size
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/dataset/{dataset}
+      name: api-dataset-dataset
+      description: REST surface for api-dataset-dataset.
+      operations:
+      - method: GET
+        name: getdataset
+        description: Arlula Get Dataset Details
+        call: arlula-orders.getdataset
+        with:
+          dataset: rest.dataset
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/datasets
+      name: api-datasets
+      description: REST surface for api-datasets.
+      operations:
+      - method: GET
+        name: listdatasets
+        description: Arlula List Datasets
+        call: arlula-orders.listdatasets
+        with:
+          page: rest.page
+          size: rest.size
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/order/{order}
+      name: api-order-order
+      description: REST surface for api-order-order.
+      operations:
+      - method: GET
+        name: getorder
+        description: Arlula Get Order Details
+        call: arlula-orders.getorder
+        with:
+          order: rest.order
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/orders
+      name: api-orders
+      description: REST surface for api-orders.
+      operations:
+      - method: GET
+        name: listorders
+        description: Arlula List Orders
+        call: arlula-orders.listorders
+        with:
+          page: rest.page
+          size: rest.size
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/api/resource/{resource}/data
+      name: api-resource-resource-data
+      description: REST surface for api-resource-resource-data.
+      operations:
+      - method: GET
+        name: downloadresource
+        description: Arlula Download Resource Data
+        call: arlula-orders.downloadresource
+        with:
+          resource: rest.resource
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: arlula-orders-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Arlula API — Orders. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: arlula-list-campaigns
+      description: Arlula List Campaigns
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: arlula-orders.listcampaigns
+      with:
+        page: tools.page
+        size: tools.size
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: arlula-get-dataset-details
+      description: Arlula Get Dataset Details
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: arlula-orders.getdataset
+      with:
+        dataset: tools.dataset
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: arlula-list-datasets
+      description: Arlula List Datasets
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: arlula-orders.listdatasets
+      with:
+        page: tools.page
+        size: tools.size
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: arlula-get-order-details
+      description: Arlula Get Order Details
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: arlula-orders.getorder
+      with:
+        order: tools.order
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: arlula-list-orders
+      description: Arlula List Orders
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: arlula-orders.listorders
+      with:
+        page: tools.page
+        size: tools.size
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: arlula-download-resource-data
+      description: Arlula Download Resource Data
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: arlula-orders.downloadresource
+      with:
+        resource: tools.resource
+      outputParameters:
+      - type: object
+        mapping: $.

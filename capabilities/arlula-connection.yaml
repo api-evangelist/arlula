@@ -1,0 +1,71 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: Arlula API — Connection
+  description: 'Arlula API — Connection. 1 operations. Lead operation: Arlula Test API Connection. Self-contained Naftiko
+    capability covering one Arlula business surface.'
+  tags:
+  - Arlula
+  - Connection
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    ARLULA_API_KEY: ARLULA_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: arlula-connection
+    baseUri: https://api.arlula.com
+    description: Arlula API — Connection business capability. Self-contained, no shared references.
+    resources:
+    - name: api-test
+      path: /api/test
+      operations:
+      - name: testconnection
+        method: GET
+        description: Arlula Test API Connection
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    authentication:
+      type: basic
+      username: '{{env.ARLULA_USER}}'
+      password: '{{env.ARLULA_PASS}}'
+  exposes:
+  - type: rest
+    namespace: arlula-connection-rest
+    port: 8080
+    description: REST adapter for Arlula API — Connection. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/api/test
+      name: api-test
+      description: REST surface for api-test.
+      operations:
+      - method: GET
+        name: testconnection
+        description: Arlula Test API Connection
+        call: arlula-connection.testconnection
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: arlula-connection-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for Arlula API — Connection. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: arlula-test-api-connection
+      description: Arlula Test API Connection
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: arlula-connection.testconnection
+      outputParameters:
+      - type: object
+        mapping: $.
