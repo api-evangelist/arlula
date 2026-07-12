@@ -1,0 +1,14 @@
+generated: '2026-07-11'
+method: derived
+source: openapi/arlula-openapi.yaml
+summary:
+  types:
+  - http
+schemes:
+- name: BasicAuth
+  type: http
+  scheme: basic
+  description: HTTP Basic Authentication using API Key as username and API Secret as password.
+    Credentials are obtained from the Arlula dashboard at https://dashboard.arlula.com/apis.
+  sources:
+  - openapi/arlula-openapi.yaml

@@ -55,6 +55,10 @@ apis:
       - type: JSONLD
         url: json-ld/arlula-api-context.jsonld
 common:
+  - type: DomainSecurity
+    url: security/arlula-domain-security.yml
+  - type: Authentication
+    url: authentication/arlula-authentication.yml
   - type: LinkedIn
     url: https://www.linkedin.com/company/arlula
   - type: Website
@@ -115,6 +119,8 @@ common:
         description: >-
           Rapidly search and order post-event imagery to assess damage extent and support emergency response and
           recovery planning.
+  - url: https://arlula.com/news
+    type: Blog
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
