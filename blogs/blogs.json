@@ -1,0 +1,14 @@
+{
+  "repo": "arlula",
+  "feeds": [
+    {
+      "source": "https://arlula.com/news",
+      "feed_url": "https://arlula.com/news",
+      "title": "",
+      "saved": 0,
+      "method": "none"
+    }
+  ],
+  "fetched": "2026-07-11T11:50:51Z",
+  "post_count": 6
+}

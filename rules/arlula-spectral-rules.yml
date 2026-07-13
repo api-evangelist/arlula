@@ -1,287 +1,332 @@
+# arlula — Spectral ruleset (strengthened)
+# Plain Spectral. Existing hand-authored rules preserved; measured rules added
+# from this provider's own OpenAPI conventions by strengthen_ruleset.py,
+# then self-validated against the spec.
+#
+# Provenance:
+#   - servers-https-only: 100% of servers already https (error)
+#   - servers-expected-domain: 1/1 servers on arlula.com
+#   - path-params-casing: snake @ 100% (n=3)
+#   - query-params-casing: snake @ 100% (n=8)
+#   - operationid-casing: camel @ 100% (n=16)
+#   - schema-names-casing: pascal @ 100% (n=20)
+#   - schema-properties-casing: snake @ 72% (n=80)
+#   - security: global (root) — NOT emitting operation-security-required
+#   - error-schema-defined: ErrorResponse
+#   - operation-documents-401: 100% adherence
+#   - pagination params observed: ['page', 'size']
+#   - merge: kept 30 existing, added 8 measured, upgraded 0
+#   - added: servers-expected-domain, path-params-casing, query-params-casing, operationid-casing, schema-names-casing, schema-properties-casing, error-schema-defined, no-empty-descriptions
+extends:
+  - spectral:oas
 rules:
-  # Info Rules
   arlula-info-title:
     description: API must have a title.
-    message: "Info object must have a non-empty title."
+    message: Info object must have a non-empty title.
     severity: error
-    given: "$.info"
+    given: $.info
     then:
       field: title
       function: truthy
-
   arlula-info-description:
     description: API must have a description.
-    message: "Info object must have a non-empty description."
+    message: Info object must have a non-empty description.
     severity: warn
-    given: "$.info"
+    given: $.info
     then:
       field: description
       function: truthy
-
   arlula-info-version:
     description: API must have a version.
-    message: "Info object must have a version."
+    message: Info object must have a version.
     severity: error
-    given: "$.info"
+    given: $.info
     then:
       field: version
       function: truthy
-
   arlula-info-contact:
     description: API should have contact information.
-    message: "Info object should include contact details."
+    message: Info object should include contact details.
     severity: warn
-    given: "$.info"
+    given: $.info
     then:
       field: contact
       function: truthy
-
-  # OpenAPI Version
   arlula-openapi-version:
     description: Must use OpenAPI 3.0.x.
-    message: "OpenAPI version must be 3.0.x."
+    message: OpenAPI version must be 3.0.x.
     severity: error
-    given: "$"
+    given: $
     then:
       field: openapi
       function: pattern
       functionOptions:
-        match: "^3\\.0\\."
-
-  # Servers Rules
+        match: ^3\.0\.
   arlula-servers-present:
     description: API must have servers defined.
-    message: "Servers array must be present and non-empty."
+    message: Servers array must be present and non-empty.
     severity: error
-    given: "$"
+    given: $
     then:
       field: servers
       function: truthy
-
   arlula-servers-https:
     description: All server URLs must use HTTPS.
-    message: "Server URL must use HTTPS."
+    message: Server URL must use HTTPS.
     severity: error
-    given: "$.servers[*]"
+    given: $.servers[*]
     then:
       field: url
       function: pattern
       functionOptions:
-        match: "^https://"
-
-  # Paths Rules
+        match: ^https://
   arlula-paths-present:
     description: API must have paths defined.
-    message: "Paths object must be present and non-empty."
+    message: Paths object must be present and non-empty.
     severity: error
-    given: "$"
+    given: $
     then:
       field: paths
       function: truthy
-
   arlula-path-kebab-case:
     description: Path segments should use kebab-case or camelCase consistently.
-    message: "Path should follow consistent casing conventions."
+    message: Path should follow consistent casing conventions.
     severity: warn
-    given: "$.paths[*]~"
+    given: $.paths[*]~
     then:
       function: pattern
       functionOptions:
-        match: "^/[a-zA-Z0-9/{}_-]*$"
-
-  # Operations Rules
+        match: ^/[a-zA-Z0-9/{}_-]*$
   arlula-operation-summary:
     description: Every operation must have a summary.
-    message: "Operation must have a summary."
+    message: Operation must have a summary.
     severity: error
-    given: "$.paths[*][get,post,put,patch,delete,options,head]"
+    given: $.paths[*][get,post,put,patch,delete,options,head]
     then:
       field: summary
       function: truthy
-
   arlula-operation-description:
     description: Every operation should have a description.
-    message: "Operation should have a description."
+    message: Operation should have a description.
     severity: warn
-    given: "$.paths[*][get,post,put,patch,delete,options,head]"
+    given: $.paths[*][get,post,put,patch,delete,options,head]
     then:
       field: description
       function: truthy
-
   arlula-operation-tags:
     description: Every operation must have tags.
-    message: "Operation must have at least one tag."
+    message: Operation must have at least one tag.
     severity: error
-    given: "$.paths[*][get,post,put,patch,delete,options,head]"
+    given: $.paths[*][get,post,put,patch,delete,options,head]
     then:
       field: tags
       function: truthy
-
   arlula-operation-id:
     description: Every operation must have an operationId.
-    message: "Operation must have an operationId."
+    message: Operation must have an operationId.
     severity: error
-    given: "$.paths[*][get,post,put,patch,delete,options,head]"
+    given: $.paths[*][get,post,put,patch,delete,options,head]
     then:
       field: operationId
       function: truthy
-
-  # Parameters Rules
   arlula-parameter-description:
     description: Parameters should have descriptions.
-    message: "Parameter should have a description."
+    message: Parameter should have a description.
     severity: warn
-    given: "$.paths[*][get,post,put,patch,delete][parameters][*]"
+    given: $.paths[*][get,post,put,patch,delete][parameters][*]
     then:
       field: description
       function: truthy
-
   arlula-parameter-schema:
     description: Parameters must have a schema.
-    message: "Parameter must have a schema."
+    message: Parameter must have a schema.
     severity: error
-    given: "$.paths[*][get,post,put,patch,delete][parameters][*]"
+    given: $.paths[*][get,post,put,patch,delete][parameters][*]
     then:
       field: schema
       function: truthy
-
-  # Request Body Rules
   arlula-request-body-content:
     description: Request bodies must have content defined.
-    message: "Request body must have content."
+    message: Request body must have content.
     severity: error
-    given: "$.paths[*][post,put,patch].requestBody"
+    given: $.paths[*][post,put,patch].requestBody
     then:
       field: content
       function: truthy
-
   arlula-request-body-json:
     description: POST/PUT/PATCH operations should accept application/json.
-    message: "Request body should support application/json content type."
+    message: Request body should support application/json content type.
     severity: warn
-    given: "$.paths[*][post,put,patch].requestBody.content"
+    given: $.paths[*][post,put,patch].requestBody.content
     then:
       function: truthy
-
-  # Response Rules
   arlula-response-200:
     description: GET operations should define a 200 response.
-    message: "GET operation should have a 200 response."
+    message: GET operation should have a 200 response.
     severity: warn
-    given: "$.paths[*].get.responses"
+    given: $.paths[*].get.responses
     then:
-      field: "200"
+      field: '200'
       function: truthy
-
   arlula-response-description:
     description: Responses must have descriptions.
-    message: "Response must have a description."
+    message: Response must have a description.
     severity: error
-    given: "$.paths[*][get,post,put,patch,delete].responses[*]"
+    given: $.paths[*][get,post,put,patch,delete].responses[*]
     then:
       field: description
       function: truthy
-
   arlula-response-401:
     description: Operations should document 401 Unauthorized responses.
-    message: "Operation should define a 401 response."
+    message: Operation should define a 401 response.
     severity: warn
-    given: "$.paths[*][get,post,put,patch,delete].responses"
+    given: $.paths[*][get,post,put,patch,delete].responses
     then:
-      field: "401"
+      field: '401'
       function: truthy
-
   arlula-response-500:
     description: Operations should document 500 error responses.
-    message: "Operation should define a 500 response."
+    message: Operation should define a 500 response.
     severity: warn
-    given: "$.paths[*][get,post,put,patch,delete].responses"
+    given: $.paths[*][get,post,put,patch,delete].responses
     then:
-      field: "500"
+      field: '500'
       function: truthy
-
-  # Schema Rules
   arlula-schema-title:
     description: Schemas in components should have titles.
-    message: "Schema must have a title."
+    message: Schema must have a title.
     severity: warn
-    given: "$.components.schemas[*]"
+    given: $.components.schemas[*]
     then:
       field: title
       function: truthy
-
   arlula-schema-description:
     description: Schemas should have descriptions.
-    message: "Schema should have a description."
+    message: Schema should have a description.
     severity: warn
-    given: "$.components.schemas[*]"
+    given: $.components.schemas[*]
     then:
       field: description
       function: truthy
-
   arlula-property-description:
     description: Schema properties should have descriptions.
-    message: "Schema property should have a description."
+    message: Schema property should have a description.
     severity: warn
-    given: "$.components.schemas[*].properties[*]"
+    given: $.components.schemas[*].properties[*]
     then:
       field: description
       function: truthy
-
   arlula-property-example:
     description: Schema properties should have examples.
-    message: "Schema property should have an example value."
+    message: Schema property should have an example value.
     severity: info
-    given: "$.components.schemas[*].properties[*]"
+    given: $.components.schemas[*].properties[*]
     then:
       field: example
       function: truthy
-
-  # Security Rules
   arlula-security-defined:
     description: API must define security schemes.
-    message: "Security schemes must be defined in components."
+    message: Security schemes must be defined in components.
     severity: error
-    given: "$.components"
+    given: $.components
     then:
       field: securitySchemes
       function: truthy
-
   arlula-security-basic-auth:
     description: Arlula API uses HTTP Basic authentication.
-    message: "BasicAuth security scheme must use http type with basic scheme."
+    message: BasicAuth security scheme must use http type with basic scheme.
     severity: error
-    given: "$.components.securitySchemes.BasicAuth"
+    given: $.components.securitySchemes.BasicAuth
     then:
       field: type
       function: enumeration
       functionOptions:
         values:
-          - http
-
-  # Satellite Imagery Specific Rules
+        - http
   arlula-archive-search-post:
     description: Archive search must use POST method.
-    message: "Archive search endpoint must use POST."
+    message: Archive search endpoint must use POST.
     severity: warn
-    given: "$.paths['/api/archive/search']"
+    given: $.paths['/api/archive/search']
     then:
       field: post
       function: truthy
-
   arlula-tasking-search-post:
     description: Tasking search must use POST method.
-    message: "Tasking search endpoint must use POST."
+    message: Tasking search endpoint must use POST.
     severity: warn
-    given: "$.paths['/api/tasking/search']"
+    given: $.paths['/api/tasking/search']
     then:
       field: post
       function: truthy
-
   arlula-resource-data-binary:
     description: Resource data download should support binary responses.
-    message: "Resource data endpoint should return binary content type."
+    message: Resource data endpoint should return binary content type.
     severity: info
-    given: "$.paths['/api/resource/{resource}/data'].get.responses['200'].content"
+    given: $.paths['/api/resource/{resource}/data'].get.responses['200'].content
+    then:
+      function: truthy
+  servers-expected-domain:
+    description: Server URLs should be on the arlula.com domain.
+    severity: warn
+    given: $.servers[*].url
+    then:
+      function: pattern
+      functionOptions:
+        match: arlula\.com
+  path-params-casing:
+    description: Path parameters should be snake_case (the dominant convention in this API).
+    severity: warn
+    given: $.paths[*].parameters[?(@.in=='path')].name
+    then:
+      function: casing
+      functionOptions:
+        type: snake
+  query-params-casing:
+    description: Query parameters should be snake_case (the dominant convention in this API).
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete].parameters[?(@.in=='query')]
+    then:
+      field: name
+      function: casing
+      functionOptions:
+        type: snake
+  operationid-casing:
+    description: Operation IDs should be camelCase (the dominant convention in this API).
+    severity: warn
+    given: $.paths[*][get,post,put,patch,delete].operationId
+    then:
+      function: casing
+      functionOptions:
+        type: camel
+  schema-names-casing:
+    description: Component schema names should be PascalCase (the dominant convention in this API).
+    severity: warn
+    given: $.components.schemas
+    then:
+      field: '@key'
+      function: casing
+      functionOptions:
+        type: pascal
+  schema-properties-casing:
+    description: Schema properties should be snake_case (the dominant convention in this API).
+    severity: info
+    given: $.components.schemas[*].properties
+    then:
+      field: '@key'
+      function: casing
+      functionOptions:
+        type: snake
+  error-schema-defined:
+    description: A shared error schema (ErrorResponse) should be defined for error payloads.
+    severity: warn
+    given: $.components.schemas
+    then:
+      field: ErrorResponse
+      function: truthy
+  no-empty-descriptions:
+    description: Descriptions must not be empty strings.
+    severity: warn
+    given: $..description
     then:
       function: truthy
