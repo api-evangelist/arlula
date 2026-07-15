@@ -55,6 +55,8 @@ apis:
       - type: JSONLD
         url: json-ld/arlula-api-context.jsonld
 common:
+  - type: AgenticAccess
+    url: agentic-access/arlula-agentic-access.yml
   - type: DomainSecurity
     url: security/arlula-domain-security.yml
   - type: Authentication
