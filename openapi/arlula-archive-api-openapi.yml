@@ -1,0 +1,462 @@
+openapi: 3.0.3
+info:
+  title: Arlula Archive API
+  description: 'The Arlula API provides programmatic access to satellite imagery ordering, archive search, tasking, and earth observation data services. The API covers four main areas: Archive (historical imagery search and ordering), Tasking (future satellite capture scheduling), Orders Management (order tracking and resource downloads), and connection testing.'
+  version: 2025-10
+  contact:
+    name: Arlula Support
+    url: https://arlula.com/
+  x-generated-from: documentation
+  x-last-validated: '2026-04-19'
+servers:
+- url: https://api.arlula.com
+  description: Production API
+security:
+- BasicAuth: []
+tags:
+- name: Archive
+  description: Search and order historical satellite imagery
+paths:
+  /api/archive/search:
+    post:
+      operationId: searchArchive
+      summary: Arlula Search Archive Imagery
+      description: Search the Arlula satellite imagery archive and its suppliers for historical imagery matching specified date, location, and quality criteria. Returns available scenes with pricing, bands, and bundle options.
+      tags:
+      - Archive
+      requestBody:
+        required: true
+        description: Archive imagery search parameters.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ArchiveSearchRequest'
+            examples:
+              searchArchiveRequestExample:
+                summary: Default searchArchive request
+                x-microcks-default: true
+                value:
+                  start: '2025-01-01'
+                  end: '2025-03-31'
+                  gsd: 1.5
+                  lat: -33.8523
+                  long: 151.2108
+                  cloud: 20
+      responses:
+        '200':
+          description: Successfully retrieved archive search results.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ArchiveScene'
+              examples:
+                searchArchive200Example:
+                  summary: Default searchArchive 200 response
+                  x-microcks-default: true
+                  value:
+                  - id: scene-a1b2c3d4
+                    supplier: supplier-001
+                    captureDate: '2025-02-15'
+                    gsd: 1.5
+                    cloudCover: 12
+                    offNadir: 15.2
+                    price: 150.0
+                    bundles:
+                    - key: bundle-basic
+                      name: Basic Bundle
+                      price: 150.0
+        '400':
+          description: Malformed request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/archive/scene:
+    get:
+      operationId: getArchiveScene
+      summary: Arlula Get Archive Scene Details
+      description: Retrieve details for a previously returned archive search result by its ordering ID.
+      tags:
+      - Archive
+      parameters:
+      - name: id
+        in: query
+        required: true
+        description: The ordering ID of the archive scene to retrieve.
+        schema:
+          type: string
+          format: uuid
+        example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+      responses:
+        '200':
+          description: Successfully retrieved scene details.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ArchiveScene'
+              examples:
+                getArchiveScene200Example:
+                  summary: Default getArchiveScene 200 response
+                  x-microcks-default: true
+                  value:
+                    id: scene-a1b2c3d4
+                    supplier: supplier-001
+                    captureDate: '2025-02-15'
+                    gsd: 1.5
+                    cloudCover: 12
+                    offNadir: 15.2
+                    price: 150.0
+        '400':
+          description: Malformed request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/archive/order:
+    post:
+      operationId: orderArchiveImagery
+      summary: Arlula Order Archive Imagery
+      description: Place a single order for archived satellite imagery. The order includes a bundle selection, EULA acceptance, and payment information. Returns order status as accepted (200) or pending approval (202).
+      tags:
+      - Archive
+      requestBody:
+        required: true
+        description: Archive imagery order parameters.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ArchiveOrderRequest'
+            examples:
+              orderArchiveImageryRequestExample:
+                summary: Default orderArchiveImagery request
+                x-microcks-default: true
+                value:
+                  id: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+                  bundleKey: bundle-basic
+                  eula: EULA-001
+                  emails:
+                  - analyst@example.com
+      responses:
+        '200':
+          description: Order accepted and processing.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderResponse'
+              examples:
+                orderArchiveImagery200Example:
+                  summary: Default orderArchiveImagery 200 response
+                  x-microcks-default: true
+                  value:
+                    orderId: order-500123
+                    status: processing
+                    createdAt: '2026-04-19T09:00:00Z'
+        '202':
+          description: Order pending supplier approval.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrderResponse'
+        '400':
+          description: Malformed request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '402':
+          description: Payment required.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '403':
+          description: Account not activated.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+  /api/archive/order/batch:
+    post:
+      operationId: batchOrderArchiveImagery
+      summary: Arlula Batch Order Archive Imagery
+      description: Place multiple archive imagery orders simultaneously in a single API call. Shares common settings (emails, webhooks, payment) across all orders.
+      tags:
+      - Archive
+      requestBody:
+        required: true
+        description: Batch archive imagery order parameters.
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BatchArchiveOrderRequest'
+            examples:
+              batchOrderArchiveImageryRequestExample:
+                summary: Default batchOrderArchiveImagery request
+                x-microcks-default: true
+                value:
+                  orders:
+                  - id: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+                    bundleKey: bundle-basic
+                    eula: EULA-001
+                  emails:
+                  - analyst@example.com
+      responses:
+        '200':
+          description: All orders accepted.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/OrderResponse'
+              examples:
+                batchOrderArchiveImagery200Example:
+                  summary: Default batchOrderArchiveImagery 200 response
+                  x-microcks-default: true
+                  value:
+                  - orderId: order-500123
+                    status: processing
+        '400':
+          description: Malformed request.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: Unauthorized.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    ArchiveScene:
+      title: ArchiveScene
+      description: A satellite imagery scene available in the archive.
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique ordering ID for the scene.
+          example: scene-a1b2c3d4
+        supplier:
+          type: string
+          description: Supplier identifier.
+          example: supplier-001
+        captureDate:
+          type: string
+          format: date
+          description: Date the imagery was captured.
+          example: '2025-02-15'
+        gsd:
+          type: number
+          description: Ground sample distance in meters.
+          example: 1.5
+        cloudCover:
+          type: integer
+          description: Cloud cover percentage at time of capture.
+          example: 12
+        offNadir:
+          type: number
+          description: Off-nadir angle at time of capture.
+          example: 15.2
+        price:
+          type: number
+          description: Price for ordering this scene.
+          example: 150.0
+        bundles:
+          type: array
+          description: Available bundle options for ordering.
+          items:
+            $ref: '#/components/schemas/Bundle'
+    ArchiveOrderRequest:
+      title: ArchiveOrderRequest
+      description: Request body for ordering archive imagery.
+      type: object
+      required:
+      - id
+      - bundleKey
+      - eula
+      properties:
+        id:
+          type: string
+          description: Ordering ID of the archive scene to purchase.
+          example: a1b2c3d4-e5f6-7890-abcd-ef1234567890
+        bundleKey:
+          type: string
+          description: Bundle key selected from search results.
+          example: bundle-basic
+        eula:
+          type: string
+          description: EULA identifier accepted for this order.
+          example: EULA-001
+        emails:
+          type: array
+          description: Email addresses to notify when order is ready.
+          items:
+            type: string
+        webhooks:
+          type: array
+          description: Webhook URLs to notify when order status changes.
+          items:
+            type: string
+        coupon:
+          type: string
+          description: Optional coupon code for discounts.
+          example: COUPON-001
+    OrderResponse:
+      title: OrderResponse
+      description: Response after placing an imagery order.
+      type: object
+      properties:
+        orderId:
+          type: string
+          description: Unique order identifier.
+          example: order-500123
+        status:
+          type: string
+          description: Current order status.
+          enum:
+          - processing
+          - pending-approval
+          - scheduled
+          - completed
+          - failed
+          example: processing
+        createdAt:
+          type: string
+          format: date-time
+          description: Time the order was created.
+          example: '2026-04-19T09:00:00Z'
+    Bundle:
+      title: Bundle
+      description: An imagery bundle option with specific products and pricing.
+      type: object
+      properties:
+        key:
+          type: string
+          description: Bundle key used when placing orders.
+          example: bundle-basic
+        name:
+          type: string
+          description: Bundle display name.
+          example: Basic Bundle
+        price:
+          type: number
+          description: Bundle price.
+          example: 150.0
+    ErrorResponse:
+      title: ErrorResponse
+      description: Error response from the API.
+      type: object
+      properties:
+        code:
+          type: integer
+          description: HTTP status code.
+          example: 400
+        message:
+          type: string
+          description: Error message.
+          example: Bad Request - invalid parameters
+    BatchArchiveOrderRequest:
+      title: BatchArchiveOrderRequest
+      description: Request body for placing multiple archive orders simultaneously.
+      type: object
+      required:
+      - orders
+      properties:
+        orders:
+          type: array
+          description: List of archive orders to place.
+          items:
+            $ref: '#/components/schemas/ArchiveOrderRequest'
+        emails:
+          type: array
+          description: Email addresses for all orders in the batch.
+          items:
+            type: string
+        webhooks:
+          type: array
+          description: Webhook URLs for all orders in the batch.
+          items:
+            type: string
+    ArchiveSearchRequest:
+      title: ArchiveSearchRequest
+      description: Request body for searching the archive imagery catalog.
+      type: object
+      required:
+      - start
+      - gsd
+      properties:
+        start:
+          type: string
+          format: date
+          description: Start date for imagery search (YYYY-MM-DD).
+          example: '2025-01-01'
+        end:
+          type: string
+          format: date
+          description: End date for imagery search (YYYY-MM-DD).
+          example: '2025-03-31'
+        gsd:
+          type: number
+          description: Maximum ground sample distance in meters.
+          example: 1.5
+        lat:
+          type: number
+          description: Latitude of the point of interest.
+          example: -33.8523
+        long:
+          type: number
+          description: Longitude of the point of interest.
+          example: 151.2108
+        cloud:
+          type: integer
+          description: Maximum cloud cover percentage (0-100).
+          example: 20
+        offNadir:
+          type: number
+          description: Maximum off-nadir angle in degrees.
+          example: 30.0
+        suppliers:
+          type: array
+          description: Filter results to specific supplier keys.
+          items:
+            type: string
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic Authentication using API Key as username and API Secret as password. Credentials are obtained from the Arlula dashboard at https://dashboard.arlula.com/apis.

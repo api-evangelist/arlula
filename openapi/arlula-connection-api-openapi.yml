@@ -1,0 +1,82 @@
+openapi: 3.0.3
+info:
+  title: Arlula Archive Connection API
+  description: 'The Arlula API provides programmatic access to satellite imagery ordering, archive search, tasking, and earth observation data services. The API covers four main areas: Archive (historical imagery search and ordering), Tasking (future satellite capture scheduling), Orders Management (order tracking and resource downloads), and connection testing.'
+  version: 2025-10
+  contact:
+    name: Arlula Support
+    url: https://arlula.com/
+  x-generated-from: documentation
+  x-last-validated: '2026-04-19'
+servers:
+- url: https://api.arlula.com
+  description: Production API
+security:
+- BasicAuth: []
+tags:
+- name: Connection
+  description: API connection testing
+paths:
+  /api/test:
+    get:
+      operationId: testConnection
+      summary: Arlula Test API Connection
+      description: Validates API authentication credentials without executing any operational requests. Use this to confirm credentials are correctly configured.
+      tags:
+      - Connection
+      responses:
+        '200':
+          description: Authentication successful.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TestResponse'
+              examples:
+                testConnection200Example:
+                  summary: Default testConnection 200 response
+                  x-microcks-default: true
+                  value:
+                    success: true
+                    message: Authentication successful.
+        '401':
+          description: Unauthorized - invalid credentials.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+      x-microcks-operation:
+        delay: 0
+        dispatcher: FALLBACK
+components:
+  schemas:
+    ErrorResponse:
+      title: ErrorResponse
+      description: Error response from the API.
+      type: object
+      properties:
+        code:
+          type: integer
+          description: HTTP status code.
+          example: 400
+        message:
+          type: string
+          description: Error message.
+          example: Bad Request - invalid parameters
+    TestResponse:
+      title: TestResponse
+      description: Response from the API connection test endpoint.
+      type: object
+      properties:
+        success:
+          type: boolean
+          description: Whether the authentication was successful.
+          example: true
+        message:
+          type: string
+          description: Status message.
+          example: Authentication successful.
+  securitySchemes:
+    BasicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic Authentication using API Key as username and API Secret as password. Credentials are obtained from the Arlula dashboard at https://dashboard.arlula.com/apis.
