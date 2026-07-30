@@ -6,7 +6,20 @@ description: >-
   discover tasking opportunities, place imagery orders, and download delivered datasets including GeoTIFF imagery,
   preview images, and metadata files.
 type: Index
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/arlula.png
 tags:
   - Earth Observation
   - Geospatial
@@ -18,43 +31,121 @@ created: '2025-02-06'
 modified: '2026-05-19'
 specificationVersion: '0.19'
 apis:
-  - aid: arlula:arlula-api
-    name: Arlula API
-    description: >-
-      The Arlula API provides programmatic access to satellite imagery search, ordering, and delivery. It covers archive
-      search for historical imagery, tasking for future satellite captures, and order management including campaign,
-      dataset, and resource download operations. Authentication uses HTTP Basic with API Key and API Secret obtained
-      from the Arlula dashboard.
-    humanURL: https://arlula.com/documentation/
-    baseURL: https://api.arlula.com
-    tags:
-      - Archive
-      - Earth Observation
-      - Imagery
-      - Satellites
-      - Tasking
-    properties:
-      - type: Documentation
-        url: https://arlula.com/documentation/
-      - type: OpenAPI
-        url: openapi/arlula-openapi.yaml
-      - type: JSONSchema
-        url: json-schema/arlula-archive-scene-schema.json
-      - type: JSONSchema
-        url: json-schema/arlula-archive-search-request-schema.json
-      - type: JSONSchema
-        url: json-schema/arlula-tasking-opportunity-schema.json
-      - type: JSONSchema
-        url: json-schema/arlula-order-schema.json
-      - type: JSONStructure
-        url: json-structure/arlula-archive-scene-structure.json
-      - type: JSONStructure
-        url: json-structure/arlula-tasking-opportunity-structure.json
-      - type: JSONStructure
-        url: json-structure/arlula-order-structure.json
-      - type: JSONLD
-        url: json-ld/arlula-api-context.jsonld
+- aid: arlula:arlula-archive-api
+  name: Arlula Archive API
+  description: Search and order historical satellite imagery
+  humanURL: https://arlula.com/documentation/
+  baseURL: https://api.arlula.com
+  tags:
+  - Archive
+  properties:
+  - type: OpenAPI
+    url: openapi/arlula-archive-api-openapi.yml
+  - type: Documentation
+    url: https://arlula.com/documentation/
+  - type: JSONSchema
+    url: json-schema/arlula-archive-scene-schema.json
+  - type: JSONSchema
+    url: json-schema/arlula-archive-search-request-schema.json
+  - type: JSONSchema
+    url: json-schema/arlula-tasking-opportunity-schema.json
+  - type: JSONSchema
+    url: json-schema/arlula-order-schema.json
+  - type: JSONStructure
+    url: json-structure/arlula-archive-scene-structure.json
+  - type: JSONStructure
+    url: json-structure/arlula-tasking-opportunity-structure.json
+  - type: JSONStructure
+    url: json-structure/arlula-order-structure.json
+  - type: JSONLD
+    url: json-ld/arlula-api-context.jsonld
+- aid: arlula:arlula-connection-api
+  name: Arlula Connection API
+  description: API connection testing
+  humanURL: https://arlula.com/documentation/
+  baseURL: https://api.arlula.com
+  tags:
+  - Connection
+  properties:
+  - type: OpenAPI
+    url: openapi/arlula-connection-api-openapi.yml
+  - type: Documentation
+    url: https://arlula.com/documentation/
+  - type: JSONSchema
+    url: json-schema/arlula-archive-scene-schema.json
+  - type: JSONSchema
+    url: json-schema/arlula-archive-search-request-schema.json
+  - type: JSONSchema
+    url: json-schema/arlula-tasking-opportunity-schema.json
+  - type: JSONSchema
+    url: json-schema/arlula-order-schema.json
+  - type: JSONStructure
+    url: json-structure/arlula-archive-scene-structure.json
+  - type: JSONStructure
+    url: json-structure/arlula-tasking-opportunity-structure.json
+  - type: JSONStructure
+    url: json-structure/arlula-order-structure.json
+  - type: JSONLD
+    url: json-ld/arlula-api-context.jsonld
+- aid: arlula:arlula-orders-api
+  name: Arlula Orders API
+  description: Manage orders, campaigns, datasets, and resources
+  humanURL: https://arlula.com/documentation/
+  baseURL: https://api.arlula.com
+  tags:
+  - Orders
+  properties:
+  - type: OpenAPI
+    url: openapi/arlula-orders-api-openapi.yml
+  - type: Documentation
+    url: https://arlula.com/documentation/
+  - type: JSONSchema
+    url: json-schema/arlula-archive-scene-schema.json
+  - type: JSONSchema
+    url: json-schema/arlula-archive-search-request-schema.json
+  - type: JSONSchema
+    url: json-schema/arlula-tasking-opportunity-schema.json
+  - type: JSONSchema
+    url: json-schema/arlula-order-schema.json
+  - type: JSONStructure
+    url: json-structure/arlula-archive-scene-structure.json
+  - type: JSONStructure
+    url: json-structure/arlula-tasking-opportunity-structure.json
+  - type: JSONStructure
+    url: json-structure/arlula-order-structure.json
+  - type: JSONLD
+    url: json-ld/arlula-api-context.jsonld
+- aid: arlula:arlula-tasking-api
+  name: Arlula Tasking API
+  description: Schedule future satellite captures
+  humanURL: https://arlula.com/documentation/
+  baseURL: https://api.arlula.com
+  tags:
+  - Tasking
+  properties:
+  - type: OpenAPI
+    url: openapi/arlula-tasking-api-openapi.yml
+  - type: Documentation
+    url: https://arlula.com/documentation/
+  - type: JSONSchema
+    url: json-schema/arlula-archive-scene-schema.json
+  - type: JSONSchema
+    url: json-schema/arlula-archive-search-request-schema.json
+  - type: JSONSchema
+    url: json-schema/arlula-tasking-opportunity-schema.json
+  - type: JSONSchema
+    url: json-schema/arlula-order-schema.json
+  - type: JSONStructure
+    url: json-structure/arlula-archive-scene-structure.json
+  - type: JSONStructure
+    url: json-structure/arlula-tasking-opportunity-structure.json
+  - type: JSONStructure
+    url: json-structure/arlula-order-structure.json
+  - type: JSONLD
+    url: json-ld/arlula-api-context.jsonld
 common:
+  - type: PostmanWorkspace
+    url: https://www.postman.com/kinlaneapi/arlula/overview
   - type: AgenticAccess
     url: agentic-access/arlula-agentic-access.yml
   - type: DomainSecurity
