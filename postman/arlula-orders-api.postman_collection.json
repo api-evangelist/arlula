@@ -1,0 +1,1170 @@
+{
+  "info": {
+    "_postman_id": "b7ea4ab1-052b-44de-b7f9-8aab34249231",
+    "name": "Arlula Archive Orders API",
+    "description": "The Arlula API provides programmatic access to satellite imagery ordering, archive search, tasking, and earth observation data services. The API covers four main areas: Archive (historical imagery search and ordering), Tasking (future satellite capture scheduling), Orders Management (order tracking and resource downloads), and connection testing.\n\nContact Support:\n Name: Arlula Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:04:55.000Z",
+    "updatedAt": "2026-07-28T01:04:55.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-b7ea4ab1-052b-44de-b7f9-8aab34249231"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "orders",
+          "item": [
+            {
+              "name": "Arlula List Orders",
+              "id": "86c9aeb7-7769-450e-bcf3-3828dbc12a84",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/orders?page=<integer>&size=<integer>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "orders"
+                  ],
+                  "query": [
+                    {
+                      "description": "Page index (0-indexed) for pagination.",
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Number of results per page.",
+                      "key": "size",
+                      "value": "<integer>"
+                    }
+                  ]
+                },
+                "description": "List all pending and completed orders on the account. Supports pagination via page and size parameters."
+              },
+              "response": [
+                {
+                  "id": "11d2a5d2-7574-4eca-84f9-d9d1a290a9b3",
+                  "name": "Successfully retrieved list of orders.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/orders?page=<integer>&size=<integer>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "orders"
+                      ],
+                      "query": [
+                        {
+                          "description": "Page index (0-indexed) for pagination.",
+                          "key": "page",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Number of results per page.",
+                          "key": "size",
+                          "value": "<integer>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"orders\": [\n    {\n      \"orderId\": \"<string>\",\n      \"status\": \"failed\",\n      \"createdAt\": \"<dateTime>\"\n    },\n    {\n      \"orderId\": \"<string>\",\n      \"status\": \"completed\",\n      \"createdAt\": \"<dateTime>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T01:04:55.000Z",
+                  "updatedAt": "2026-07-28T01:04:55.000Z",
+                  "uid": "35240-11d2a5d2-7574-4eca-84f9-d9d1a290a9b3"
+                },
+                {
+                  "id": "8f7f3f25-35b4-4e52-864b-6d61c319bd4c",
+                  "name": "Malformed request.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/orders?page=<integer>&size=<integer>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "orders"
+                      ],
+                      "query": [
+                        {
+                          "description": "Page index (0-indexed) for pagination.",
+                          "key": "page",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Number of results per page.",
+                          "key": "size",
+                          "value": "<integer>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T01:04:55.000Z",
+                  "updatedAt": "2026-07-28T01:04:55.000Z",
+                  "uid": "35240-8f7f3f25-35b4-4e52-864b-6d61c319bd4c"
+                },
+                {
+                  "id": "101161ad-8091-488b-9639-f48536483c6c",
+                  "name": "Unauthorized.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/orders?page=<integer>&size=<integer>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "orders"
+                      ],
+                      "query": [
+                        {
+                          "description": "Page index (0-indexed) for pagination.",
+                          "key": "page",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Number of results per page.",
+                          "key": "size",
+                          "value": "<integer>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T01:04:55.000Z",
+                  "updatedAt": "2026-07-28T01:04:55.000Z",
+                  "uid": "35240-101161ad-8091-488b-9639-f48536483c6c"
+                }
+              ],
+              "createdAt": "2026-07-28T01:04:55.000Z",
+              "updatedAt": "2026-07-28T01:04:55.000Z",
+              "uid": "35240-86c9aeb7-7769-450e-bcf3-3828dbc12a84"
+            }
+          ],
+          "id": "fd7019d8-1881-4b25-90bb-e801750259d4",
+          "createdAt": "2026-07-28T01:04:55.000Z",
+          "updatedAt": "2026-07-28T01:04:55.000Z",
+          "uid": "35240-fd7019d8-1881-4b25-90bb-e801750259d4"
+        },
+        {
+          "name": "order",
+          "item": [
+            {
+              "name": "{order}",
+              "item": [
+                {
+                  "name": "Arlula Get Order Details",
+                  "id": "f3b01a33-908a-4a68-a60d-ef30e7fd6855",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/order/:order",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "order",
+                        ":order"
+                      ],
+                      "variable": [
+                        {
+                          "id": "95f2bdf2-2f8e-41c2-b335-9f5d04c667d2",
+                          "key": "order",
+                          "value": "<uuid>",
+                          "description": "(Required) UUID of the order to retrieve."
+                        }
+                      ]
+                    },
+                    "description": "Retrieve detailed information about a specific order including its campaigns and datasets."
+                  },
+                  "response": [
+                    {
+                      "id": "5ef1dbcc-a1fe-4ae6-86a7-62dd32855bb0",
+                      "name": "Successfully retrieved order details.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/order/:order",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "order",
+                            ":order"
+                          ],
+                          "variable": [
+                            {
+                              "key": "order"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"orderId\": \"<string>\",\n  \"status\": \"<string>\",\n  \"createdAt\": \"<dateTime>\",\n  \"campaigns\": [\n    {\n      \"campaignId\": \"<string>\",\n      \"orderId\": \"<string>\",\n      \"status\": \"<string>\"\n    },\n    {\n      \"campaignId\": \"<string>\",\n      \"orderId\": \"<string>\",\n      \"status\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T01:04:55.000Z",
+                      "updatedAt": "2026-07-28T01:04:55.000Z",
+                      "uid": "35240-5ef1dbcc-a1fe-4ae6-86a7-62dd32855bb0"
+                    },
+                    {
+                      "id": "f697e49f-a472-489b-ab64-fcec89852da5",
+                      "name": "Malformed request.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/order/:order",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "order",
+                            ":order"
+                          ],
+                          "variable": [
+                            {
+                              "key": "order"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T01:04:55.000Z",
+                      "updatedAt": "2026-07-28T01:04:55.000Z",
+                      "uid": "35240-f697e49f-a472-489b-ab64-fcec89852da5"
+                    },
+                    {
+                      "id": "c9c12840-1bd9-4535-ac87-ba7ca5cd6268",
+                      "name": "Unauthorized.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/order/:order",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "order",
+                            ":order"
+                          ],
+                          "variable": [
+                            {
+                              "key": "order"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T01:04:55.000Z",
+                      "updatedAt": "2026-07-28T01:04:55.000Z",
+                      "uid": "35240-c9c12840-1bd9-4535-ac87-ba7ca5cd6268"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:04:55.000Z",
+                  "updatedAt": "2026-07-28T01:04:55.000Z",
+                  "uid": "35240-f3b01a33-908a-4a68-a60d-ef30e7fd6855"
+                }
+              ],
+              "id": "d60fb6e0-8011-4710-ba18-190b5a006fa3",
+              "createdAt": "2026-07-28T01:04:55.000Z",
+              "updatedAt": "2026-07-28T01:04:55.000Z",
+              "uid": "35240-d60fb6e0-8011-4710-ba18-190b5a006fa3"
+            }
+          ],
+          "id": "1e2889b9-a21f-41e3-8d30-a93522b25d87",
+          "createdAt": "2026-07-28T01:04:55.000Z",
+          "updatedAt": "2026-07-28T01:04:55.000Z",
+          "uid": "35240-1e2889b9-a21f-41e3-8d30-a93522b25d87"
+        },
+        {
+          "name": "campaigns",
+          "item": [
+            {
+              "name": "Arlula List Campaigns",
+              "id": "4e24adef-61bb-40c1-97bb-8d2a59b93564",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/campaigns?page=<integer>&size=<integer>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "campaigns"
+                  ],
+                  "query": [
+                    {
+                      "description": "Page index (0-indexed).",
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Results per page.",
+                      "key": "size",
+                      "value": "<integer>"
+                    }
+                  ]
+                },
+                "description": "List all pending and completed campaigns across all orders. Supports pagination."
+              },
+              "response": [
+                {
+                  "id": "869c09a7-cb7f-480b-bc13-9009bcd3b082",
+                  "name": "Successfully retrieved campaigns.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/campaigns?page=<integer>&size=<integer>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "campaigns"
+                      ],
+                      "query": [
+                        {
+                          "description": "Page index (0-indexed).",
+                          "key": "page",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Results per page.",
+                          "key": "size",
+                          "value": "<integer>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"campaigns\": [\n    {\n      \"campaignId\": \"<string>\",\n      \"orderId\": \"<string>\",\n      \"status\": \"<string>\"\n    },\n    {\n      \"campaignId\": \"<string>\",\n      \"orderId\": \"<string>\",\n      \"status\": \"<string>\"\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T01:04:55.000Z",
+                  "updatedAt": "2026-07-28T01:04:55.000Z",
+                  "uid": "35240-869c09a7-cb7f-480b-bc13-9009bcd3b082"
+                },
+                {
+                  "id": "47927546-5020-4e49-b506-0847177ef315",
+                  "name": "Unauthorized.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/campaigns?page=<integer>&size=<integer>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "campaigns"
+                      ],
+                      "query": [
+                        {
+                          "description": "Page index (0-indexed).",
+                          "key": "page",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Results per page.",
+                          "key": "size",
+                          "value": "<integer>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T01:04:55.000Z",
+                  "updatedAt": "2026-07-28T01:04:55.000Z",
+                  "uid": "35240-47927546-5020-4e49-b506-0847177ef315"
+                }
+              ],
+              "createdAt": "2026-07-28T01:04:55.000Z",
+              "updatedAt": "2026-07-28T01:04:55.000Z",
+              "uid": "35240-4e24adef-61bb-40c1-97bb-8d2a59b93564"
+            }
+          ],
+          "id": "2529eb57-b2f4-4312-ab62-0e6bd734f2b6",
+          "createdAt": "2026-07-28T01:04:55.000Z",
+          "updatedAt": "2026-07-28T01:04:55.000Z",
+          "uid": "35240-2529eb57-b2f4-4312-ab62-0e6bd734f2b6"
+        },
+        {
+          "name": "datasets",
+          "item": [
+            {
+              "name": "Arlula List Datasets",
+              "id": "805f927b-f282-4853-8b61-2b4bc85bb8a8",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/datasets?page=<integer>&size=<integer>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "datasets"
+                  ],
+                  "query": [
+                    {
+                      "description": "Page index (0-indexed).",
+                      "key": "page",
+                      "value": "<integer>"
+                    },
+                    {
+                      "description": "Results per page.",
+                      "key": "size",
+                      "value": "<integer>"
+                    }
+                  ]
+                },
+                "description": "List all pending and completed datasets across all orders. Supports pagination."
+              },
+              "response": [
+                {
+                  "id": "77946e73-d939-4fe0-9bb6-48ee5c08d773",
+                  "name": "Successfully retrieved datasets.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/datasets?page=<integer>&size=<integer>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "datasets"
+                      ],
+                      "query": [
+                        {
+                          "description": "Page index (0-indexed).",
+                          "key": "page",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Results per page.",
+                          "key": "size",
+                          "value": "<integer>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"datasets\": [\n    {\n      \"datasetId\": \"<string>\",\n      \"campaignId\": \"<string>\",\n      \"status\": \"<string>\",\n      \"resources\": [\n        {\n          \"resourceId\": \"<string>\",\n          \"type\": \"<string>\",\n          \"filename\": \"<string>\"\n        },\n        {\n          \"resourceId\": \"<string>\",\n          \"type\": \"<string>\",\n          \"filename\": \"<string>\"\n        }\n      ]\n    },\n    {\n      \"datasetId\": \"<string>\",\n      \"campaignId\": \"<string>\",\n      \"status\": \"<string>\",\n      \"resources\": [\n        {\n          \"resourceId\": \"<string>\",\n          \"type\": \"<string>\",\n          \"filename\": \"<string>\"\n        },\n        {\n          \"resourceId\": \"<string>\",\n          \"type\": \"<string>\",\n          \"filename\": \"<string>\"\n        }\n      ]\n    }\n  ]\n}",
+                  "createdAt": "2026-07-28T01:04:55.000Z",
+                  "updatedAt": "2026-07-28T01:04:55.000Z",
+                  "uid": "35240-77946e73-d939-4fe0-9bb6-48ee5c08d773"
+                },
+                {
+                  "id": "4335b3e6-a385-4cd3-b827-7fea01ca6836",
+                  "name": "Unauthorized.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/datasets?page=<integer>&size=<integer>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "datasets"
+                      ],
+                      "query": [
+                        {
+                          "description": "Page index (0-indexed).",
+                          "key": "page",
+                          "value": "<integer>"
+                        },
+                        {
+                          "description": "Results per page.",
+                          "key": "size",
+                          "value": "<integer>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T01:04:55.000Z",
+                  "updatedAt": "2026-07-28T01:04:55.000Z",
+                  "uid": "35240-4335b3e6-a385-4cd3-b827-7fea01ca6836"
+                }
+              ],
+              "createdAt": "2026-07-28T01:04:55.000Z",
+              "updatedAt": "2026-07-28T01:04:55.000Z",
+              "uid": "35240-805f927b-f282-4853-8b61-2b4bc85bb8a8"
+            }
+          ],
+          "id": "d5852128-dbc8-4f72-8a15-fb30bea3a874",
+          "createdAt": "2026-07-28T01:04:55.000Z",
+          "updatedAt": "2026-07-28T01:04:55.000Z",
+          "uid": "35240-d5852128-dbc8-4f72-8a15-fb30bea3a874"
+        },
+        {
+          "name": "dataset",
+          "item": [
+            {
+              "name": "{dataset}",
+              "item": [
+                {
+                  "name": "Arlula Get Dataset Details",
+                  "id": "f4102c00-4294-4fd8-923d-d515477f9dd0",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/dataset/:dataset",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "dataset",
+                        ":dataset"
+                      ],
+                      "variable": [
+                        {
+                          "id": "e8288176-aff3-4449-beb8-a236682b9b47",
+                          "key": "dataset",
+                          "value": "<uuid>",
+                          "description": "(Required) UUID of the dataset to retrieve."
+                        }
+                      ]
+                    },
+                    "description": "Retrieve a detailed dataset object with its available resources for download."
+                  },
+                  "response": [
+                    {
+                      "id": "d9cb869b-7f6b-4c48-a6cc-3f46d6d541d3",
+                      "name": "Successfully retrieved dataset.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/dataset/:dataset",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "dataset",
+                            ":dataset"
+                          ],
+                          "variable": [
+                            {
+                              "key": "dataset"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"datasetId\": \"<string>\",\n  \"campaignId\": \"<string>\",\n  \"status\": \"<string>\",\n  \"resources\": [\n    {\n      \"resourceId\": \"<string>\",\n      \"type\": \"<string>\",\n      \"filename\": \"<string>\"\n    },\n    {\n      \"resourceId\": \"<string>\",\n      \"type\": \"<string>\",\n      \"filename\": \"<string>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T01:04:55.000Z",
+                      "updatedAt": "2026-07-28T01:04:55.000Z",
+                      "uid": "35240-d9cb869b-7f6b-4c48-a6cc-3f46d6d541d3"
+                    },
+                    {
+                      "id": "e610dabe-3ec2-4533-96e7-16ab0c885af1",
+                      "name": "Unauthorized.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/dataset/:dataset",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "dataset",
+                            ":dataset"
+                          ],
+                          "variable": [
+                            {
+                              "key": "dataset"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T01:04:55.000Z",
+                      "updatedAt": "2026-07-28T01:04:55.000Z",
+                      "uid": "35240-e610dabe-3ec2-4533-96e7-16ab0c885af1"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:04:55.000Z",
+                  "updatedAt": "2026-07-28T01:04:55.000Z",
+                  "uid": "35240-f4102c00-4294-4fd8-923d-d515477f9dd0"
+                }
+              ],
+              "id": "83143ffc-a795-4c30-9646-d730393a5498",
+              "createdAt": "2026-07-28T01:04:55.000Z",
+              "updatedAt": "2026-07-28T01:04:55.000Z",
+              "uid": "35240-83143ffc-a795-4c30-9646-d730393a5498"
+            }
+          ],
+          "id": "671220ce-034d-475d-bab3-b95a02007464",
+          "createdAt": "2026-07-28T01:04:55.000Z",
+          "updatedAt": "2026-07-28T01:04:55.000Z",
+          "uid": "35240-671220ce-034d-475d-bab3-b95a02007464"
+        },
+        {
+          "name": "resource",
+          "item": [
+            {
+              "name": "{resource}",
+              "item": [
+                {
+                  "name": "data",
+                  "item": [
+                    {
+                      "name": "Arlula Download Resource Data",
+                      "id": "b3f4ad40-391b-4bc2-a56f-ed3912f2f76c",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/octet-stream"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/resource/:resource/data",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "resource",
+                            ":resource",
+                            "data"
+                          ],
+                          "variable": [
+                            {
+                              "id": "53d15b38-3494-4f9f-a155-416995bd890a",
+                              "key": "resource",
+                              "value": "<uuid>",
+                              "description": "(Required) UUID of the resource to download."
+                            }
+                          ]
+                        },
+                        "description": "Download the binary content of a specific resource (imagery file, metadata, thumbnail, etc.). Returns the file content as a binary stream."
+                      },
+                      "response": [
+                        {
+                          "id": "1aad39e9-0642-4056-8de8-182c475e9908",
+                          "name": "Resource file content.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/octet-stream"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/resource/:resource/data",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "resource",
+                                ":resource",
+                                "data"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "resource"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "text",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/octet-stream"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "<binary>",
+                          "createdAt": "2026-07-28T01:04:55.000Z",
+                          "updatedAt": "2026-07-28T01:04:55.000Z",
+                          "uid": "35240-1aad39e9-0642-4056-8de8-182c475e9908"
+                        },
+                        {
+                          "id": "b62ebe04-d56e-411c-b547-7c3cddd2e8cc",
+                          "name": "Unauthorized.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/resource/:resource/data",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "resource",
+                                ":resource",
+                                "data"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "resource"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T01:04:55.000Z",
+                          "updatedAt": "2026-07-28T01:04:55.000Z",
+                          "uid": "35240-b62ebe04-d56e-411c-b547-7c3cddd2e8cc"
+                        },
+                        {
+                          "id": "be7b90c5-a7a4-4195-9c71-c69c9fdaeff3",
+                          "name": "Resource expired and no longer available.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/resource/:resource/data",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "resource",
+                                ":resource",
+                                "data"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "resource"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Gone",
+                          "code": 410,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T01:04:55.000Z",
+                          "updatedAt": "2026-07-28T01:04:55.000Z",
+                          "uid": "35240-be7b90c5-a7a4-4195-9c71-c69c9fdaeff3"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:04:55.000Z",
+                      "updatedAt": "2026-07-28T01:04:55.000Z",
+                      "uid": "35240-b3f4ad40-391b-4bc2-a56f-ed3912f2f76c"
+                    }
+                  ],
+                  "id": "90f7c997-814c-4a19-85f6-922fc6ee32df",
+                  "createdAt": "2026-07-28T01:04:55.000Z",
+                  "updatedAt": "2026-07-28T01:04:55.000Z",
+                  "uid": "35240-90f7c997-814c-4a19-85f6-922fc6ee32df"
+                }
+              ],
+              "id": "87d7eaae-38d2-4ccf-9588-5623e58632d7",
+              "createdAt": "2026-07-28T01:04:55.000Z",
+              "updatedAt": "2026-07-28T01:04:55.000Z",
+              "uid": "35240-87d7eaae-38d2-4ccf-9588-5623e58632d7"
+            }
+          ],
+          "id": "4ac80ab8-ed68-4d97-9c06-868169acdc36",
+          "createdAt": "2026-07-28T01:04:55.000Z",
+          "updatedAt": "2026-07-28T01:04:55.000Z",
+          "uid": "35240-4ac80ab8-ed68-4d97-9c06-868169acdc36"
+        }
+      ],
+      "id": "12b157d5-ae50-44ca-a938-978d12f552d1",
+      "createdAt": "2026-07-28T01:04:55.000Z",
+      "updatedAt": "2026-07-28T01:04:55.000Z",
+      "uid": "35240-12b157d5-ae50-44ca-a938-978d12f552d1"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.arlula.com"
+    }
+  ]
+}

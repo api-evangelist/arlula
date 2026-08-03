@@ -1,0 +1,171 @@
+{
+  "info": {
+    "_postman_id": "b8624b1c-a7a2-4f16-8890-41ec20591a0b",
+    "name": "Arlula Archive Connection API",
+    "description": "The Arlula API provides programmatic access to satellite imagery ordering, archive search, tasking, and earth observation data services. The API covers four main areas: Archive (historical imagery search and ordering), Tasking (future satellite capture scheduling), Orders Management (order tracking and resource downloads), and connection testing.\n\nContact Support:\n Name: Arlula Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:04:53.000Z",
+    "updatedAt": "2026-07-28T01:04:54.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-b8624b1c-a7a2-4f16-8890-41ec20591a0b"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "test",
+          "item": [
+            {
+              "name": "Arlula Test API Connection",
+              "id": "c7db9ece-529b-4ad1-bf05-9bdb6123f396",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/api/test",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "api",
+                    "test"
+                  ]
+                },
+                "description": "Validates API authentication credentials without executing any operational requests. Use this to confirm credentials are correctly configured."
+              },
+              "response": [
+                {
+                  "id": "be8ecb35-ad25-4198-aff0-addbf23b7171",
+                  "name": "Authentication successful.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/test",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "test"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"success\": \"<boolean>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T01:04:54.000Z",
+                  "updatedAt": "2026-07-28T01:04:54.000Z",
+                  "uid": "35240-be8ecb35-ad25-4198-aff0-addbf23b7171"
+                },
+                {
+                  "id": "589e7b95-4f75-4a59-8028-b5e37094244d",
+                  "name": "Unauthorized - invalid credentials.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: basic",
+                        "key": "Authorization",
+                        "value": "Basic <credentials>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/test",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "test"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+                  "createdAt": "2026-07-28T01:04:54.000Z",
+                  "updatedAt": "2026-07-28T01:04:54.000Z",
+                  "uid": "35240-589e7b95-4f75-4a59-8028-b5e37094244d"
+                }
+              ],
+              "createdAt": "2026-07-28T01:04:54.000Z",
+              "updatedAt": "2026-07-28T01:04:54.000Z",
+              "uid": "35240-c7db9ece-529b-4ad1-bf05-9bdb6123f396"
+            }
+          ],
+          "id": "59c6e9c6-6ffa-44ca-b139-b42af3484c73",
+          "createdAt": "2026-07-28T01:04:54.000Z",
+          "updatedAt": "2026-07-28T01:04:54.000Z",
+          "uid": "35240-59c6e9c6-6ffa-44ca-b139-b42af3484c73"
+        }
+      ],
+      "id": "63183ac0-2944-4d88-98b4-0b6d6e4e3003",
+      "createdAt": "2026-07-28T01:04:54.000Z",
+      "updatedAt": "2026-07-28T01:04:54.000Z",
+      "uid": "35240-63183ac0-2944-4d88-98b4-0b6d6e4e3003"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.arlula.com"
+    }
+  ]
+}

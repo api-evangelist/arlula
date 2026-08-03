@@ -1,0 +1,1288 @@
+{
+  "info": {
+    "_postman_id": "91c7aefc-e8ed-4077-bf76-d439fb6aeda7",
+    "name": "Arlula Archive Tasking API",
+    "description": "The Arlula API provides programmatic access to satellite imagery ordering, archive search, tasking, and earth observation data services. The API covers four main areas: Archive (historical imagery search and ordering), Tasking (future satellite capture scheduling), Orders Management (order tracking and resource downloads), and connection testing.\n\nContact Support:\n Name: Arlula Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:04:56.000Z",
+    "updatedAt": "2026-07-28T01:04:56.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-91c7aefc-e8ed-4077-bf76-d439fb6aeda7"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "tasking",
+          "item": [
+            {
+              "name": "search",
+              "item": [
+                {
+                  "name": "Arlula Search Tasking Opportunities",
+                  "id": "a57fc136-ca41-4439-8823-c973c2360db8",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"start\": \"<dateTime>\",\n  \"end\": \"<dateTime>\",\n  \"gsd\": \"<number>\",\n  \"lat\": \"<number>\",\n  \"long\": \"<number>\",\n  \"cloud\": \"<integer>\",\n  \"offNadir\": \"<number>\",\n  \"suppliers\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"platformTypes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"sensorTypes\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/tasking/search",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "tasking",
+                        "search"
+                      ]
+                    },
+                    "description": "Search for future satellite capture opportunities from Arlula suppliers. Specify temporal window, location, resolution, and sensor parameters to find available capture slots."
+                  },
+                  "response": [
+                    {
+                      "id": "84ebc179-cd41-4846-881b-334ec1b2fc1a",
+                      "name": "Successfully retrieved tasking opportunities.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"start\": \"<dateTime>\",\n  \"end\": \"<dateTime>\",\n  \"gsd\": \"<number>\",\n  \"lat\": \"<number>\",\n  \"long\": \"<number>\",\n  \"cloud\": \"<integer>\",\n  \"offNadir\": \"<number>\",\n  \"suppliers\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"platformTypes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"sensorTypes\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/tasking/search",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "tasking",
+                            "search"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "[\n  {\n    \"id\": \"<string>\",\n    \"supplier\": \"<string>\",\n    \"captureStart\": \"<dateTime>\",\n    \"captureEnd\": \"<dateTime>\",\n    \"gsd\": \"<number>\",\n    \"price\": \"<number>\"\n  },\n  {\n    \"id\": \"<string>\",\n    \"supplier\": \"<string>\",\n    \"captureStart\": \"<dateTime>\",\n    \"captureEnd\": \"<dateTime>\",\n    \"gsd\": \"<number>\",\n    \"price\": \"<number>\"\n  }\n]",
+                      "createdAt": "2026-07-28T01:04:56.000Z",
+                      "updatedAt": "2026-07-28T01:04:56.000Z",
+                      "uid": "35240-84ebc179-cd41-4846-881b-334ec1b2fc1a"
+                    },
+                    {
+                      "id": "e1ac6c54-7116-4f00-b2e2-de494dfb7b81",
+                      "name": "Malformed request.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"start\": \"<dateTime>\",\n  \"end\": \"<dateTime>\",\n  \"gsd\": \"<number>\",\n  \"lat\": \"<number>\",\n  \"long\": \"<number>\",\n  \"cloud\": \"<integer>\",\n  \"offNadir\": \"<number>\",\n  \"suppliers\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"platformTypes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"sensorTypes\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/tasking/search",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "tasking",
+                            "search"
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T01:04:56.000Z",
+                      "updatedAt": "2026-07-28T01:04:56.000Z",
+                      "uid": "35240-e1ac6c54-7116-4f00-b2e2-de494dfb7b81"
+                    },
+                    {
+                      "id": "8ccd57a5-4b11-4a4e-ac1e-02fe058ef3de",
+                      "name": "Unauthorized.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"start\": \"<dateTime>\",\n  \"end\": \"<dateTime>\",\n  \"gsd\": \"<number>\",\n  \"lat\": \"<number>\",\n  \"long\": \"<number>\",\n  \"cloud\": \"<integer>\",\n  \"offNadir\": \"<number>\",\n  \"suppliers\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"platformTypes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"sensorTypes\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/tasking/search",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "tasking",
+                            "search"
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T01:04:56.000Z",
+                      "updatedAt": "2026-07-28T01:04:56.000Z",
+                      "uid": "35240-8ccd57a5-4b11-4a4e-ac1e-02fe058ef3de"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:04:56.000Z",
+                  "updatedAt": "2026-07-28T01:04:56.000Z",
+                  "uid": "35240-a57fc136-ca41-4439-8823-c973c2360db8"
+                }
+              ],
+              "id": "78385c00-9208-4a73-8e5e-8a33d4bcea84",
+              "createdAt": "2026-07-28T01:04:56.000Z",
+              "updatedAt": "2026-07-28T01:04:56.000Z",
+              "uid": "35240-78385c00-9208-4a73-8e5e-8a33d4bcea84"
+            },
+            {
+              "name": "get",
+              "item": [
+                {
+                  "name": "Arlula Get Tasking Opportunity Details",
+                  "id": "d3d5d087-1590-4c78-9b78-41039a5874b5",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"id\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/tasking/get",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "tasking",
+                        "get"
+                      ]
+                    },
+                    "description": "Retrieve details for a previously returned tasking search result from a supplier by its ordering ID."
+                  },
+                  "response": [
+                    {
+                      "id": "3ca57fd8-54a1-4375-a1a3-620e3aec5815",
+                      "name": "Successfully retrieved tasking opportunity.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"id\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/tasking/get",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "tasking",
+                            "get"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string>\",\n  \"supplier\": \"<string>\",\n  \"captureStart\": \"<dateTime>\",\n  \"captureEnd\": \"<dateTime>\",\n  \"gsd\": \"<number>\",\n  \"price\": \"<number>\"\n}",
+                      "createdAt": "2026-07-28T01:04:56.000Z",
+                      "updatedAt": "2026-07-28T01:04:56.000Z",
+                      "uid": "35240-3ca57fd8-54a1-4375-a1a3-620e3aec5815"
+                    },
+                    {
+                      "id": "8159a172-6fe4-455c-b161-378fd6dc1649",
+                      "name": "Malformed request.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"id\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/tasking/get",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "tasking",
+                            "get"
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T01:04:56.000Z",
+                      "updatedAt": "2026-07-28T01:04:56.000Z",
+                      "uid": "35240-8159a172-6fe4-455c-b161-378fd6dc1649"
+                    },
+                    {
+                      "id": "d1b08be4-f76c-4504-83d2-e53b0bff4080",
+                      "name": "Unauthorized.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"id\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/tasking/get",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "tasking",
+                            "get"
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T01:04:56.000Z",
+                      "updatedAt": "2026-07-28T01:04:56.000Z",
+                      "uid": "35240-d1b08be4-f76c-4504-83d2-e53b0bff4080"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:04:56.000Z",
+                  "updatedAt": "2026-07-28T01:04:56.000Z",
+                  "uid": "35240-d3d5d087-1590-4c78-9b78-41039a5874b5"
+                }
+              ],
+              "id": "0a0c5ef8-7e28-42c8-99d3-b6707c12d97f",
+              "createdAt": "2026-07-28T01:04:56.000Z",
+              "updatedAt": "2026-07-28T01:04:56.000Z",
+              "uid": "35240-0a0c5ef8-7e28-42c8-99d3-b6707c12d97f"
+            },
+            {
+              "name": "order",
+              "item": [
+                {
+                  "name": "batch",
+                  "item": [
+                    {
+                      "name": "Arlula Batch Order Tasking Captures",
+                      "id": "f5d02d30-6bcc-4134-8301-32b39a4ebc98",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"orders\": [\n    {\n      \"id\": \"<string>\",\n      \"bundleKey\": \"<string>\",\n      \"eula\": \"<string>\",\n      \"cloud\": \"<integer>\",\n      \"priorityKey\": \"<string>\",\n      \"emails\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"webhooks\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"coupon\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"bundleKey\": \"<string>\",\n      \"eula\": \"<string>\",\n      \"cloud\": \"<integer>\",\n      \"priorityKey\": \"<string>\",\n      \"emails\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"webhooks\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"coupon\": \"<string>\"\n    }\n  ],\n  \"emails\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/tasking/order/batch",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "tasking",
+                            "order",
+                            "batch"
+                          ]
+                        },
+                        "description": "Place multiple tasking capture orders simultaneously. All orders are billed immediately and are non-cancellable once submitted."
+                      },
+                      "response": [
+                        {
+                          "id": "33fc52d4-3fe0-460f-ad59-241f585cc304",
+                          "name": "All tasking orders accepted.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"orders\": [\n    {\n      \"id\": \"<string>\",\n      \"bundleKey\": \"<string>\",\n      \"eula\": \"<string>\",\n      \"cloud\": \"<integer>\",\n      \"priorityKey\": \"<string>\",\n      \"emails\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"webhooks\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"coupon\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"bundleKey\": \"<string>\",\n      \"eula\": \"<string>\",\n      \"cloud\": \"<integer>\",\n      \"priorityKey\": \"<string>\",\n      \"emails\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"webhooks\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"coupon\": \"<string>\"\n    }\n  ],\n  \"emails\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/tasking/order/batch",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "tasking",
+                                "order",
+                                "batch"
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "[\n  {\n    \"orderId\": \"<string>\",\n    \"status\": \"pending-approval\",\n    \"createdAt\": \"<dateTime>\"\n  },\n  {\n    \"orderId\": \"<string>\",\n    \"status\": \"pending-approval\",\n    \"createdAt\": \"<dateTime>\"\n  }\n]",
+                          "createdAt": "2026-07-28T01:04:56.000Z",
+                          "updatedAt": "2026-07-28T01:04:56.000Z",
+                          "uid": "35240-33fc52d4-3fe0-460f-ad59-241f585cc304"
+                        },
+                        {
+                          "id": "54473f0b-02fa-4f9b-b054-25edb7c351f4",
+                          "name": "Malformed request.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"orders\": [\n    {\n      \"id\": \"<string>\",\n      \"bundleKey\": \"<string>\",\n      \"eula\": \"<string>\",\n      \"cloud\": \"<integer>\",\n      \"priorityKey\": \"<string>\",\n      \"emails\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"webhooks\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"coupon\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"bundleKey\": \"<string>\",\n      \"eula\": \"<string>\",\n      \"cloud\": \"<integer>\",\n      \"priorityKey\": \"<string>\",\n      \"emails\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"webhooks\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"coupon\": \"<string>\"\n    }\n  ],\n  \"emails\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/tasking/order/batch",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "tasking",
+                                "order",
+                                "batch"
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T01:04:56.000Z",
+                          "updatedAt": "2026-07-28T01:04:56.000Z",
+                          "uid": "35240-54473f0b-02fa-4f9b-b054-25edb7c351f4"
+                        },
+                        {
+                          "id": "bbe5fffe-2bc3-4b55-88d5-ace9487e042d",
+                          "name": "Unauthorized.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"orders\": [\n    {\n      \"id\": \"<string>\",\n      \"bundleKey\": \"<string>\",\n      \"eula\": \"<string>\",\n      \"cloud\": \"<integer>\",\n      \"priorityKey\": \"<string>\",\n      \"emails\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"webhooks\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"coupon\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"bundleKey\": \"<string>\",\n      \"eula\": \"<string>\",\n      \"cloud\": \"<integer>\",\n      \"priorityKey\": \"<string>\",\n      \"emails\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"webhooks\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"coupon\": \"<string>\"\n    }\n  ],\n  \"emails\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/tasking/order/batch",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "tasking",
+                                "order",
+                                "batch"
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T01:04:56.000Z",
+                          "updatedAt": "2026-07-28T01:04:56.000Z",
+                          "uid": "35240-bbe5fffe-2bc3-4b55-88d5-ace9487e042d"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:04:56.000Z",
+                      "updatedAt": "2026-07-28T01:04:56.000Z",
+                      "uid": "35240-f5d02d30-6bcc-4134-8301-32b39a4ebc98"
+                    }
+                  ],
+                  "id": "155c0e33-52c2-45e1-b8b8-53c8dccc06ca",
+                  "createdAt": "2026-07-28T01:04:56.000Z",
+                  "updatedAt": "2026-07-28T01:04:56.000Z",
+                  "uid": "35240-155c0e33-52c2-45e1-b8b8-53c8dccc06ca"
+                },
+                {
+                  "name": "Arlula Order Tasking Satellite Capture",
+                  "id": "4530268b-d5e1-46a4-937f-9350bafaf760",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"id\": \"<string>\",\n  \"bundleKey\": \"<string>\",\n  \"eula\": \"<string>\",\n  \"cloud\": \"<integer>\",\n  \"priorityKey\": \"<string>\",\n  \"emails\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"webhooks\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"coupon\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/tasking/order",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "tasking",
+                        "order"
+                      ]
+                    },
+                    "description": "Order a future satellite capture from Arlula suppliers. Billed immediately upon placement. Non-cancellable once ordered (unlike archive orders which may be pending approval)."
+                  },
+                  "response": [
+                    {
+                      "id": "4ff793ff-2525-4ccd-8173-96f819b074f0",
+                      "name": "Tasking order accepted and scheduled.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"id\": \"<string>\",\n  \"bundleKey\": \"<string>\",\n  \"eula\": \"<string>\",\n  \"cloud\": \"<integer>\",\n  \"priorityKey\": \"<string>\",\n  \"emails\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"webhooks\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"coupon\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/tasking/order",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "tasking",
+                            "order"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"orderId\": \"<string>\",\n  \"status\": \"failed\",\n  \"createdAt\": \"<dateTime>\"\n}",
+                      "createdAt": "2026-07-28T01:04:56.000Z",
+                      "updatedAt": "2026-07-28T01:04:56.000Z",
+                      "uid": "35240-4ff793ff-2525-4ccd-8173-96f819b074f0"
+                    },
+                    {
+                      "id": "608eb20a-d3d8-4d77-b43e-8ebd2a93ca27",
+                      "name": "Malformed request.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"id\": \"<string>\",\n  \"bundleKey\": \"<string>\",\n  \"eula\": \"<string>\",\n  \"cloud\": \"<integer>\",\n  \"priorityKey\": \"<string>\",\n  \"emails\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"webhooks\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"coupon\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/tasking/order",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "tasking",
+                            "order"
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T01:04:56.000Z",
+                      "updatedAt": "2026-07-28T01:04:56.000Z",
+                      "uid": "35240-608eb20a-d3d8-4d77-b43e-8ebd2a93ca27"
+                    },
+                    {
+                      "id": "cd21b24c-37b3-46c8-ab02-c86b32fe1701",
+                      "name": "Unauthorized.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"id\": \"<string>\",\n  \"bundleKey\": \"<string>\",\n  \"eula\": \"<string>\",\n  \"cloud\": \"<integer>\",\n  \"priorityKey\": \"<string>\",\n  \"emails\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"webhooks\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"coupon\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/tasking/order",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "tasking",
+                            "order"
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T01:04:56.000Z",
+                      "updatedAt": "2026-07-28T01:04:56.000Z",
+                      "uid": "35240-cd21b24c-37b3-46c8-ab02-c86b32fe1701"
+                    },
+                    {
+                      "id": "367cc026-6193-4b14-b888-d657dded4674",
+                      "name": "Payment required.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"id\": \"<string>\",\n  \"bundleKey\": \"<string>\",\n  \"eula\": \"<string>\",\n  \"cloud\": \"<integer>\",\n  \"priorityKey\": \"<string>\",\n  \"emails\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"webhooks\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"coupon\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/tasking/order",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "tasking",
+                            "order"
+                          ]
+                        }
+                      },
+                      "status": "Payment Required",
+                      "code": 402,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T01:04:56.000Z",
+                      "updatedAt": "2026-07-28T01:04:56.000Z",
+                      "uid": "35240-367cc026-6193-4b14-b888-d657dded4674"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:04:56.000Z",
+                  "updatedAt": "2026-07-28T01:04:56.000Z",
+                  "uid": "35240-4530268b-d5e1-46a4-937f-9350bafaf760"
+                }
+              ],
+              "id": "0b836a7d-8504-4085-9378-eac275926ed4",
+              "createdAt": "2026-07-28T01:04:56.000Z",
+              "updatedAt": "2026-07-28T01:04:56.000Z",
+              "uid": "35240-0b836a7d-8504-4085-9378-eac275926ed4"
+            },
+            {
+              "name": "cancel",
+              "item": [
+                {
+                  "name": "Arlula Cancel Tasking Campaign",
+                  "id": "6b681d3f-7bc1-4cee-be86-323c84904554",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/tasking/cancel?id=<uuid>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "tasking",
+                        "cancel"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) The UUID of the tasking campaign to cancel.",
+                          "key": "id",
+                          "value": "<uuid>"
+                        }
+                      ]
+                    },
+                    "description": "Cancel a pending tasking campaign that is in the pending-approval state. Only campaigns that have not yet been approved can be cancelled."
+                  },
+                  "response": [
+                    {
+                      "id": "7fc447ac-15c6-433d-8b50-745c61cfa567",
+                      "name": "Campaign successfully cancelled.",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/tasking/cancel?id=<uuid>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "tasking",
+                            "cancel"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) The UUID of the tasking campaign to cancel.",
+                              "key": "id",
+                              "value": "<uuid>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"success\": \"<boolean>\",\n  \"campaignId\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T01:04:56.000Z",
+                      "updatedAt": "2026-07-28T01:04:56.000Z",
+                      "uid": "35240-7fc447ac-15c6-433d-8b50-745c61cfa567"
+                    },
+                    {
+                      "id": "01b10e11-c3f5-4df6-a1ee-9f0a6e6f64fa",
+                      "name": "Malformed request.",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/tasking/cancel?id=<uuid>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "tasking",
+                            "cancel"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) The UUID of the tasking campaign to cancel.",
+                              "key": "id",
+                              "value": "<uuid>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T01:04:56.000Z",
+                      "updatedAt": "2026-07-28T01:04:56.000Z",
+                      "uid": "35240-01b10e11-c3f5-4df6-a1ee-9f0a6e6f64fa"
+                    },
+                    {
+                      "id": "9399c622-b08d-4a47-be8f-bb170a29f2c4",
+                      "name": "Unauthorized.",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/tasking/cancel?id=<uuid>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "tasking",
+                            "cancel"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) The UUID of the tasking campaign to cancel.",
+                              "key": "id",
+                              "value": "<uuid>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T01:04:56.000Z",
+                      "updatedAt": "2026-07-28T01:04:56.000Z",
+                      "uid": "35240-9399c622-b08d-4a47-be8f-bb170a29f2c4"
+                    },
+                    {
+                      "id": "e4f64046-dfd5-490a-baf1-3e1e721b3c51",
+                      "name": "Method not allowed - campaign not in cancellable state.",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/tasking/cancel?id=<uuid>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "tasking",
+                            "cancel"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) The UUID of the tasking campaign to cancel.",
+                              "key": "id",
+                              "value": "<uuid>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Method Not Allowed",
+                      "code": 405,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T01:04:56.000Z",
+                      "updatedAt": "2026-07-28T01:04:56.000Z",
+                      "uid": "35240-e4f64046-dfd5-490a-baf1-3e1e721b3c51"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:04:56.000Z",
+                  "updatedAt": "2026-07-28T01:04:56.000Z",
+                  "uid": "35240-6b681d3f-7bc1-4cee-be86-323c84904554"
+                }
+              ],
+              "id": "5a73cc1b-6714-4b27-905a-36642249815f",
+              "createdAt": "2026-07-28T01:04:56.000Z",
+              "updatedAt": "2026-07-28T01:04:56.000Z",
+              "uid": "35240-5a73cc1b-6714-4b27-905a-36642249815f"
+            }
+          ],
+          "id": "89e0fe2b-53c6-4db0-8786-45228279a09d",
+          "createdAt": "2026-07-28T01:04:56.000Z",
+          "updatedAt": "2026-07-28T01:04:56.000Z",
+          "uid": "35240-89e0fe2b-53c6-4db0-8786-45228279a09d"
+        }
+      ],
+      "id": "15333784-a311-46b5-a9a5-60cf46b3615f",
+      "createdAt": "2026-07-28T01:04:56.000Z",
+      "updatedAt": "2026-07-28T01:04:56.000Z",
+      "uid": "35240-15333784-a311-46b5-a9a5-60cf46b3615f"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.arlula.com"
+    }
+  ]
+}

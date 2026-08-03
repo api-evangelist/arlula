@@ -1,0 +1,20 @@
+{
+  "provider": "arlula",
+  "sources": [
+    "arlula-archive-api-openapi.yml",
+    "arlula-connection-api-openapi.yml",
+    "arlula-orders-api-openapi.yml",
+    "arlula-tasking-api-openapi.yml"
+  ],
+  "outputs": [
+    "arlula-archive-api-openapi.yml",
+    "arlula-connection-api-openapi.yml",
+    "arlula-orders-api-openapi.yml",
+    "arlula-tasking-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}

@@ -1,0 +1,1123 @@
+{
+  "info": {
+    "_postman_id": "c7c77471-138a-4c92-b6e2-91214564cc32",
+    "name": "Arlula Archive API",
+    "description": "The Arlula API provides programmatic access to satellite imagery ordering, archive search, tasking, and earth observation data services. The API covers four main areas: Archive (historical imagery search and ordering), Tasking (future satellite capture scheduling), Orders Management (order tracking and resource downloads), and connection testing.\n\nContact Support:\n Name: Arlula Support",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-07-28T01:04:52.000Z",
+    "updatedAt": "2026-07-28T01:04:52.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-c7c77471-138a-4c92-b6e2-91214564cc32"
+  },
+  "item": [
+    {
+      "name": "api",
+      "item": [
+        {
+          "name": "archive",
+          "item": [
+            {
+              "name": "search",
+              "item": [
+                {
+                  "name": "Arlula Search Archive Imagery",
+                  "id": "d48bfe09-1777-476c-b913-dc7b5cbf790f",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"start\": \"<date>\",\n  \"gsd\": \"<number>\",\n  \"end\": \"<date>\",\n  \"lat\": \"<number>\",\n  \"long\": \"<number>\",\n  \"cloud\": \"<integer>\",\n  \"offNadir\": \"<number>\",\n  \"suppliers\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/archive/search",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "archive",
+                        "search"
+                      ]
+                    },
+                    "description": "Search the Arlula satellite imagery archive and its suppliers for historical imagery matching specified date, location, and quality criteria. Returns available scenes with pricing, bands, and bundle options."
+                  },
+                  "response": [
+                    {
+                      "id": "0cc98da1-12c0-4eeb-9dcb-0485dd07bf0c",
+                      "name": "Successfully retrieved archive search results.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"start\": \"<date>\",\n  \"gsd\": \"<number>\",\n  \"end\": \"<date>\",\n  \"lat\": \"<number>\",\n  \"long\": \"<number>\",\n  \"cloud\": \"<integer>\",\n  \"offNadir\": \"<number>\",\n  \"suppliers\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/archive/search",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "archive",
+                            "search"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "[\n  {\n    \"id\": \"<string>\",\n    \"supplier\": \"<string>\",\n    \"captureDate\": \"<date>\",\n    \"gsd\": \"<number>\",\n    \"cloudCover\": \"<integer>\",\n    \"offNadir\": \"<number>\",\n    \"price\": \"<number>\",\n    \"bundles\": [\n      {\n        \"key\": \"<string>\",\n        \"name\": \"<string>\",\n        \"price\": \"<number>\"\n      },\n      {\n        \"key\": \"<string>\",\n        \"name\": \"<string>\",\n        \"price\": \"<number>\"\n      }\n    ]\n  },\n  {\n    \"id\": \"<string>\",\n    \"supplier\": \"<string>\",\n    \"captureDate\": \"<date>\",\n    \"gsd\": \"<number>\",\n    \"cloudCover\": \"<integer>\",\n    \"offNadir\": \"<number>\",\n    \"price\": \"<number>\",\n    \"bundles\": [\n      {\n        \"key\": \"<string>\",\n        \"name\": \"<string>\",\n        \"price\": \"<number>\"\n      },\n      {\n        \"key\": \"<string>\",\n        \"name\": \"<string>\",\n        \"price\": \"<number>\"\n      }\n    ]\n  }\n]",
+                      "createdAt": "2026-07-28T01:04:53.000Z",
+                      "updatedAt": "2026-07-28T01:04:53.000Z",
+                      "uid": "35240-0cc98da1-12c0-4eeb-9dcb-0485dd07bf0c"
+                    },
+                    {
+                      "id": "fb9a5646-93a4-42d2-afd4-2d7e9b85079a",
+                      "name": "Malformed request.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"start\": \"<date>\",\n  \"gsd\": \"<number>\",\n  \"end\": \"<date>\",\n  \"lat\": \"<number>\",\n  \"long\": \"<number>\",\n  \"cloud\": \"<integer>\",\n  \"offNadir\": \"<number>\",\n  \"suppliers\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/archive/search",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "archive",
+                            "search"
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T01:04:53.000Z",
+                      "updatedAt": "2026-07-28T01:04:53.000Z",
+                      "uid": "35240-fb9a5646-93a4-42d2-afd4-2d7e9b85079a"
+                    },
+                    {
+                      "id": "6a9eb3ba-8c7d-4084-aaeb-93dfc6679b55",
+                      "name": "Unauthorized.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"start\": \"<date>\",\n  \"gsd\": \"<number>\",\n  \"end\": \"<date>\",\n  \"lat\": \"<number>\",\n  \"long\": \"<number>\",\n  \"cloud\": \"<integer>\",\n  \"offNadir\": \"<number>\",\n  \"suppliers\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/archive/search",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "archive",
+                            "search"
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T01:04:53.000Z",
+                      "updatedAt": "2026-07-28T01:04:53.000Z",
+                      "uid": "35240-6a9eb3ba-8c7d-4084-aaeb-93dfc6679b55"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:04:53.000Z",
+                  "updatedAt": "2026-07-28T01:04:53.000Z",
+                  "uid": "35240-d48bfe09-1777-476c-b913-dc7b5cbf790f"
+                }
+              ],
+              "id": "5a869e9f-0b52-444b-acbc-8c637184bed6",
+              "createdAt": "2026-07-28T01:04:53.000Z",
+              "updatedAt": "2026-07-28T01:04:53.000Z",
+              "uid": "35240-5a869e9f-0b52-444b-acbc-8c637184bed6"
+            },
+            {
+              "name": "scene",
+              "item": [
+                {
+                  "name": "Arlula Get Archive Scene Details",
+                  "id": "4d8e21d6-6560-4b90-a9fa-421dfb56fb62",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/api/archive/scene?id=<uuid>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "archive",
+                        "scene"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) The ordering ID of the archive scene to retrieve.",
+                          "key": "id",
+                          "value": "<uuid>"
+                        }
+                      ]
+                    },
+                    "description": "Retrieve details for a previously returned archive search result by its ordering ID."
+                  },
+                  "response": [
+                    {
+                      "id": "26aada1e-5675-4ea1-9e24-d22dfed6109c",
+                      "name": "Successfully retrieved scene details.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/archive/scene?id=<uuid>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "archive",
+                            "scene"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) The ordering ID of the archive scene to retrieve.",
+                              "key": "id",
+                              "value": "<uuid>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string>\",\n  \"supplier\": \"<string>\",\n  \"captureDate\": \"<date>\",\n  \"gsd\": \"<number>\",\n  \"cloudCover\": \"<integer>\",\n  \"offNadir\": \"<number>\",\n  \"price\": \"<number>\",\n  \"bundles\": [\n    {\n      \"key\": \"<string>\",\n      \"name\": \"<string>\",\n      \"price\": \"<number>\"\n    },\n    {\n      \"key\": \"<string>\",\n      \"name\": \"<string>\",\n      \"price\": \"<number>\"\n    }\n  ]\n}",
+                      "createdAt": "2026-07-28T01:04:53.000Z",
+                      "updatedAt": "2026-07-28T01:04:53.000Z",
+                      "uid": "35240-26aada1e-5675-4ea1-9e24-d22dfed6109c"
+                    },
+                    {
+                      "id": "4c895cb6-3dbd-4c6d-9247-6809e72f99c1",
+                      "name": "Malformed request.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/archive/scene?id=<uuid>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "archive",
+                            "scene"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) The ordering ID of the archive scene to retrieve.",
+                              "key": "id",
+                              "value": "<uuid>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T01:04:53.000Z",
+                      "updatedAt": "2026-07-28T01:04:53.000Z",
+                      "uid": "35240-4c895cb6-3dbd-4c6d-9247-6809e72f99c1"
+                    },
+                    {
+                      "id": "52593006-762f-47ee-8b8d-89385a33ce76",
+                      "name": "Unauthorized.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/archive/scene?id=<uuid>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "archive",
+                            "scene"
+                          ],
+                          "query": [
+                            {
+                              "description": "(Required) The ordering ID of the archive scene to retrieve.",
+                              "key": "id",
+                              "value": "<uuid>"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T01:04:53.000Z",
+                      "updatedAt": "2026-07-28T01:04:53.000Z",
+                      "uid": "35240-52593006-762f-47ee-8b8d-89385a33ce76"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:04:53.000Z",
+                  "updatedAt": "2026-07-28T01:04:53.000Z",
+                  "uid": "35240-4d8e21d6-6560-4b90-a9fa-421dfb56fb62"
+                }
+              ],
+              "id": "672912bf-754d-44d4-a223-1f9e20591835",
+              "createdAt": "2026-07-28T01:04:53.000Z",
+              "updatedAt": "2026-07-28T01:04:53.000Z",
+              "uid": "35240-672912bf-754d-44d4-a223-1f9e20591835"
+            },
+            {
+              "name": "order",
+              "item": [
+                {
+                  "name": "batch",
+                  "item": [
+                    {
+                      "name": "Arlula Batch Order Archive Imagery",
+                      "id": "eebaa6b7-6821-4cee-928c-8860e5c96e4c",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"orders\": [\n    {\n      \"id\": \"<string>\",\n      \"bundleKey\": \"<string>\",\n      \"eula\": \"<string>\",\n      \"emails\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"webhooks\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"coupon\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"bundleKey\": \"<string>\",\n      \"eula\": \"<string>\",\n      \"emails\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"webhooks\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"coupon\": \"<string>\"\n    }\n  ],\n  \"emails\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"webhooks\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/archive/order/batch",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "archive",
+                            "order",
+                            "batch"
+                          ]
+                        },
+                        "description": "Place multiple archive imagery orders simultaneously in a single API call. Shares common settings (emails, webhooks, payment) across all orders."
+                      },
+                      "response": [
+                        {
+                          "id": "91e2a27f-41f5-4695-b65a-a4e93f089c64",
+                          "name": "All orders accepted.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"orders\": [\n    {\n      \"id\": \"<string>\",\n      \"bundleKey\": \"<string>\",\n      \"eula\": \"<string>\",\n      \"emails\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"webhooks\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"coupon\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"bundleKey\": \"<string>\",\n      \"eula\": \"<string>\",\n      \"emails\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"webhooks\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"coupon\": \"<string>\"\n    }\n  ],\n  \"emails\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"webhooks\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/archive/order/batch",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "archive",
+                                "order",
+                                "batch"
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "[\n  {\n    \"orderId\": \"<string>\",\n    \"status\": \"processing\",\n    \"createdAt\": \"<dateTime>\"\n  },\n  {\n    \"orderId\": \"<string>\",\n    \"status\": \"processing\",\n    \"createdAt\": \"<dateTime>\"\n  }\n]",
+                          "createdAt": "2026-07-28T01:04:53.000Z",
+                          "updatedAt": "2026-07-28T01:04:53.000Z",
+                          "uid": "35240-91e2a27f-41f5-4695-b65a-a4e93f089c64"
+                        },
+                        {
+                          "id": "12640347-e6ec-4091-b260-49ef0c8f8a18",
+                          "name": "Malformed request.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"orders\": [\n    {\n      \"id\": \"<string>\",\n      \"bundleKey\": \"<string>\",\n      \"eula\": \"<string>\",\n      \"emails\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"webhooks\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"coupon\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"bundleKey\": \"<string>\",\n      \"eula\": \"<string>\",\n      \"emails\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"webhooks\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"coupon\": \"<string>\"\n    }\n  ],\n  \"emails\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"webhooks\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/archive/order/batch",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "archive",
+                                "order",
+                                "batch"
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T01:04:53.000Z",
+                          "updatedAt": "2026-07-28T01:04:53.000Z",
+                          "uid": "35240-12640347-e6ec-4091-b260-49ef0c8f8a18"
+                        },
+                        {
+                          "id": "cb363a46-0493-4f0f-a90a-c52397f5b403",
+                          "name": "Unauthorized.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: basic",
+                                "key": "Authorization",
+                                "value": "Basic <credentials>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"orders\": [\n    {\n      \"id\": \"<string>\",\n      \"bundleKey\": \"<string>\",\n      \"eula\": \"<string>\",\n      \"emails\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"webhooks\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"coupon\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"bundleKey\": \"<string>\",\n      \"eula\": \"<string>\",\n      \"emails\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"webhooks\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"coupon\": \"<string>\"\n    }\n  ],\n  \"emails\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"webhooks\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/archive/order/batch",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "archive",
+                                "order",
+                                "batch"
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+                          "createdAt": "2026-07-28T01:04:53.000Z",
+                          "updatedAt": "2026-07-28T01:04:53.000Z",
+                          "uid": "35240-cb363a46-0493-4f0f-a90a-c52397f5b403"
+                        }
+                      ],
+                      "createdAt": "2026-07-28T01:04:53.000Z",
+                      "updatedAt": "2026-07-28T01:04:53.000Z",
+                      "uid": "35240-eebaa6b7-6821-4cee-928c-8860e5c96e4c"
+                    }
+                  ],
+                  "id": "e508c710-0e16-4638-bdd6-730c29accfa2",
+                  "createdAt": "2026-07-28T01:04:53.000Z",
+                  "updatedAt": "2026-07-28T01:04:53.000Z",
+                  "uid": "35240-e508c710-0e16-4638-bdd6-730c29accfa2"
+                },
+                {
+                  "name": "Arlula Order Archive Imagery",
+                  "id": "30c2f7b4-c550-458f-b05b-f76e3ef14ee6",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"id\": \"<string>\",\n  \"bundleKey\": \"<string>\",\n  \"eula\": \"<string>\",\n  \"emails\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"webhooks\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"coupon\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/api/archive/order",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "api",
+                        "archive",
+                        "order"
+                      ]
+                    },
+                    "description": "Place a single order for archived satellite imagery. The order includes a bundle selection, EULA acceptance, and payment information. Returns order status as accepted (200) or pending approval (202)."
+                  },
+                  "response": [
+                    {
+                      "id": "7b049bcf-1950-4ffa-9c51-3d54fd126c41",
+                      "name": "Order accepted and processing.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"id\": \"<string>\",\n  \"bundleKey\": \"<string>\",\n  \"eula\": \"<string>\",\n  \"emails\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"webhooks\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"coupon\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/archive/order",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "archive",
+                            "order"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"orderId\": \"<string>\",\n  \"status\": \"failed\",\n  \"createdAt\": \"<dateTime>\"\n}",
+                      "createdAt": "2026-07-28T01:04:53.000Z",
+                      "updatedAt": "2026-07-28T01:04:53.000Z",
+                      "uid": "35240-7b049bcf-1950-4ffa-9c51-3d54fd126c41"
+                    },
+                    {
+                      "id": "0201fda5-6207-4b12-90ea-2ff7db0239ef",
+                      "name": "Order pending supplier approval.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"id\": \"<string>\",\n  \"bundleKey\": \"<string>\",\n  \"eula\": \"<string>\",\n  \"emails\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"webhooks\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"coupon\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/archive/order",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "archive",
+                            "order"
+                          ]
+                        }
+                      },
+                      "status": "Accepted",
+                      "code": 202,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"orderId\": \"<string>\",\n  \"status\": \"failed\",\n  \"createdAt\": \"<dateTime>\"\n}",
+                      "createdAt": "2026-07-28T01:04:53.000Z",
+                      "updatedAt": "2026-07-28T01:04:53.000Z",
+                      "uid": "35240-0201fda5-6207-4b12-90ea-2ff7db0239ef"
+                    },
+                    {
+                      "id": "f3843405-1fbb-445b-bde7-d7e9e4278046",
+                      "name": "Malformed request.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"id\": \"<string>\",\n  \"bundleKey\": \"<string>\",\n  \"eula\": \"<string>\",\n  \"emails\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"webhooks\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"coupon\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/archive/order",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "archive",
+                            "order"
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T01:04:53.000Z",
+                      "updatedAt": "2026-07-28T01:04:53.000Z",
+                      "uid": "35240-f3843405-1fbb-445b-bde7-d7e9e4278046"
+                    },
+                    {
+                      "id": "954bf75a-3e32-4075-a8a2-514ee702c17d",
+                      "name": "Unauthorized.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"id\": \"<string>\",\n  \"bundleKey\": \"<string>\",\n  \"eula\": \"<string>\",\n  \"emails\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"webhooks\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"coupon\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/archive/order",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "archive",
+                            "order"
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T01:04:53.000Z",
+                      "updatedAt": "2026-07-28T01:04:53.000Z",
+                      "uid": "35240-954bf75a-3e32-4075-a8a2-514ee702c17d"
+                    },
+                    {
+                      "id": "9cfb79bf-35fa-433d-b1a6-91dfe22f6264",
+                      "name": "Payment required.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"id\": \"<string>\",\n  \"bundleKey\": \"<string>\",\n  \"eula\": \"<string>\",\n  \"emails\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"webhooks\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"coupon\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/archive/order",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "archive",
+                            "order"
+                          ]
+                        }
+                      },
+                      "status": "Payment Required",
+                      "code": 402,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T01:04:53.000Z",
+                      "updatedAt": "2026-07-28T01:04:53.000Z",
+                      "uid": "35240-9cfb79bf-35fa-433d-b1a6-91dfe22f6264"
+                    },
+                    {
+                      "id": "225490ae-ea69-4638-8f30-3187bae45538",
+                      "name": "Account not activated.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: basic",
+                            "key": "Authorization",
+                            "value": "Basic <credentials>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"id\": \"<string>\",\n  \"bundleKey\": \"<string>\",\n  \"eula\": \"<string>\",\n  \"emails\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"webhooks\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"coupon\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/archive/order",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "archive",
+                            "order"
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"code\": \"<integer>\",\n  \"message\": \"<string>\"\n}",
+                      "createdAt": "2026-07-28T01:04:53.000Z",
+                      "updatedAt": "2026-07-28T01:04:53.000Z",
+                      "uid": "35240-225490ae-ea69-4638-8f30-3187bae45538"
+                    }
+                  ],
+                  "createdAt": "2026-07-28T01:04:53.000Z",
+                  "updatedAt": "2026-07-28T01:04:53.000Z",
+                  "uid": "35240-30c2f7b4-c550-458f-b05b-f76e3ef14ee6"
+                }
+              ],
+              "id": "f9aab965-3a6d-4528-b5ff-b0cf283a8c3b",
+              "createdAt": "2026-07-28T01:04:53.000Z",
+              "updatedAt": "2026-07-28T01:04:53.000Z",
+              "uid": "35240-f9aab965-3a6d-4528-b5ff-b0cf283a8c3b"
+            }
+          ],
+          "id": "8b861644-1440-4e70-8a83-1ebc3412cf6b",
+          "createdAt": "2026-07-28T01:04:53.000Z",
+          "updatedAt": "2026-07-28T01:04:53.000Z",
+          "uid": "35240-8b861644-1440-4e70-8a83-1ebc3412cf6b"
+        }
+      ],
+      "id": "96020d73-eb72-4ef2-8fcb-7ab8d57f1c19",
+      "createdAt": "2026-07-28T01:04:53.000Z",
+      "updatedAt": "2026-07-28T01:04:53.000Z",
+      "uid": "35240-96020d73-eb72-4ef2-8fcb-7ab8d57f1c19"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}",
+        "type": "string"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.arlula.com"
+    }
+  ]
+}
