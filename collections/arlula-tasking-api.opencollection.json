@@ -1,0 +1,104 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Arlula Archive Tasking API",
+    "version": "2025-10"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Tasking",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Arlula Search Tasking Opportunities",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.arlula.com/api/tasking/search",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Search for future satellite capture opportunities from Arlula suppliers. Specify temporal window, location, resolution, and sensor parameters to find available capture slots."
+        },
+        {
+          "info": {
+            "name": "Arlula Get Tasking Opportunity Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.arlula.com/api/tasking/get",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Retrieve details for a previously returned tasking search result from a supplier by its ordering ID."
+        },
+        {
+          "info": {
+            "name": "Arlula Order Tasking Satellite Capture",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.arlula.com/api/tasking/order",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Order a future satellite capture from Arlula suppliers. Billed immediately upon placement. Non-cancellable once ordered (unlike archive orders which may be pending approval)."
+        },
+        {
+          "info": {
+            "name": "Arlula Batch Order Tasking Captures",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.arlula.com/api/tasking/order/batch",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Place multiple tasking capture orders simultaneously. All orders are billed immediately and are non-cancellable once submitted."
+        },
+        {
+          "info": {
+            "name": "Arlula Cancel Tasking Campaign",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://api.arlula.com/api/tasking/cancel",
+            "params": [
+              {
+                "name": "id",
+                "value": "campaign-a1b2c3d4-e5f6-7890",
+                "type": "query",
+                "description": "The UUID of the tasking campaign to cancel."
+              }
+            ]
+          },
+          "docs": "Cancel a pending tasking campaign that is in the pending-approval state. Only campaigns that have not yet been approved can be cancelled."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,36 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Arlula Archive Connection API",
+    "version": "2025-10"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Connection",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Arlula Test API Connection",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.arlula.com/api/test"
+          },
+          "docs": "Validates API authentication credentials without executing any operational requests. Use this to confirm credentials are correctly configured."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

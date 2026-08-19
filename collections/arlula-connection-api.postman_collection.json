@@ -1,0 +1,169 @@
+{
+  "item": [
+    {
+      "id": "a46aadaa-8ca8-48ac-b155-f2f3575a2fae",
+      "name": "Connection",
+      "description": {
+        "content": "API connection testing",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "cad66247-7203-45f9-b672-10d9fe6d1b31",
+          "name": "Arlula Test API Connection",
+          "request": {
+            "name": "Arlula Test API Connection",
+            "description": {
+              "content": "Validates API authentication credentials without executing any operational requests. Use this to confirm credentials are correctly configured.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "api",
+                "test"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "80c2fa71-2a06-489a-8937-5e2ce8953f76",
+              "name": "Authentication successful.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "test"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"success\": true,\n  \"message\": \"Authentication successful.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "d5cc50ce-e85d-4a15-8789-4e59126ea7b8",
+              "name": "Unauthorized - invalid credentials.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "api",
+                    "test"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: basic",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Basic <credentials>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"code\": 400,\n  \"message\": \"Bad Request - invalid parameters\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.arlula.com",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "basic",
+    "basic": [
+      {
+        "key": "username",
+        "value": "{{basicAuthUsername}}"
+      },
+      {
+        "key": "password",
+        "value": "{{basicAuthPassword}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "3ecba5d2-4735-4365-96ba-4f752a505d64",
+    "name": "Arlula Archive Connection API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "The Arlula API provides programmatic access to satellite imagery ordering, archive search, tasking, and earth observation data services. The API covers four main areas: Archive (historical imagery search and ordering), Tasking (future satellite capture scheduling), Orders Management (order tracking and resource downloads), and connection testing.\n\nContact Support:\n Name: Arlula Support",
+      "type": "text/plain"
+    }
+  }
+}

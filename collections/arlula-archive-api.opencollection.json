@@ -1,0 +1,89 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Arlula Archive API",
+    "version": "2025-10"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Archive",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Arlula Search Archive Imagery",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.arlula.com/api/archive/search",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Search the Arlula satellite imagery archive and its suppliers for historical imagery matching specified date, location, and quality criteria. Returns available scenes with pricing, bands, and bundle options."
+        },
+        {
+          "info": {
+            "name": "Arlula Get Archive Scene Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.arlula.com/api/archive/scene",
+            "params": [
+              {
+                "name": "id",
+                "value": "a1b2c3d4-e5f6-7890-abcd-ef1234567890",
+                "type": "query",
+                "description": "The ordering ID of the archive scene to retrieve."
+              }
+            ]
+          },
+          "docs": "Retrieve details for a previously returned archive search result by its ordering ID."
+        },
+        {
+          "info": {
+            "name": "Arlula Order Archive Imagery",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.arlula.com/api/archive/order",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Place a single order for archived satellite imagery. The order includes a bundle selection, EULA acceptance, and payment information. Returns order status as accepted (200) or pending approval (202)."
+        },
+        {
+          "info": {
+            "name": "Arlula Batch Order Archive Imagery",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://api.arlula.com/api/archive/order/batch",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Place multiple archive imagery orders simultaneously in a single API call. Shares common settings (emails, webhooks, payment) across all orders."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

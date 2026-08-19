@@ -1,0 +1,157 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Arlula Archive Orders API",
+    "version": "2025-10"
+  },
+  "request": {
+    "auth": {
+      "type": "basic",
+      "username": "{{username}}",
+      "password": "{{password}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Orders",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Arlula List Orders",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.arlula.com/api/orders",
+            "params": [
+              {
+                "name": "page",
+                "value": "0",
+                "type": "query",
+                "description": "Page index (0-indexed) for pagination."
+              },
+              {
+                "name": "size",
+                "value": "25",
+                "type": "query",
+                "description": "Number of results per page."
+              }
+            ]
+          },
+          "docs": "List all pending and completed orders on the account. Supports pagination via page and size parameters."
+        },
+        {
+          "info": {
+            "name": "Arlula Get Order Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.arlula.com/api/order/:order",
+            "params": [
+              {
+                "name": "order",
+                "value": "order-a1b2c3d4-e5f6-7890",
+                "type": "path",
+                "description": "UUID of the order to retrieve."
+              }
+            ]
+          },
+          "docs": "Retrieve detailed information about a specific order including its campaigns and datasets."
+        },
+        {
+          "info": {
+            "name": "Arlula List Campaigns",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.arlula.com/api/campaigns",
+            "params": [
+              {
+                "name": "page",
+                "value": "0",
+                "type": "query",
+                "description": "Page index (0-indexed)."
+              },
+              {
+                "name": "size",
+                "value": "25",
+                "type": "query",
+                "description": "Results per page."
+              }
+            ]
+          },
+          "docs": "List all pending and completed campaigns across all orders. Supports pagination."
+        },
+        {
+          "info": {
+            "name": "Arlula List Datasets",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.arlula.com/api/datasets",
+            "params": [
+              {
+                "name": "page",
+                "value": "0",
+                "type": "query",
+                "description": "Page index (0-indexed)."
+              },
+              {
+                "name": "size",
+                "value": "25",
+                "type": "query",
+                "description": "Results per page."
+              }
+            ]
+          },
+          "docs": "List all pending and completed datasets across all orders. Supports pagination."
+        },
+        {
+          "info": {
+            "name": "Arlula Get Dataset Details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.arlula.com/api/dataset/:dataset",
+            "params": [
+              {
+                "name": "dataset",
+                "value": "dataset-a1b2c3d4",
+                "type": "path",
+                "description": "UUID of the dataset to retrieve."
+              }
+            ]
+          },
+          "docs": "Retrieve a detailed dataset object with its available resources for download."
+        },
+        {
+          "info": {
+            "name": "Arlula Download Resource Data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.arlula.com/api/resource/:resource/data",
+            "params": [
+              {
+                "name": "resource",
+                "value": "resource-a1b2c3d4",
+                "type": "path",
+                "description": "UUID of the resource to download."
+              }
+            ]
+          },
+          "docs": "Download the binary content of a specific resource (imagery file, metadata, thumbnail, etc.). Returns the file content as a binary stream."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
