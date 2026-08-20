@@ -93,6 +93,8 @@ apis:
   humanURL: https://arlula.com/documentation/
   baseURL: https://api.arlula.com
   tags:
+  - Order
+  tags_raw:
   - Orders
   properties:
   - type: OpenAPI
