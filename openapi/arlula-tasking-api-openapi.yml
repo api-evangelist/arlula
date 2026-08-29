@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: Arlula Archive Tasking API
   description: 'The Arlula API provides programmatic access to satellite imagery ordering, archive search, tasking, and earth observation data services. The API covers four main areas: Archive (historical imagery search and ordering), Tasking (future satellite capture scheduling), Orders Management (order tracking and resource downloads), and connection testing.'
@@ -305,30 +305,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    OrderResponse:
-      title: OrderResponse
-      description: Response after placing an imagery order.
-      type: object
-      properties:
-        orderId:
-          type: string
-          description: Unique order identifier.
-          example: order-500123
-        status:
-          type: string
-          description: Current order status.
-          enum:
-          - processing
-          - pending-approval
-          - scheduled
-          - completed
-          - failed
-          example: processing
-        createdAt:
-          type: string
-          format: date-time
-          description: Time the order was created.
-          example: '2026-04-19T09:00:00Z'
     TaskingOpportunity:
       title: TaskingOpportunity
       description: A future satellite capture opportunity.
@@ -360,19 +336,6 @@ components:
           type: number
           description: Price for this tasking opportunity.
           example: 500.0
-    CancelResponse:
-      title: CancelResponse
-      description: Response after cancelling a tasking campaign.
-      type: object
-      properties:
-        success:
-          type: boolean
-          description: Whether the cancellation was successful.
-          example: true
-        campaignId:
-          type: string
-          description: ID of the cancelled campaign.
-          example: campaign-a1b2c3d4
     TaskingOrderRequest:
       title: TaskingOrderRequest
       description: Request body for ordering a future satellite capture.
@@ -415,6 +378,23 @@ components:
         coupon:
           type: string
           description: Optional coupon code.
+    BatchTaskingOrderRequest:
+      title: BatchTaskingOrderRequest
+      description: Request body for placing multiple tasking orders simultaneously.
+      type: object
+      required:
+      - orders
+      properties:
+        orders:
+          type: array
+          description: List of tasking orders to place.
+          items:
+            $ref: '#/components/schemas/TaskingOrderRequest'
+        emails:
+          type: array
+          description: Email addresses for all orders in the batch.
+          items:
+            type: string
     TaskingSearchRequest:
       title: TaskingSearchRequest
       description: Request body for searching future satellite capture opportunities.
@@ -468,6 +448,43 @@ components:
           description: Filter by sensor type.
           items:
             type: string
+    CancelResponse:
+      title: CancelResponse
+      description: Response after cancelling a tasking campaign.
+      type: object
+      properties:
+        success:
+          type: boolean
+          description: Whether the cancellation was successful.
+          example: true
+        campaignId:
+          type: string
+          description: ID of the cancelled campaign.
+          example: campaign-a1b2c3d4
+    OrderResponse:
+      title: OrderResponse
+      description: Response after placing an imagery order.
+      type: object
+      properties:
+        orderId:
+          type: string
+          description: Unique order identifier.
+          example: order-500123
+        status:
+          type: string
+          description: Current order status.
+          enum:
+          - processing
+          - pending-approval
+          - scheduled
+          - completed
+          - failed
+          example: processing
+        createdAt:
+          type: string
+          format: date-time
+          description: Time the order was created.
+          example: '2026-04-19T09:00:00Z'
     ErrorResponse:
       title: ErrorResponse
       description: Error response from the API.
@@ -481,23 +498,6 @@ components:
           type: string
           description: Error message.
           example: Bad Request - invalid parameters
-    BatchTaskingOrderRequest:
-      title: BatchTaskingOrderRequest
-      description: Request body for placing multiple tasking orders simultaneously.
-      type: object
-      required:
-      - orders
-      properties:
-        orders:
-          type: array
-          description: List of tasking orders to place.
-          items:
-            $ref: '#/components/schemas/TaskingOrderRequest'
-        emails:
-          type: array
-          description: Email addresses for all orders in the batch.
-          items:
-            type: string
   securitySchemes:
     BasicAuth:
       type: http

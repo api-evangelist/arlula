@@ -1,4 +1,4 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
   title: Arlula Archive Orders API
   description: 'The Arlula API provides programmatic access to satellite imagery ordering, archive search, tasking, and earth observation data services. The API covers four main areas: Archive (historical imagery search and ordering), Tasking (future satellite capture scheduling), Orders Management (order tracking and resource downloads), and connection testing.'
@@ -298,6 +298,43 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    CampaignsListResponse:
+      title: CampaignsListResponse
+      description: Paginated list of campaigns.
+      type: object
+      properties:
+        campaigns:
+          type: array
+          description: List of campaigns.
+          items:
+            $ref: '#/components/schemas/Campaign'
+    DatasetsListResponse:
+      title: DatasetsListResponse
+      description: Paginated list of datasets.
+      type: object
+      properties:
+        datasets:
+          type: array
+          description: List of datasets.
+          items:
+            $ref: '#/components/schemas/Dataset'
+    Campaign:
+      title: Campaign
+      description: A capture campaign within an order.
+      type: object
+      properties:
+        campaignId:
+          type: string
+          description: Campaign identifier.
+          example: campaign-001
+        orderId:
+          type: string
+          description: Parent order identifier.
+          example: order-a1b2c3d4
+        status:
+          type: string
+          description: Campaign status.
+          example: completed
     Dataset:
       title: Dataset
       description: A dataset produced from a campaign containing downloadable resources.
@@ -320,6 +357,23 @@ components:
           description: Downloadable resources in this dataset.
           items:
             $ref: '#/components/schemas/Resource'
+    Resource:
+      title: Resource
+      description: A downloadable resource within a dataset.
+      type: object
+      properties:
+        resourceId:
+          type: string
+          description: Resource identifier.
+          example: resource-001
+        type:
+          type: string
+          description: Resource type (GeoTIFF, Preview, Metadata, etc.).
+          example: GeoTIFF
+        filename:
+          type: string
+          description: Original filename.
+          example: imagery.tif
     OrderResponse:
       title: OrderResponse
       description: Response after placing an imagery order.
@@ -344,23 +398,16 @@ components:
           format: date-time
           description: Time the order was created.
           example: '2026-04-19T09:00:00Z'
-    Resource:
-      title: Resource
-      description: A downloadable resource within a dataset.
+    OrdersListResponse:
+      title: OrdersListResponse
+      description: Paginated list of orders.
       type: object
       properties:
-        resourceId:
-          type: string
-          description: Resource identifier.
-          example: resource-001
-        type:
-          type: string
-          description: Resource type (GeoTIFF, Preview, Metadata, etc.).
-          example: GeoTIFF
-        filename:
-          type: string
-          description: Original filename.
-          example: imagery.tif
+        orders:
+          type: array
+          description: List of orders.
+          items:
+            $ref: '#/components/schemas/OrderResponse'
     Order:
       title: Order
       description: A detailed order with campaigns and datasets.
@@ -384,36 +431,6 @@ components:
           description: Campaigns within this order.
           items:
             $ref: '#/components/schemas/Campaign'
-    OrdersListResponse:
-      title: OrdersListResponse
-      description: Paginated list of orders.
-      type: object
-      properties:
-        orders:
-          type: array
-          description: List of orders.
-          items:
-            $ref: '#/components/schemas/OrderResponse'
-    DatasetsListResponse:
-      title: DatasetsListResponse
-      description: Paginated list of datasets.
-      type: object
-      properties:
-        datasets:
-          type: array
-          description: List of datasets.
-          items:
-            $ref: '#/components/schemas/Dataset'
-    CampaignsListResponse:
-      title: CampaignsListResponse
-      description: Paginated list of campaigns.
-      type: object
-      properties:
-        campaigns:
-          type: array
-          description: List of campaigns.
-          items:
-            $ref: '#/components/schemas/Campaign'
     ErrorResponse:
       title: ErrorResponse
       description: Error response from the API.
@@ -427,23 +444,6 @@ components:
           type: string
           description: Error message.
           example: Bad Request - invalid parameters
-    Campaign:
-      title: Campaign
-      description: A capture campaign within an order.
-      type: object
-      properties:
-        campaignId:
-          type: string
-          description: Campaign identifier.
-          example: campaign-001
-        orderId:
-          type: string
-          description: Parent order identifier.
-          example: order-a1b2c3d4
-        status:
-          type: string
-          description: Campaign status.
-          example: completed
   securitySchemes:
     BasicAuth:
       type: http

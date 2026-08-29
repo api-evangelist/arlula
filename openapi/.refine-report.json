@@ -15,6 +15,12 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
+  "notes": [
+    "arlula-archive-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "arlula-connection-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "arlula-orders-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "arlula-tasking-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
   "skipped": []
 }
