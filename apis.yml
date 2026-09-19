@@ -37,6 +37,12 @@ tags:
   - Geospatial
   - Imagery
   - Remote Sensing
+  - Satellite
+tags_raw:
+  - Earth Observation
+  - Geospatial
+  - Imagery
+  - Remote Sensing
   - Satellites
 url: https://raw.githubusercontent.com/api-evangelist/arlula/refs/heads/main/apis.yml
 created: '2025-02-06'
@@ -49,6 +55,8 @@ apis:
   humanURL: https://arlula.com/documentation/
   baseURL: https://api.arlula.com
   tags:
+  - Archives
+  tags_raw:
   - Archive
   properties:
   - type: OpenAPI
