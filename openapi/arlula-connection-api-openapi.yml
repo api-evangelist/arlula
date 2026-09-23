@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Arlula Archive Connection API
+  title: Arlula Connection API
   description: 'The Arlula API provides programmatic access to satellite imagery ordering, archive search, tasking, and earth observation data services. The API covers four main areas: Archive (historical imagery search and ordering), Tasking (future satellite capture scheduling), Orders Management (order tracking and resource downloads), and connection testing.'
   version: 2025-10
   contact:

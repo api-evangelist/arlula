@@ -1,0 +1,27 @@
+# Front Door AI Index — arlula — 2026-09-17
+# AI vocabulary counted on the provider's root page. Generated; do not edit.
+# `score` is null unless ownership is `own` — see front_door_ai.py.
+front_door_ai:
+  slug: arlula
+  lexicon_version: '1.0'
+  probed_at: '2026-09-17'
+  host: arlula.com
+  final_host: www.arlula.com
+  ownership: own
+  owner: arlula
+  shares_host_with: null
+  inherited_from: null
+  verdict: scored
+  score: 1
+  host_score: 1
+  density: 1.08
+  words: 923
+  tiers:
+    agentic: 0
+    core: 1
+    model: 0
+  ambiguous: 5
+  top_terms:
+    automation: 4
+    ML: 1
+    intelligence: 1

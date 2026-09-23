@@ -1,6 +1,6 @@
 openapi: 3.2.0
 info:
-  title: Arlula Archive Tasking API
+  title: Arlula Tasking API
   description: 'The Arlula API provides programmatic access to satellite imagery ordering, archive search, tasking, and earth observation data services. The API covers four main areas: Archive (historical imagery search and ordering), Tasking (future satellite capture scheduling), Orders Management (order tracking and resource downloads), and connection testing.'
   version: 2025-10
   contact:
@@ -305,79 +305,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    TaskingOpportunity:
-      title: TaskingOpportunity
-      description: A future satellite capture opportunity.
-      type: object
-      properties:
-        id:
-          type: string
-          description: Ordering ID for this tasking opportunity.
-          example: opp-a1b2c3d4
-        supplier:
-          type: string
-          description: Supplier identifier.
-          example: supplier-001
-        captureStart:
-          type: string
-          format: date-time
-          description: Earliest start time for the capture window.
-          example: '2026-05-10T10:00:00Z'
-        captureEnd:
-          type: string
-          format: date-time
-          description: Latest end time for the capture window.
-          example: '2026-05-10T10:05:00Z'
-        gsd:
-          type: number
-          description: Expected ground sample distance in meters.
-          example: 0.5
-        price:
-          type: number
-          description: Price for this tasking opportunity.
-          example: 500.0
-    TaskingOrderRequest:
-      title: TaskingOrderRequest
-      description: Request body for ordering a future satellite capture.
-      type: object
-      required:
-      - id
-      - bundleKey
-      - eula
-      properties:
-        id:
-          type: string
-          description: Ordering ID of the tasking opportunity.
-          example: opp-a1b2c3d4
-        bundleKey:
-          type: string
-          description: Bundle key for this order.
-          example: bundle-standard
-        eula:
-          type: string
-          description: EULA identifier.
-          example: EULA-001
-        cloud:
-          type: integer
-          description: Maximum acceptable cloud cover percentage.
-          example: 20
-        priorityKey:
-          type: string
-          description: Priority level for the capture.
-          example: standard
-        emails:
-          type: array
-          description: Email notifications for order completion.
-          items:
-            type: string
-        webhooks:
-          type: array
-          description: Webhook URLs for status notifications.
-          items:
-            type: string
-        coupon:
-          type: string
-          description: Optional coupon code.
     BatchTaskingOrderRequest:
       title: BatchTaskingOrderRequest
       description: Request body for placing multiple tasking orders simultaneously.
@@ -448,19 +375,48 @@ components:
           description: Filter by sensor type.
           items:
             type: string
-    CancelResponse:
-      title: CancelResponse
-      description: Response after cancelling a tasking campaign.
+    TaskingOrderRequest:
+      title: TaskingOrderRequest
+      description: Request body for ordering a future satellite capture.
       type: object
+      required:
+      - id
+      - bundleKey
+      - eula
       properties:
-        success:
-          type: boolean
-          description: Whether the cancellation was successful.
-          example: true
-        campaignId:
+        id:
           type: string
-          description: ID of the cancelled campaign.
-          example: campaign-a1b2c3d4
+          description: Ordering ID of the tasking opportunity.
+          example: opp-a1b2c3d4
+        bundleKey:
+          type: string
+          description: Bundle key for this order.
+          example: bundle-standard
+        eula:
+          type: string
+          description: EULA identifier.
+          example: EULA-001
+        cloud:
+          type: integer
+          description: Maximum acceptable cloud cover percentage.
+          example: 20
+        priorityKey:
+          type: string
+          description: Priority level for the capture.
+          example: standard
+        emails:
+          type: array
+          description: Email notifications for order completion.
+          items:
+            type: string
+        webhooks:
+          type: array
+          description: Webhook URLs for status notifications.
+          items:
+            type: string
+        coupon:
+          type: string
+          description: Optional coupon code.
     OrderResponse:
       title: OrderResponse
       description: Response after placing an imagery order.
@@ -498,6 +454,50 @@ components:
           type: string
           description: Error message.
           example: Bad Request - invalid parameters
+    TaskingOpportunity:
+      title: TaskingOpportunity
+      description: A future satellite capture opportunity.
+      type: object
+      properties:
+        id:
+          type: string
+          description: Ordering ID for this tasking opportunity.
+          example: opp-a1b2c3d4
+        supplier:
+          type: string
+          description: Supplier identifier.
+          example: supplier-001
+        captureStart:
+          type: string
+          format: date-time
+          description: Earliest start time for the capture window.
+          example: '2026-05-10T10:00:00Z'
+        captureEnd:
+          type: string
+          format: date-time
+          description: Latest end time for the capture window.
+          example: '2026-05-10T10:05:00Z'
+        gsd:
+          type: number
+          description: Expected ground sample distance in meters.
+          example: 0.5
+        price:
+          type: number
+          description: Price for this tasking opportunity.
+          example: 500.0
+    CancelResponse:
+      title: CancelResponse
+      description: Response after cancelling a tasking campaign.
+      type: object
+      properties:
+        success:
+          type: boolean
+          description: Whether the cancellation was successful.
+          example: true
+        campaignId:
+          type: string
+          description: ID of the cancelled campaign.
+          example: campaign-a1b2c3d4
   securitySchemes:
     BasicAuth:
       type: http

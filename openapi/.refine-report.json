@@ -1,10 +1,7 @@
 {
   "provider": "arlula",
   "sources": [
-    "arlula-archive-api-openapi.yml",
-    "arlula-connection-api-openapi.yml",
-    "arlula-orders-api-openapi.yml",
-    "arlula-tasking-api-openapi.yml"
+    "_ae-authored/arlula-openapi.yaml"
   ],
   "outputs": [
     "arlula-archive-api-openapi.yml",
@@ -16,11 +13,14 @@
   "errors": [],
   "warnings": [],
   "notes": [
-    "arlula-archive-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "arlula-connection-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "arlula-orders-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "arlula-tasking-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "sourced from openapi/_original/ (0 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "arlula-openapi.yaml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
     "apis.yml register: already-registered"
   ],
-  "skipped": []
+  "skipped": [
+    "arlula-archive-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "arlula-connection-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "arlula-orders-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "arlula-tasking-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }
