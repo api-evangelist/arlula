@@ -308,6 +308,46 @@ components:
           description: List of datasets.
           items:
             $ref: '#/components/schemas/Dataset'
+    Order:
+      title: Order
+      description: A detailed order with campaigns and datasets.
+      type: object
+      properties:
+        orderId:
+          type: string
+          description: Order identifier.
+          example: order-a1b2c3d4
+        status:
+          type: string
+          description: Order status.
+          example: completed
+        createdAt:
+          type: string
+          format: date-time
+          description: Order creation timestamp.
+          example: '2026-04-15T09:00:00Z'
+        campaigns:
+          type: array
+          description: Campaigns within this order.
+          items:
+            $ref: '#/components/schemas/Campaign'
+    Campaign:
+      title: Campaign
+      description: A capture campaign within an order.
+      type: object
+      properties:
+        campaignId:
+          type: string
+          description: Campaign identifier.
+          example: campaign-001
+        orderId:
+          type: string
+          description: Parent order identifier.
+          example: order-a1b2c3d4
+        status:
+          type: string
+          description: Campaign status.
+          example: completed
     Dataset:
       title: Dataset
       description: A dataset produced from a campaign containing downloadable resources.
@@ -377,6 +417,16 @@ components:
           description: List of campaigns.
           items:
             $ref: '#/components/schemas/Campaign'
+    OrdersListResponse:
+      title: OrdersListResponse
+      description: Paginated list of orders.
+      type: object
+      properties:
+        orders:
+          type: array
+          description: List of orders.
+          items:
+            $ref: '#/components/schemas/OrderResponse'
     Resource:
       title: Resource
       description: A downloadable resource within a dataset.
@@ -394,56 +444,6 @@ components:
           type: string
           description: Original filename.
           example: imagery.tif
-    Order:
-      title: Order
-      description: A detailed order with campaigns and datasets.
-      type: object
-      properties:
-        orderId:
-          type: string
-          description: Order identifier.
-          example: order-a1b2c3d4
-        status:
-          type: string
-          description: Order status.
-          example: completed
-        createdAt:
-          type: string
-          format: date-time
-          description: Order creation timestamp.
-          example: '2026-04-15T09:00:00Z'
-        campaigns:
-          type: array
-          description: Campaigns within this order.
-          items:
-            $ref: '#/components/schemas/Campaign'
-    Campaign:
-      title: Campaign
-      description: A capture campaign within an order.
-      type: object
-      properties:
-        campaignId:
-          type: string
-          description: Campaign identifier.
-          example: campaign-001
-        orderId:
-          type: string
-          description: Parent order identifier.
-          example: order-a1b2c3d4
-        status:
-          type: string
-          description: Campaign status.
-          example: completed
-    OrdersListResponse:
-      title: OrdersListResponse
-      description: Paginated list of orders.
-      type: object
-      properties:
-        orders:
-          type: array
-          description: List of orders.
-          items:
-            $ref: '#/components/schemas/OrderResponse'
   securitySchemes:
     BasicAuth:
       type: http
