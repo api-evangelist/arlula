@@ -49,19 +49,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    TestResponse:
-      title: TestResponse
-      description: Response from the API connection test endpoint.
-      type: object
-      properties:
-        success:
-          type: boolean
-          description: Whether the authentication was successful.
-          example: true
-        message:
-          type: string
-          description: Status message.
-          example: Authentication successful.
     ErrorResponse:
       title: ErrorResponse
       description: Error response from the API.
@@ -75,6 +62,19 @@ components:
           type: string
           description: Error message.
           example: Bad Request - invalid parameters
+    TestResponse:
+      title: TestResponse
+      description: Response from the API connection test endpoint.
+      type: object
+      properties:
+        success:
+          type: boolean
+          description: Whether the authentication was successful.
+          example: true
+        message:
+          type: string
+          description: Status message.
+          example: Authentication successful.
   securitySchemes:
     BasicAuth:
       type: http

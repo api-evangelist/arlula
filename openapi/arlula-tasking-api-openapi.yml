@@ -305,6 +305,19 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
+    ErrorResponse:
+      title: ErrorResponse
+      description: Error response from the API.
+      type: object
+      properties:
+        code:
+          type: integer
+          description: HTTP status code.
+          example: 400
+        message:
+          type: string
+          description: Error message.
+          example: Bad Request - invalid parameters
     TaskingOrderRequest:
       title: TaskingOrderRequest
       description: Request body for ordering a future satellite capture.
@@ -347,6 +360,19 @@ components:
         coupon:
           type: string
           description: Optional coupon code.
+    CancelResponse:
+      title: CancelResponse
+      description: Response after cancelling a tasking campaign.
+      type: object
+      properties:
+        success:
+          type: boolean
+          description: Whether the cancellation was successful.
+          example: true
+        campaignId:
+          type: string
+          description: ID of the cancelled campaign.
+          example: campaign-a1b2c3d4
     BatchTaskingOrderRequest:
       title: BatchTaskingOrderRequest
       description: Request body for placing multiple tasking orders simultaneously.
@@ -419,32 +445,6 @@ components:
           format: date-time
           description: Time the order was created.
           example: '2026-04-19T09:00:00Z'
-    CancelResponse:
-      title: CancelResponse
-      description: Response after cancelling a tasking campaign.
-      type: object
-      properties:
-        success:
-          type: boolean
-          description: Whether the cancellation was successful.
-          example: true
-        campaignId:
-          type: string
-          description: ID of the cancelled campaign.
-          example: campaign-a1b2c3d4
-    ErrorResponse:
-      title: ErrorResponse
-      description: Error response from the API.
-      type: object
-      properties:
-        code:
-          type: integer
-          description: HTTP status code.
-          example: 400
-        message:
-          type: string
-          description: Error message.
-          example: Bad Request - invalid parameters
     TaskingSearchRequest:
       title: TaskingSearchRequest
       description: Request body for searching future satellite capture opportunities.
