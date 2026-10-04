@@ -298,118 +298,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    ErrorResponse:
-      title: ErrorResponse
-      description: Error response from the API.
-      type: object
-      properties:
-        code:
-          type: integer
-          description: HTTP status code.
-          example: 400
-        message:
-          type: string
-          description: Error message.
-          example: Bad Request - invalid parameters
-    Dataset:
-      title: Dataset
-      description: A dataset produced from a campaign containing downloadable resources.
-      type: object
-      properties:
-        datasetId:
-          type: string
-          description: Dataset identifier.
-          example: dataset-a1b2c3d4
-        campaignId:
-          type: string
-          description: Parent campaign identifier.
-          example: campaign-a1b2
-        status:
-          type: string
-          description: Dataset status.
-          example: completed
-        resources:
-          type: array
-          description: Downloadable resources in this dataset.
-          items:
-            $ref: '#/components/schemas/Resource'
-    OrdersListResponse:
-      title: OrdersListResponse
-      description: Paginated list of orders.
-      type: object
-      properties:
-        orders:
-          type: array
-          description: List of orders.
-          items:
-            $ref: '#/components/schemas/OrderResponse'
-    CampaignsListResponse:
-      title: CampaignsListResponse
-      description: Paginated list of campaigns.
-      type: object
-      properties:
-        campaigns:
-          type: array
-          description: List of campaigns.
-          items:
-            $ref: '#/components/schemas/Campaign'
-    Campaign:
-      title: Campaign
-      description: A capture campaign within an order.
-      type: object
-      properties:
-        campaignId:
-          type: string
-          description: Campaign identifier.
-          example: campaign-001
-        orderId:
-          type: string
-          description: Parent order identifier.
-          example: order-a1b2c3d4
-        status:
-          type: string
-          description: Campaign status.
-          example: completed
-    Order:
-      title: Order
-      description: A detailed order with campaigns and datasets.
-      type: object
-      properties:
-        orderId:
-          type: string
-          description: Order identifier.
-          example: order-a1b2c3d4
-        status:
-          type: string
-          description: Order status.
-          example: completed
-        createdAt:
-          type: string
-          format: date-time
-          description: Order creation timestamp.
-          example: '2026-04-15T09:00:00Z'
-        campaigns:
-          type: array
-          description: Campaigns within this order.
-          items:
-            $ref: '#/components/schemas/Campaign'
-    Resource:
-      title: Resource
-      description: A downloadable resource within a dataset.
-      type: object
-      properties:
-        resourceId:
-          type: string
-          description: Resource identifier.
-          example: resource-001
-        type:
-          type: string
-          description: Resource type (GeoTIFF, Preview, Metadata, etc.).
-          example: GeoTIFF
-        filename:
-          type: string
-          description: Original filename.
-          example: imagery.tif
     OrderResponse:
       title: OrderResponse
       description: Response after placing an imagery order.
@@ -434,6 +322,79 @@ components:
           format: date-time
           description: Time the order was created.
           example: '2026-04-19T09:00:00Z'
+    ErrorResponse:
+      title: ErrorResponse
+      description: Error response from the API.
+      type: object
+      properties:
+        code:
+          type: integer
+          description: HTTP status code.
+          example: 400
+        message:
+          type: string
+          description: Error message.
+          example: Bad Request - invalid parameters
+    Order:
+      title: Order
+      description: A detailed order with campaigns and datasets.
+      type: object
+      properties:
+        orderId:
+          type: string
+          description: Order identifier.
+          example: order-a1b2c3d4
+        status:
+          type: string
+          description: Order status.
+          example: completed
+        createdAt:
+          type: string
+          format: date-time
+          description: Order creation timestamp.
+          example: '2026-04-15T09:00:00Z'
+        campaigns:
+          type: array
+          description: Campaigns within this order.
+          items:
+            $ref: '#/components/schemas/Campaign'
+    Campaign:
+      title: Campaign
+      description: A capture campaign within an order.
+      type: object
+      properties:
+        campaignId:
+          type: string
+          description: Campaign identifier.
+          example: campaign-001
+        orderId:
+          type: string
+          description: Parent order identifier.
+          example: order-a1b2c3d4
+        status:
+          type: string
+          description: Campaign status.
+          example: completed
+    CampaignsListResponse:
+      title: CampaignsListResponse
+      description: Paginated list of campaigns.
+      type: object
+      properties:
+        campaigns:
+          type: array
+          description: List of campaigns.
+          items:
+            $ref: '#/components/schemas/Campaign'
+    OrdersListResponse:
+      title: OrdersListResponse
+      description: Paginated list of orders.
+      type: object
+      properties:
+        orders:
+          type: array
+          description: List of orders.
+          items:
+            $ref: '#/components/schemas/OrderResponse'
     DatasetsListResponse:
       title: DatasetsListResponse
       description: Paginated list of datasets.
@@ -444,6 +405,45 @@ components:
           description: List of datasets.
           items:
             $ref: '#/components/schemas/Dataset'
+    Dataset:
+      title: Dataset
+      description: A dataset produced from a campaign containing downloadable resources.
+      type: object
+      properties:
+        datasetId:
+          type: string
+          description: Dataset identifier.
+          example: dataset-a1b2c3d4
+        campaignId:
+          type: string
+          description: Parent campaign identifier.
+          example: campaign-a1b2
+        status:
+          type: string
+          description: Dataset status.
+          example: completed
+        resources:
+          type: array
+          description: Downloadable resources in this dataset.
+          items:
+            $ref: '#/components/schemas/Resource'
+    Resource:
+      title: Resource
+      description: A downloadable resource within a dataset.
+      type: object
+      properties:
+        resourceId:
+          type: string
+          description: Resource identifier.
+          example: resource-001
+        type:
+          type: string
+          description: Resource type (GeoTIFF, Preview, Metadata, etc.).
+          example: GeoTIFF
+        filename:
+          type: string
+          description: Original filename.
+          example: imagery.tif
   securitySchemes:
     BasicAuth:
       type: http
