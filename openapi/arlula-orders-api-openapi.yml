@@ -298,30 +298,6 @@ paths:
         dispatcher: FALLBACK
 components:
   schemas:
-    OrderResponse:
-      title: OrderResponse
-      description: Response after placing an imagery order.
-      type: object
-      properties:
-        orderId:
-          type: string
-          description: Unique order identifier.
-          example: order-500123
-        status:
-          type: string
-          description: Current order status.
-          enum:
-          - processing
-          - pending-approval
-          - scheduled
-          - completed
-          - failed
-          example: processing
-        createdAt:
-          type: string
-          format: date-time
-          description: Time the order was created.
-          example: '2026-04-19T09:00:00Z'
     ErrorResponse:
       title: ErrorResponse
       description: Error response from the API.
@@ -358,53 +334,6 @@ components:
           description: Campaigns within this order.
           items:
             $ref: '#/components/schemas/Campaign'
-    Campaign:
-      title: Campaign
-      description: A capture campaign within an order.
-      type: object
-      properties:
-        campaignId:
-          type: string
-          description: Campaign identifier.
-          example: campaign-001
-        orderId:
-          type: string
-          description: Parent order identifier.
-          example: order-a1b2c3d4
-        status:
-          type: string
-          description: Campaign status.
-          example: completed
-    CampaignsListResponse:
-      title: CampaignsListResponse
-      description: Paginated list of campaigns.
-      type: object
-      properties:
-        campaigns:
-          type: array
-          description: List of campaigns.
-          items:
-            $ref: '#/components/schemas/Campaign'
-    OrdersListResponse:
-      title: OrdersListResponse
-      description: Paginated list of orders.
-      type: object
-      properties:
-        orders:
-          type: array
-          description: List of orders.
-          items:
-            $ref: '#/components/schemas/OrderResponse'
-    DatasetsListResponse:
-      title: DatasetsListResponse
-      description: Paginated list of datasets.
-      type: object
-      properties:
-        datasets:
-          type: array
-          description: List of datasets.
-          items:
-            $ref: '#/components/schemas/Dataset'
     Dataset:
       title: Dataset
       description: A dataset produced from a campaign containing downloadable resources.
@@ -427,6 +356,26 @@ components:
           description: Downloadable resources in this dataset.
           items:
             $ref: '#/components/schemas/Resource'
+    OrdersListResponse:
+      title: OrdersListResponse
+      description: Paginated list of orders.
+      type: object
+      properties:
+        orders:
+          type: array
+          description: List of orders.
+          items:
+            $ref: '#/components/schemas/OrderResponse'
+    CampaignsListResponse:
+      title: CampaignsListResponse
+      description: Paginated list of campaigns.
+      type: object
+      properties:
+        campaigns:
+          type: array
+          description: List of campaigns.
+          items:
+            $ref: '#/components/schemas/Campaign'
     Resource:
       title: Resource
       description: A downloadable resource within a dataset.
@@ -444,6 +393,57 @@ components:
           type: string
           description: Original filename.
           example: imagery.tif
+    DatasetsListResponse:
+      title: DatasetsListResponse
+      description: Paginated list of datasets.
+      type: object
+      properties:
+        datasets:
+          type: array
+          description: List of datasets.
+          items:
+            $ref: '#/components/schemas/Dataset'
+    Campaign:
+      title: Campaign
+      description: A capture campaign within an order.
+      type: object
+      properties:
+        campaignId:
+          type: string
+          description: Campaign identifier.
+          example: campaign-001
+        orderId:
+          type: string
+          description: Parent order identifier.
+          example: order-a1b2c3d4
+        status:
+          type: string
+          description: Campaign status.
+          example: completed
+    OrderResponse:
+      title: OrderResponse
+      description: Response after placing an imagery order.
+      type: object
+      properties:
+        orderId:
+          type: string
+          description: Unique order identifier.
+          example: order-500123
+        status:
+          type: string
+          description: Current order status.
+          enum:
+          - processing
+          - pending-approval
+          - scheduled
+          - completed
+          - failed
+          example: processing
+        createdAt:
+          type: string
+          format: date-time
+          description: Time the order was created.
+          example: '2026-04-19T09:00:00Z'
   securitySchemes:
     BasicAuth:
       type: http
